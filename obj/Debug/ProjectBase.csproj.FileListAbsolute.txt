@@ -1,0 +1,52 @@
+E:\Projects\IKApplications\ProjectBase\ProjectBase\bin\Debug\ProjectBase.dll.config
+E:\Projects\IKApplications\ProjectBase\ProjectBase\bin\Debug\ProjectBase.dll
+E:\Projects\IKApplications\ProjectBase\ProjectBase\bin\Debug\ProjectBase.pdb
+E:\Projects\IKApplications\ProjectBase\ProjectBase\bin\Debug\Oracle.DataAccess.dll
+E:\Projects\IKApplications\ProjectBase\ProjectBase\obj\Debug\ProjectBase.dll
+E:\Projects\IKApplications\ProjectBase\ProjectBase\obj\Debug\ProjectBase.pdb
+C:\Users\v-yolcu\Desktop\İKPUB\Yeni klasör\IKApplications\ProjectBase\ProjectBase\bin\Debug\ProjectBase.dll.config
+C:\Users\v-yolcu\Desktop\İKPUB\Yeni klasör\IKApplications\ProjectBase\ProjectBase\bin\Debug\ProjectBase.dll
+C:\Users\v-yolcu\Desktop\İKPUB\Yeni klasör\IKApplications\ProjectBase\ProjectBase\bin\Debug\ProjectBase.pdb
+C:\Users\v-yolcu\Desktop\İKPUB\Yeni klasör\IKApplications\ProjectBase\ProjectBase\obj\Debug\ProjectBase.csprojResolveAssemblyReference.cache
+C:\Users\v-yolcu\Desktop\İKPUB\Yeni klasör\IKApplications\ProjectBase\ProjectBase\obj\Debug\ProjectBase.dll
+C:\Users\v-yolcu\Desktop\İKPUB\Yeni klasör\IKApplications\ProjectBase\ProjectBase\obj\Debug\ProjectBase.pdb
+E:\Projects\ProjectBase\ProjectBase\bin\Debug\ProjectBase.dll.config
+E:\Projects\ProjectBase\ProjectBase\bin\Debug\ProjectBase.dll
+E:\Projects\ProjectBase\ProjectBase\bin\Debug\ProjectBase.pdb
+E:\Projects\ProjectBase\ProjectBase\obj\Debug\ProjectBase.csprojResolveAssemblyReference.cache
+E:\Projects\ProjectBase\ProjectBase\obj\Debug\ProjectBase.dll
+E:\Projects\ProjectBase\ProjectBase\obj\Debug\ProjectBase.pdb
+C:\Users\v-yolcu\Desktop\Projects2\ProjectBase\ProjectBase\bin\Debug\ProjectBase.dll.config
+C:\Users\v-yolcu\Desktop\Projects2\ProjectBase\ProjectBase\bin\Debug\ProjectBase.dll
+C:\Users\v-yolcu\Desktop\Projects2\ProjectBase\ProjectBase\bin\Debug\ProjectBase.pdb
+C:\Users\v-yolcu\Desktop\Projects2\ProjectBase\ProjectBase\bin\Debug\Oracle.DataAccess.dll
+C:\Users\v-yolcu\Desktop\Projects2\ProjectBase\ProjectBase\obj\Debug\ProjectBase.csprojResolveAssemblyReference.cache
+C:\Users\v-yolcu\Desktop\Projects2\ProjectBase\ProjectBase\obj\Debug\ProjectBase.dll
+C:\Users\v-yolcu\Desktop\Projects2\ProjectBase\ProjectBase\obj\Debug\ProjectBase.pdb
+C:\Users\v-yolcu\Desktop\Projects3\ProjectBase\ProjectBase\bin\Debug\ProjectBase.dll.config
+C:\Users\v-yolcu\Desktop\Projects3\ProjectBase\ProjectBase\bin\Debug\ProjectBase.dll
+C:\Users\v-yolcu\Desktop\Projects3\ProjectBase\ProjectBase\bin\Debug\ProjectBase.pdb
+C:\Users\v-yolcu\Desktop\Projects3\ProjectBase\ProjectBase\bin\Debug\Oracle.DataAccess.dll
+C:\Users\v-yolcu\Desktop\Projects3\ProjectBase\ProjectBase\obj\Debug\ProjectBase.csprojResolveAssemblyReference.cache
+C:\Users\v-yolcu\Desktop\Projects3\ProjectBase\ProjectBase\obj\Debug\ProjectBase.dll
+C:\Users\v-yolcu\Desktop\Projects3\ProjectBase\ProjectBase\obj\Debug\ProjectBase.pdb
+C:\Users\v-yolcu\Desktop\Projects\ProjectBase\ProjectBase\bin\Debug\ProjectBase.dll.config
+C:\Users\v-yolcu\Desktop\Projects\ProjectBase\ProjectBase\bin\Debug\ProjectBase.dll
+C:\Users\v-yolcu\Desktop\Projects\ProjectBase\ProjectBase\bin\Debug\ProjectBase.pdb
+C:\Users\v-yolcu\Desktop\Projects\ProjectBase\ProjectBase\bin\Debug\Oracle.DataAccess.dll
+C:\Users\v-yolcu\Desktop\Projects\ProjectBase\ProjectBase\obj\Debug\ProjectBase.csprojResolveAssemblyReference.cache
+C:\Users\v-yolcu\Desktop\Projects\ProjectBase\ProjectBase\obj\Debug\ProjectBase.dll
+C:\Users\v-yolcu\Desktop\Projects\ProjectBase\ProjectBase\obj\Debug\ProjectBase.pdb
+C:\Users\v-yolcu\Desktop\GitHub\ProjectBase\ProjectBase\bin\Debug\ProjectBase.dll.config
+C:\Users\v-yolcu\Desktop\GitHub\ProjectBase\ProjectBase\bin\Debug\ProjectBase.dll
+C:\Users\v-yolcu\Desktop\GitHub\ProjectBase\ProjectBase\bin\Debug\ProjectBase.pdb
+C:\Users\v-yolcu\Desktop\GitHub\ProjectBase\ProjectBase\bin\Debug\Oracle.DataAccess.dll
+C:\Users\v-yolcu\Desktop\GitHub\ProjectBase\ProjectBase\obj\Debug\ProjectBase.csprojResolveAssemblyReference.cache
+C:\Users\v-yolcu\Desktop\GitHub\ProjectBase\ProjectBase\obj\Debug\ProjectBase.dll
+C:\Users\v-yolcu\Desktop\GitHub\ProjectBase\ProjectBase\obj\Debug\ProjectBase.pdb
+C:\Users\vyigity\Desktop\GitHub\ProjectBase\ProjectBase\bin\Debug\ProjectBase.dll.config
+C:\Users\vyigity\Desktop\GitHub\ProjectBase\ProjectBase\bin\Debug\ProjectBase.dll
+C:\Users\vyigity\Desktop\GitHub\ProjectBase\ProjectBase\bin\Debug\ProjectBase.pdb
+C:\Users\vyigity\Desktop\GitHub\ProjectBase\ProjectBase\obj\Debug\ProjectBase.csprojResolveAssemblyReference.cache
+C:\Users\vyigity\Desktop\GitHub\ProjectBase\ProjectBase\obj\Debug\ProjectBase.dll
+C:\Users\vyigity\Desktop\GitHub\ProjectBase\ProjectBase\obj\Debug\ProjectBase.pdb
