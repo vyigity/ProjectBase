@@ -10,10 +10,10 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectBase.DataBaseClasses
+namespace ProjectBase.Database
 {
     //vyigity
-    public class KbOracleDatabase2 : IDisposable, IKbDatabase2
+    public class OracleDatabase2 : IDisposable, IDatabase2
     {
         OracleConnection myCon = null;
         OracleTransaction tran = null;
@@ -96,20 +96,20 @@ namespace ProjectBase.DataBaseClasses
             }
         }
 
-        public KbOracleDatabase2()
+        public OracleDatabase2()
         {
-            ConnectionString = KbAppContext.CONNECTION_STRINGS[KbAppContext.DEFAULT_DB];
+            ConnectionString = AppContext2.CONNECTION_STRINGS[AppContext2.DEFAULT_DB];
         }
 
-        public KbOracleDatabase2(DbSettings setting)
+        public OracleDatabase2(DbSettings setting)
         {
-            ConnectionString = KbAppContext.CONNECTION_STRINGS[KbAppContext.DEFAULT_DB];
+            ConnectionString = AppContext2.CONNECTION_STRINGS[AppContext2.DEFAULT_DB];
             this.Setting = setting;
         }
 
-        public KbOracleDatabase2(DbSettings setting, IsolationLevel isolation)
+        public OracleDatabase2(DbSettings setting, IsolationLevel isolation)
         {
-            ConnectionString = KbAppContext.CONNECTION_STRINGS[KbAppContext.DEFAULT_DB];
+            ConnectionString = AppContext2.CONNECTION_STRINGS[AppContext2.DEFAULT_DB];
             this.Setting = setting;
             this.isolation = isolation;
         }
@@ -499,7 +499,7 @@ namespace ProjectBase.DataBaseClasses
                 {
                     if (HasColumn(reader, inf.Name))
                     {
-                        inf.SetValue(instance, Util.IsNull(reader[inf.Name]) ? null : Util.getProperty(reader[inf.Name], inf.PropertyType));
+                        inf.SetValue(instance, Util.IsNull(reader[inf.Name]) ? null : Util.GetProperty(reader[inf.Name], inf.PropertyType));
                     }
                 }
 
@@ -538,7 +538,7 @@ namespace ProjectBase.DataBaseClasses
                 {
                     if (HasColumn(reader, inf.Name))
                     {
-                        inf.SetValue(instance, Util.IsNull(reader[inf.Name]) ? null : Util.getProperty(reader[inf.Name], inf.PropertyType));
+                        inf.SetValue(instance, Util.IsNull(reader[inf.Name]) ? null : Util.GetProperty(reader[inf.Name], inf.PropertyType));
                     }
                 }
 
@@ -578,7 +578,7 @@ namespace ProjectBase.DataBaseClasses
                     {
                         if (HasColumn(reader, inf.Name))
                         {
-                            inf.SetValue(instance, Util.IsNull(reader[inf.Name]) ? null : Util.getProperty(reader[inf.Name], inf.PropertyType));
+                            inf.SetValue(instance, Util.IsNull(reader[inf.Name]) ? null : Util.GetProperty(reader[inf.Name], inf.PropertyType));
                         }
                     }
 
@@ -621,7 +621,7 @@ namespace ProjectBase.DataBaseClasses
                     {
                         if (HasColumn(reader, inf.Name))
                         {
-                            inf.SetValue(instance, Util.IsNull(reader[inf.Name]) ? null : Util.getProperty(reader[inf.Name], inf.PropertyType));
+                            inf.SetValue(instance, Util.IsNull(reader[inf.Name]) ? null : Util.GetProperty(reader[inf.Name], inf.PropertyType));
                         }
                     }
 

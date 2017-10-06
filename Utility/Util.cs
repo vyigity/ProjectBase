@@ -24,11 +24,11 @@ namespace ProjectBase.Utility
 
         public static string DateInStringRegEx = @"(0[1-9]|[12][0-9]|3[01]|[1-9])[- /.](0[1-9]|1[012]|[1-9])[- /.](19|2)\d\d\d";
         
-        public static string generateHTMLList(IEnumerable<string> Data)
+        public static string GenerateHTMLList(IEnumerable<string> data)
         {
             StringBuilder builder = new StringBuilder("<ul>");
 
-            foreach (string item in Data)
+            foreach (string item in data)
             {
                 builder.Append("<li>");
                 builder.Append(item);
@@ -40,28 +40,28 @@ namespace ProjectBase.Utility
             return builder.ToString();
         }
 
-        public static string generateHTMLTable(DataTable Data, string CssClass, string CssClassName)
+        public static string generateHTMLTable(DataTable data, string cssClass, string cssClassName)
         {
             StringBuilder builder = new StringBuilder();
 
-            if (CssClass != null)
+            if (cssClass != null)
             {
                 builder.Append("<style>");
-                builder.Append(CssClass);
+                builder.Append(cssClass);
                 builder.Append("</style>");
             }
 
-            if (CssClassName == null)
+            if (cssClassName == null)
             {
                 builder.Append("<table>");
             }
             else
             {
-                builder.Append("<table class=\"" + CssClassName + "\">");
+                builder.Append("<table class=\"" + cssClassName + "\">");
             }
 
             builder.Append("<thead>");
-            foreach (DataColumn item in Data.Columns)
+            foreach (DataColumn item in data.Columns)
             {
                 builder.Append("<th>");
                 builder.Append(item.ColumnName);
@@ -70,10 +70,10 @@ namespace ProjectBase.Utility
             builder.Append("</thead>");
 
             builder.Append("<tbody>");
-            foreach (DataRow item in Data.Rows)
+            foreach (DataRow item in data.Rows)
             {
                 builder.Append("<tr>");
-                foreach (DataColumn item2 in Data.Columns)
+                foreach (DataColumn item2 in data.Columns)
                 {
                     builder.Append("<td>");
                     builder.Append(item[item2]);
@@ -88,149 +88,123 @@ namespace ProjectBase.Utility
             return builder.ToString();
         }
 
-        public static string SerializeObjectXml<T>(T Obj)
+        public static string SerializeObjectXml<T>(T obj)
         {          
             StringWriter swriter = new StringWriter();
             XmlSerializer sxml = new XmlSerializer(typeof(T));
-            sxml.Serialize(swriter, Obj);
+            sxml.Serialize(swriter, obj);
             return swriter.ToString();
         }
 
-        public static string SerializeObjectXml(object Obj, Type ObjType)
+        public static string SerializeObjectXml(object obj, Type objType)
         {
             StringWriter swriter = new StringWriter();
-            XmlSerializer sxml = new XmlSerializer(ObjType);
-            sxml.Serialize(swriter, Obj);
+            XmlSerializer sxml = new XmlSerializer(objType);
+            sxml.Serialize(swriter, obj);
             return swriter.ToString();
         }
 
-        public static T DeSeriliazeObjectXml<T>(string XmlString)
+        public static T DeSeriliazeObjectXml<T>(string xmlString)
         {
             XmlSerializer sxml = new XmlSerializer(typeof(T));
-            return (T)sxml.Deserialize(new StringReader(XmlString));
+            return (T)sxml.Deserialize(new StringReader(xmlString));
         }
 
-        public static object DeSeriliazeObjectXml(string XmlString, Type ObjectType)
+        public static object DeSeriliazeObjectXml(string xmlString, Type objectType)
         {
-            XmlSerializer sxml = new XmlSerializer(ObjectType);
-            return sxml.Deserialize(new StringReader(XmlString));
+            XmlSerializer sxml = new XmlSerializer(objectType);
+            return sxml.Deserialize(new StringReader(xmlString));
         }
 
-        public static byte[] SerializeObjectBinary(object Obj)
+        public static byte[] SerializeObjectBinary(object obj)
         {
             MemoryStream stream = new MemoryStream();
             BinaryFormatter formatter = new BinaryFormatter();
-            formatter.Serialize(stream, Obj);
+            formatter.Serialize(stream, obj);
 
             return stream.ToArray();
         }
 
-        public static object DeSerializeObjectBinary(byte[] ObjBinary)
+        public static object DeSerializeObjectBinary(byte[] objBinary)
         {
             MemoryStream stream = new MemoryStream();
-            stream.Write(ObjBinary, 0, ObjBinary.Length);
+            stream.Write(objBinary, 0, objBinary.Length);
             stream.Position = 0;
             BinaryFormatter formatter = new BinaryFormatter();
             return formatter.Deserialize(stream); ;
         }
 
-        public static bool IsNull(object Obj)
+        public static bool IsNull(object obj)
         {
-            return Obj == System.DBNull.Value || Obj == null;
+            return obj == System.DBNull.Value || obj == null;
         }
 
-        public static T getProperty<T>(object Obj)
+        public static T GetProperty<T>(object obj)
         {
-            if (IsNull(Obj))
+            if (IsNull(obj))
                 return default(T);
             else
-                return (T)Convert.ChangeType(Obj, typeof(T));
+                return (T)Convert.ChangeType(obj, typeof(T));
         }
 
-        public static T getProperty<T>(object Obj, T Default)
+        public static T GetProperty<T>(object obj, T defaultValue)
         {
-            if (IsNull(Obj))
-                return Default;
+            if (IsNull(obj))
+                return defaultValue;
             else
-                return (T)Convert.ChangeType(Obj, typeof(T));
+                return (T)Convert.ChangeType(obj, typeof(T));
         }
 
-        public static object getProperty(object Obj, Type ObjectType)
+        public static object GetProperty(object obj, Type objectType)
         {
-            Type  objectType = null;
+            Type  objectTypeTmp = null;
 
-            if (IsNull(Obj))
+            if (IsNull(obj))
                 return null;
             else
             {
-                if (Nullable.GetUnderlyingType(ObjectType) != null)
+                if (Nullable.GetUnderlyingType(objectType) != null)
                 {
-                    objectType = Nullable.GetUnderlyingType(ObjectType);
+                    objectTypeTmp = Nullable.GetUnderlyingType(objectType);
                 }
                 else
-                    objectType = ObjectType;
+                    objectTypeTmp = objectType;
 
-                return Convert.ChangeType(Obj, objectType);
+                return Convert.ChangeType(obj, objectTypeTmp);
             }
         }
 
-        public static object getProperty(object Obj, Type ObjectType, object DefaultValue)
+        public static object GetProperty(object Obj, Type objectType, object defaultValue)
         {
-            Type objectType = null;
+            Type objectTypeTmp = null;
 
             if (IsNull(Obj))
-                return DefaultValue;
+                return defaultValue;
             else
             {
-                if (Nullable.GetUnderlyingType(ObjectType) != null)
+                if (Nullable.GetUnderlyingType(objectType) != null)
                 {
-                    objectType = Nullable.GetUnderlyingType(ObjectType);
+                    objectTypeTmp = Nullable.GetUnderlyingType(objectType);
                 }
                 else
-                    objectType = ObjectType;
+                    objectTypeTmp = objectType;
 
-                return Convert.ChangeType(Obj, objectType);
+                return Convert.ChangeType(Obj, objectTypeTmp);
             }
         }
 
-        public static Nullable<T> getPropertyNullable<T>(object Obj) where T : struct
+        public static Nullable<T> getPropertyNullable<T>(object obj) where T : struct
         {
             try
             {
-                if (IsNull(Obj))
+                if (IsNull(obj))
                     return null;
                 else
-                    return (Nullable<T>)Convert.ChangeType(Obj, typeof(T));
+                    return (Nullable<T>)Convert.ChangeType(obj, typeof(T));
             }
             catch
             {
                 return null;
-            }
-        }
-
-        public static bool IsTcKimlikNo(string Data)
-        {
-            if (11 != Data.Length)  // Girilen sayı 11 haneli olmak zorunda
-            {
-                return false;
-            }
-            else
-            {
-                int toplam = 0; // 1. Açıklama
-
-                for (int i = 0; i < Data.Length - 1; i++) // 2. Açıklama
-                {
-                    toplam += Convert.ToInt32(Data[i].ToString()); // 3. Açıklama
-                }
-
-                if (toplam.ToString()[1] == Data[10]) // 4. Açıklama  
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
             }
         }
 
@@ -254,7 +228,7 @@ namespace ProjectBase.Utility
             return obj;
         }
 
-        public static T ToUpperProperty<T>(T obj, params string[] ExceptionProperties)
+        public static T ToUpperProperty<T>(T obj, params string[] exceptionProperties)
         {
             var props = typeof(T).GetProperties();
 
@@ -264,7 +238,7 @@ namespace ProjectBase.Utility
 
                 if (val != null)
                 {
-                    if (inf.PropertyType == typeof(string) && !ExceptionProperties.Contains(inf.Name))
+                    if (inf.PropertyType == typeof(string) && !exceptionProperties.Contains(inf.Name))
                     {
                         inf.SetValue(obj, val.ToString().ToUpper(Thread.CurrentThread.CurrentCulture));
                     }
@@ -296,7 +270,7 @@ namespace ProjectBase.Utility
             return obj;
         }
 
-        public static T ToLowerProperty<T>(T obj, params string[] ExceptionProperties)
+        public static T ToLowerProperty<T>(T obj, params string[] exceptionProperties)
         {
             var props = typeof(T).GetProperties();
 
@@ -306,7 +280,7 @@ namespace ProjectBase.Utility
 
                 if (val != null)
                 {
-                    if (inf.PropertyType == typeof(string) && !ExceptionProperties.Contains(inf.Name))
+                    if (inf.PropertyType == typeof(string) && !exceptionProperties.Contains(inf.Name))
                     {
                         inf.SetValue(obj, val.ToString().ToLower(Thread.CurrentThread.CurrentCulture));
                     }
@@ -317,29 +291,29 @@ namespace ProjectBase.Utility
             return obj;
         }
 
-        public static string GetUpperString(object Value)
+        public static string GetUpperString(object val)
         {
-            if (!IsNull(Value))
+            if (!IsNull(val))
             {
-                return Value.ToString().ToUpper(Thread.CurrentThread.CurrentCulture);
+                return val.ToString().ToUpper(Thread.CurrentThread.CurrentCulture);
             }
             else
                 return null;
         }
 
-        public static string GetLowerString(object Value)
+        public static string GetLowerString(object val)
         {
-            if (!IsNull(Value))
+            if (!IsNull(val))
             {
-                return Value.ToString().ToLower(Thread.CurrentThread.CurrentCulture);
+                return val.ToString().ToLower(Thread.CurrentThread.CurrentCulture);
             }
             else
                 return null;
         }
 
-        public static string GetClearUpperString(object Value)
+        public static string GetClearUpperString(object val)
         {
-            string value = ClearString(Value);
+            string value = ClearString(val);
 
             if (value != null)
             {
@@ -349,9 +323,9 @@ namespace ProjectBase.Utility
                 return null;
         }
 
-        public static string GetClearLowerString(object Value)
+        public static string GetClearLowerString(object val)
         {
-            string value = ClearString(Value);
+            string value = ClearString(val);
 
             if (value != null)
             {
@@ -361,19 +335,19 @@ namespace ProjectBase.Utility
                 return null;
         }
 
-        public static string ClearString(object Value)
+        public static string ClearString(object val)
         {
-            if (IsNull(Value) || string.IsNullOrWhiteSpace(Value.ToString()))
+            if (IsNull(val) || string.IsNullOrWhiteSpace(val.ToString()))
             {
                 return null;
             }
             else
-                return Value.ToString().Trim();
+                return val.ToString().Trim();
         }
 
-        public static T CopyObject<T>(object From, T To)
+        public static T CopyObject<T>(object from, T to)
         {
-            Type tfrom = From.GetType();
+            Type tfrom = from.GetType();
             Type tto = typeof(T);
 
             foreach (PropertyInfo to_property in tto.GetProperties())
@@ -382,28 +356,28 @@ namespace ProjectBase.Utility
                 {
                     if (from_property.Name == to_property.Name)
                     {
-                        to_property.SetValue(To, from_property.GetValue(From));
+                        to_property.SetValue(to, from_property.GetValue(from));
                         break;
                     }
                 }
             }
 
-            return To;            
+            return to;            
         }
 
-        public static object GetDynamicObject(object ConvertObject, Dictionary<string, object> ExtraProperty)
+        public static object GetDynamicObject(object convertObject, Dictionary<string, object> extraProperty)
         {
             dynamic expando = new ExpandoObject();
             var dic = expando as IDictionary<string, object>;
-            Type tto = ConvertObject.GetType();
+            Type tto = convertObject.GetType();
 
             foreach (PropertyInfo to_property in tto.GetProperties())
             {
-                dic.Add(to_property.Name, to_property.GetValue(ConvertObject));
+                dic.Add(to_property.Name, to_property.GetValue(convertObject));
             }
 
-            if(ExtraProperty != null)
-                foreach (var val in ExtraProperty)
+            if(extraProperty != null)
+                foreach (var val in extraProperty)
                 {
                     int i = 0;
                     string oldKey = val.Key;
@@ -420,9 +394,9 @@ namespace ProjectBase.Utility
             return expando;
         }
 
-        public static T CopyObjectDeeper<T>(object From, T To)
+        public static T CopyObjectDeeper<T>(object from, T to)
         {
-            Type tfrom = From.GetType();
+            Type tfrom = from.GetType();
             Type tto = typeof(T);
             object newProperty = null;
 
@@ -432,9 +406,9 @@ namespace ProjectBase.Utility
                 {
                     if (from_property.Name == to_property.Name)
                     {
-                        if (from_property.GetValue(From) != null && !(from_property.GetValue(From) is IConvertible))
+                        if (from_property.GetValue(from) != null && !(from_property.GetValue(from) is IConvertible))
                         {
-                            if (to_property.GetValue(To) == null)
+                            if (to_property.GetValue(to) == null)
                             {
                                newProperty = Activator.CreateInstance(to_property.PropertyType);
                             }
@@ -442,19 +416,19 @@ namespace ProjectBase.Utility
                             CopyObjectDeeper(from_property, newProperty, to_property.PropertyType);
                         }
 
-                        to_property.SetValue(To, from_property.GetValue(From));
+                        to_property.SetValue(to, from_property.GetValue(from));
                         break;
                     }
                 }
             }
 
-            return To;
+            return to;
         }
 
-        public static object CopyObjectDeeper(object From, object To, Type ObjectType)
+        public static object CopyObjectDeeper(object from, object to, Type objectType)
         {
-            Type tfrom = From.GetType();
-            Type tto = ObjectType;
+            Type tfrom = from.GetType();
+            Type tto = objectType;
             object newProperty = null;
 
             foreach (PropertyInfo to_property in tto.GetProperties())
@@ -463,9 +437,9 @@ namespace ProjectBase.Utility
                 {
                     if (from_property.Name == to_property.Name)
                     {
-                        if (from_property.GetValue(From) != null && !(from_property.GetValue(From) is IConvertible))
+                        if (from_property.GetValue(from) != null && !(from_property.GetValue(from) is IConvertible))
                         {
-                            if (to_property.GetValue(To) == null)
+                            if (to_property.GetValue(to) == null)
                             {
                                 newProperty = Activator.CreateInstance(to_property.PropertyType);
                             }
@@ -473,50 +447,50 @@ namespace ProjectBase.Utility
                             CopyObjectDeeper(from_property, newProperty, to_property.PropertyType);
                         }
 
-                        to_property.SetValue(To, from_property.GetValue(From));
+                        to_property.SetValue(to, from_property.GetValue(from));
                         break;
                     }
                 }
             }
 
-            return To;
+            return to;
         }
 
-        public static List<string> GetClassList(string AssemblyName, string NameSpace, bool RemoveNameSpace)
+        public static List<string> GetClassList(string assemblyName, string nameSpace, bool removeNameSpace)
         {
-            if (!RemoveNameSpace)
+            if (!removeNameSpace)
             {
-                return Assembly.Load(AssemblyName).GetTypes().ToList().Where(t => t.Namespace == NameSpace).Select(r => r.FullName).ToList();
+                return Assembly.Load(assemblyName).GetTypes().ToList().Where(t => t.Namespace == nameSpace).Select(r => r.FullName).ToList();
             }
             else
             {
-                return Assembly.Load(AssemblyName).GetTypes().ToList().Where(t => t.Namespace == NameSpace).Select(r => r.Name).ToList();
+                return Assembly.Load(assemblyName).GetTypes().ToList().Where(t => t.Namespace == nameSpace).Select(r => r.Name).ToList();
             }
         }
 
-        public static List<string> GetClassListWithInterface(string AssemblyName, string NameSpace, bool RemoveNameSpace, params string[] Interfaces)
+        public static List<string> GetClassListWithInterface(string assemblyName, string nameSpace, bool removeNameSpace, params string[] interfaces)
         {
-            if (!RemoveNameSpace)
+            if (!removeNameSpace)
             {
-                return Assembly.Load(AssemblyName).GetTypes().ToList().Where(t => t.Namespace == NameSpace && t.GetInterfaces().ToList().Exists(r=>Interfaces.Contains(r.Name))).Select(r => r.FullName).ToList();
+                return Assembly.Load(assemblyName).GetTypes().ToList().Where(t => t.Namespace == nameSpace && t.GetInterfaces().ToList().Exists(r=>interfaces.Contains(r.Name))).Select(r => r.FullName).ToList();
             }
             else
             {
-                return Assembly.Load(AssemblyName).GetTypes().ToList().Where(t => t.Namespace == NameSpace && t.GetInterfaces().ToList().Exists(r => Interfaces.Contains(r.Name))).Select(r => r.Name).ToList();
+                return Assembly.Load(assemblyName).GetTypes().ToList().Where(t => t.Namespace == nameSpace && t.GetInterfaces().ToList().Exists(r => interfaces.Contains(r.Name))).Select(r => r.Name).ToList();
             }
         }
 
-        public static List<PropertyDifference> DetectPropertyChanges<T>(T Object1, T Object2, params string[] ExceptionProperties)
+        public static List<PropertyDifference> DetectPropertyChanges<T>(T object1, T object2, params string[] exceptionProperties)
         {
             List<PropertyDifference> ChangedProperties = new List<PropertyDifference>();
             Type tto = typeof(T);
 
             foreach (PropertyInfo to_property in tto.GetProperties())
             {
-                if (!ExceptionProperties.Contains(to_property.Name))
+                if (!exceptionProperties.Contains(to_property.Name))
                 {
-                    object pvalue1 = to_property.GetValue(Object1);
-                    object pvalue2 = to_property.GetValue(Object2);
+                    object pvalue1 = to_property.GetValue(object1);
+                    object pvalue2 = to_property.GetValue(object2);
 
                     if (!object.Equals(pvalue1, pvalue2))
                     {
@@ -534,42 +508,42 @@ namespace ProjectBase.Utility
             return ChangedProperties;
         }
 
-        public static DateTime? findDateInString(string SearchString)
+        public static DateTime? FindDateInString(string searchString)
         {
             Regex ex = new Regex(DateInStringRegEx);
-            var match = ex.Matches(SearchString);
+            var match = ex.Matches(searchString);
 
             if (match.Count > 0)
-                return Util.getProperty<DateTime>(match[0].Value);
+                return Util.GetProperty<DateTime>(match[0].Value);
             else
                 return null;
         }
 
-        public static string GetEnglishLocalizedString(string SearchString)
+        public static string GetEnglishLocalizedString(string searchString)
         {
-            if (!IsNull(SearchString))
+            if (!IsNull(searchString))
             {
                 char[] turkishChars = { 'ı', 'ğ', 'İ', 'Ğ', 'ç', 'Ç', 'ş', 'Ş', 'ö', 'Ö', 'ü', 'Ü' };
                 char[] englishChars = { 'i', 'g', 'I', 'G', 'c', 'C', 's', 'S', 'o', 'O', 'u', 'U' };
 
                 for (int i = 0; i < turkishChars.Length; i++)
                 {
-                    SearchString = SearchString.Replace(turkishChars[i], englishChars[i]);
+                    searchString = searchString.Replace(turkishChars[i], englishChars[i]);
                 }
 
-                return SearchString;
+                return searchString;
             }
             else
                 return null;
         }
 
-        public static byte[] ZipThat(IEnumerable<ByteFile> Files)
+        public static byte[] ZipThat(IEnumerable<ByteFile> files)
         {
             using (MemoryStream mst = new MemoryStream())
             {
                 using (ZipArchive arc = new ZipArchive(mst, ZipArchiveMode.Create))
                 {
-                    foreach (var item in Files)
+                    foreach (var item in files)
                     {
                         var zipEntry = arc.CreateEntry(item.FileName);
 

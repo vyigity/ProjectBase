@@ -4,20 +4,20 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
+using System.Data.OleDb;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectBase.DataBaseClasses
+namespace ProjectBase.Database
 {
     //vyigity
-    public class KbSqlDatabase2 : IDisposable, IKbDatabase2
+    public class OleDbDatabase2 : IDisposable, IDatabase2
     {
-        SqlConnection myCon = null;
-        SqlTransaction tran = null;
-        SqlCommand command = null;
+        OleDbConnection myCon = null;
+        OleDbTransaction tran = null;
+        OleDbCommand command = null;
 
         DbSettings setting = DbSettings.AutoConnectionManagement;
         public DbSettings Setting
@@ -96,22 +96,22 @@ namespace ProjectBase.DataBaseClasses
             }
         }
 
-        public KbSqlDatabase2()
+        public OleDbDatabase2()
         {
-            ConnectionString = KbAppContext.CONNECTION_STRINGS[KbAppContext.DEFAULT_DB];
+            ConnectionString = AppContext2.CONNECTION_STRINGS[AppContext2.DEFAULT_DB];
         }
 
-        public KbSqlDatabase2(DbSettings setting)
+        public OleDbDatabase2(DbSettings Setting)
         {
-            ConnectionString = KbAppContext.CONNECTION_STRINGS[KbAppContext.DEFAULT_DB];
-            this.Setting = setting;
+            ConnectionString = AppContext2.CONNECTION_STRINGS[AppContext2.DEFAULT_DB];
+            this.Setting = Setting;
         }
 
-        public KbSqlDatabase2(DbSettings setting, IsolationLevel isolation)
+        public OleDbDatabase2(DbSettings Setting, IsolationLevel Isolation)
         {
-            ConnectionString = KbAppContext.CONNECTION_STRINGS[KbAppContext.DEFAULT_DB];
-            this.Setting = setting;
-            this.isolation = isolation;
+            ConnectionString = AppContext2.CONNECTION_STRINGS[AppContext2.DEFAULT_DB];
+            this.Setting = Setting;
+            this.isolation = Isolation;
         }
 
         void Close()
@@ -178,7 +178,7 @@ namespace ProjectBase.DataBaseClasses
             }
             else
             {
-                myCon = new SqlConnection(connectionString.ConnectionString);
+                myCon = new OleDbConnection(connectionString.ConnectionString);
 
                 if (myCon.State == ConnectionState.Closed)
                     myCon.Open();
@@ -198,18 +198,18 @@ namespace ProjectBase.DataBaseClasses
             }
         }
 
-        public DataTable ExecuteQueryDataTable(string query)
+        public DataTable ExecuteQueryDataTable(string Query)
         {
             DataTable dt = new DataTable();
 
             try
             {
                 GetConnection();
-                SqlDataAdapter oraadap = new SqlDataAdapter(new SqlCommand(query, myCon));
+                OleDbDataAdapter oraadap = new OleDbDataAdapter(new OleDbCommand(Query, myCon));
                 oraadap.Fill(dt);
                 return dt;
             }
-            catch (SqlException ex)
+            catch (OleDbException ex)
             {
                 throw ex;
             }
@@ -226,17 +226,17 @@ namespace ProjectBase.DataBaseClasses
         public DataTable ExecuteQueryDataTable(IDbCommand query)
         {
             DataTable dt = new DataTable();
-            command = query as SqlCommand;
+            command = query as OleDbCommand;
 
             try
             {
                 GetConnection();
                 query.Connection = myCon;
-                SqlDataAdapter oraadap = new SqlDataAdapter(command);
+                OleDbDataAdapter oraadap = new OleDbDataAdapter(command);
                 oraadap.Fill(dt);
                 return dt;
             }
-            catch (SqlException ex)
+            catch (OleDbException ex)
             {
                 throw ex;
             }
@@ -257,10 +257,10 @@ namespace ProjectBase.DataBaseClasses
             try
             {
                 GetConnection();
-                SqlDataAdapter oraadap = new SqlDataAdapter(new SqlCommand(query, myCon));
+                OleDbDataAdapter oraadap = new OleDbDataAdapter(new OleDbCommand(query, myCon));
                 oraadap.Fill(set, table);
             }
-            catch (SqlException ex)
+            catch (OleDbException ex)
             {
                 throw ex;
             }
@@ -278,15 +278,15 @@ namespace ProjectBase.DataBaseClasses
         {
             DataTable dt = new DataTable();
             query.Connection = myCon;
-            command = query as SqlCommand;
+            command = query as OleDbCommand;
 
             try
             {
                 GetConnection();
-                SqlDataAdapter oraadap = new SqlDataAdapter(command);
+                OleDbDataAdapter oraadap = new OleDbDataAdapter(command);
                 oraadap.Fill(set, table);
             }
-            catch (SqlException ex)
+            catch (OleDbException ex)
             {
                 throw ex;
             }
@@ -307,11 +307,11 @@ namespace ProjectBase.DataBaseClasses
             try
             {
                 GetConnection();
-                SqlDataAdapter oraadap = new SqlDataAdapter(new SqlCommand(query, myCon));
+                OleDbDataAdapter oraadap = new OleDbDataAdapter(new OleDbCommand(query, myCon));
                 oraadap.Fill(table);
 
             }
-            catch (SqlException ex)
+            catch (OleDbException ex)
             {
                 throw ex;
             }
@@ -328,17 +328,17 @@ namespace ProjectBase.DataBaseClasses
         public void FillObject(DataTable table, IDbCommand query)
         {
             DataTable dt = new DataTable();
-            command = query as SqlCommand;
+            command = query as OleDbCommand;
 
             try
             {
                 GetConnection();
                 query.Connection = myCon;
-                SqlDataAdapter oraadap = new SqlDataAdapter(command);
+                OleDbDataAdapter oraadap = new OleDbDataAdapter(command);
                 oraadap.Fill(table);
 
             }
-            catch (SqlException ex)
+            catch (OleDbException ex)
             {
                 throw ex;
             }
@@ -354,15 +354,15 @@ namespace ProjectBase.DataBaseClasses
 
         public int ExecuteQuery(string query)
         {
-            SqlCommand oracomm = null;
+            OleDbCommand oracomm = null;
 
             try
             {
                 GetConnection();
-                oracomm = new SqlCommand(query, myCon);
+                oracomm = new OleDbCommand(query, myCon);
                 return oracomm.ExecuteNonQuery();
             }
-            catch (SqlException ex)
+            catch (OleDbException ex)
             {
                 throw ex;
             }
@@ -384,7 +384,7 @@ namespace ProjectBase.DataBaseClasses
                 query.Connection = myCon;
                 return query.ExecuteNonQuery(); ;
             }
-            catch (SqlException ex)
+            catch (OleDbException ex)
             {
                 throw ex;
             }
@@ -400,14 +400,14 @@ namespace ProjectBase.DataBaseClasses
 
         public object GetSingleValue(string query)
         {
-            SqlCommand oracomm = null;
+            OleDbCommand oracomm = null;
             try
             {
                 GetConnection();
-                oracomm = new SqlCommand(query, myCon);
+                oracomm = new OleDbCommand(query, myCon);
                 return oracomm.ExecuteScalar();
             }
-            catch (SqlException ex)
+            catch (OleDbException ex)
             {
                 throw ex;
             }
@@ -430,7 +430,7 @@ namespace ProjectBase.DataBaseClasses
                 query.Connection = myCon;
                 return query.ExecuteScalar();
             }
-            catch (SqlException ex)
+            catch (OleDbException ex)
             {
                 throw ex;
             }
@@ -447,15 +447,15 @@ namespace ProjectBase.DataBaseClasses
 
         public IDataReader GetDataReader(string query)
         {
-            SqlCommand comm = null;
+            OleDbCommand comm = null;
 
             try
             {
                 GetConnection();
-                comm = new SqlCommand(query, myCon);
+                comm = new OleDbCommand(query, myCon);
                 return comm.ExecuteReader();
             }
-            catch (SqlException ex)
+            catch (OleDbException ex)
             {
                 throw ex;
             }
@@ -473,7 +473,7 @@ namespace ProjectBase.DataBaseClasses
                 query.Connection = myCon;
                 return query.ExecuteReader();
             }
-            catch (SqlException ex)
+            catch (OleDbException ex)
             {
                 throw ex;
             }
@@ -485,7 +485,7 @@ namespace ProjectBase.DataBaseClasses
 
         public T GetObject<T>(string query)
         {
-            SqlDataReader reader = GetDataReader(query) as SqlDataReader;
+            OleDbDataReader reader = GetDataReader(query) as OleDbDataReader;
 
             try
             {
@@ -499,13 +499,13 @@ namespace ProjectBase.DataBaseClasses
                 {
                     if (HasColumn(reader, inf.Name))
                     {
-                        inf.SetValue(instance, Util.IsNull(reader[inf.Name]) ? null : Util.getProperty(reader[inf.Name], inf.PropertyType));
+                        inf.SetValue(instance, Util.IsNull(reader[inf.Name]) ? null : Util.GetProperty(reader[inf.Name], inf.PropertyType));
                     }
                 }
 
                 return instance;
             }
-            catch (SqlException ex)
+            catch (OleDbException ex)
             {
                 throw ex;
             }
@@ -524,7 +524,7 @@ namespace ProjectBase.DataBaseClasses
 
         public T GetObject<T>(IDbCommand query)
         {
-            SqlDataReader reader = GetDataReader(query) as SqlDataReader;
+            OleDbDataReader reader = GetDataReader(query) as OleDbDataReader;
 
             try
             {
@@ -538,13 +538,13 @@ namespace ProjectBase.DataBaseClasses
                 {
                     if (HasColumn(reader, inf.Name))
                     {
-                        inf.SetValue(instance, Util.IsNull(reader[inf.Name]) ? null : Util.getProperty(reader[inf.Name], inf.PropertyType));
+                        inf.SetValue(instance, Util.IsNull(reader[inf.Name]) ? null : Util.GetProperty(reader[inf.Name], inf.PropertyType));
                     }
                 }
 
                 return instance;
             }
-            catch (SqlException ex)
+            catch (OleDbException ex)
             {
                 throw ex;
             }
@@ -563,7 +563,7 @@ namespace ProjectBase.DataBaseClasses
 
         public List<T> GetObjectList<T>(string query)
         {
-            SqlDataReader reader = GetDataReader(query) as SqlDataReader;
+            OleDbDataReader reader = GetDataReader(query) as OleDbDataReader;
             List<T> entityList = new List<T>();
 
             try
@@ -578,7 +578,7 @@ namespace ProjectBase.DataBaseClasses
                     {
                         if (HasColumn(reader, inf.Name))
                         {
-                            inf.SetValue(instance, Util.IsNull(reader[inf.Name]) ? null : Util.getProperty(reader[inf.Name], inf.PropertyType));
+                            inf.SetValue(instance, Util.IsNull(reader[inf.Name]) ? null : Util.GetProperty(reader[inf.Name], inf.PropertyType));
                         }
                     }
 
@@ -587,7 +587,7 @@ namespace ProjectBase.DataBaseClasses
 
                 return entityList;
             }
-            catch (SqlException ex)
+            catch (OleDbException ex)
             {
                 throw ex;
             }
@@ -606,7 +606,7 @@ namespace ProjectBase.DataBaseClasses
 
         public List<T> GetObjectList<T>(IDbCommand query)
         {
-            SqlDataReader reader = GetDataReader(query) as SqlDataReader;
+            OleDbDataReader reader = GetDataReader(query) as OleDbDataReader;
             List<T> entityList = new List<T>();
 
             try
@@ -621,7 +621,7 @@ namespace ProjectBase.DataBaseClasses
                     {
                         if (HasColumn(reader, inf.Name))
                         {
-                            inf.SetValue(instance, Util.IsNull(reader[inf.Name]) ? null : Util.getProperty(reader[inf.Name], inf.PropertyType));
+                            inf.SetValue(instance, Util.IsNull(reader[inf.Name]) ? null : Util.GetProperty(reader[inf.Name], inf.PropertyType));
                         }
                     }
 
@@ -630,7 +630,7 @@ namespace ProjectBase.DataBaseClasses
 
                 return entityList;
             }
-            catch (SqlException ex)
+            catch (OleDbException ex)
             {
                 throw ex;
             }

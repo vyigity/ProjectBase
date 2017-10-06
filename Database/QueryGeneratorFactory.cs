@@ -6,13 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectBase.DataBaseClasses
+namespace ProjectBase.Database
 {
     public static class QueryGeneratorFactory
     {
         public static IQueryGenerator GetDbObject()
         {
-            ConnectionStringSettings conStr = KbAppContext.CONNECTION_STRINGS["context"];
+            ConnectionStringSettings conStr = AppContext2.CONNECTION_STRINGS["context"];
 
             if (conStr.ProviderName == "Oracle.DataAccess.Client")
             {

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ProjectBase.AppContext
 {
-    public static class KbAppContext
+    public static class AppContext2
     {
         public static string APPLICATION_NAME
         {
@@ -29,7 +29,7 @@ namespace ProjectBase.AppContext
             {
                 if (ConfigurationManager.AppSettings["IN_TEST"] != null)
                 {
-                    return Util.getProperty<bool>(ConfigurationManager.AppSettings["IN_TEST"], false);
+                    return Util.GetProperty<bool>(ConfigurationManager.AppSettings["IN_TEST"], false);
                 }
                 else
                     return false;
@@ -55,7 +55,7 @@ namespace ProjectBase.AppContext
             {
                 if (ConfigurationManager.AppSettings["LOG_OBJECT"] != null)
                 {
-                    return Util.getProperty<bool>(ConfigurationManager.AppSettings["LOG_OBJECT"]);
+                    return Util.GetProperty<bool>(ConfigurationManager.AppSettings["LOG_OBJECT"]);
                 }
                 else
                     return null;
@@ -116,7 +116,7 @@ namespace ProjectBase.AppContext
             {
                 if (ConfigurationManager.AppSettings["MAIL_PORT"] != null)
                 {
-                    return Util.getProperty<int>(ConfigurationManager.AppSettings["MAIL_PORT"]);
+                    return Util.GetProperty<int>(ConfigurationManager.AppSettings["MAIL_PORT"]);
                 }
                 else
                     return null;

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 
-namespace ProjectBase.DataBaseClasses
+namespace ProjectBase.Database
 {
-    public interface IKbDatabase2: IDisposable
+    public interface IDatabase2: IDisposable
     {
         ConnectionStringSettings ConnectionString { get; set; }
         IsolationLevel Isolation { get; set; }

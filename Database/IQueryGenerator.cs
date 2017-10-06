@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace ProjectBase.DataBaseClasses
+namespace ProjectBase.Database
 {
     public interface IQueryGenerator
     {

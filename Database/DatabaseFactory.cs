@@ -8,62 +8,62 @@ using System.Text;
 using System.Threading.Tasks;
 
 //vyigity
-namespace ProjectBase.DataBaseClasses
+namespace ProjectBase.Database
 {
     public enum DbSettings { AutoConnectionManagement = 0, TransactionMode = 1, ManuelConnectionManagement = 2 }
 
     public static class DatabaseFactory
     {
-        public static IKbDatabase2 GetDbObject()
+        public static IDatabase2 GetDbObject()
         {
-            ConnectionStringSettings conStr = KbAppContext.CONNECTION_STRINGS[KbAppContext.DEFAULT_DB];
+            ConnectionStringSettings conStr = AppContext2.CONNECTION_STRINGS[AppContext2.DEFAULT_DB];
 
             if (conStr.ProviderName == "Oracle.DataAccess.Client")
             {
-                return new KbOracleDatabase2();
+                return new OracleDatabase2();
             }
             else if (conStr.ProviderName == "System.Data.SqlClient")
             {
-                return new KbSqlDatabase2();
+                return new SqlDatabase2();
             }
             else if (conStr.ProviderName == "System.Data.OleDb")
-                return new KbOleDbDatabase2();
+                return new OleDbDatabase2();
             else
                 throw new Exception("Provider ilişkilendirilemedi.");
         }
 
-        public static IKbDatabase2 GetDbObject(DbSettings setting)
+        public static IDatabase2 GetDbObject(DbSettings setting)
         {
-            ConnectionStringSettings conStr = KbAppContext.CONNECTION_STRINGS["context"];
+            ConnectionStringSettings conStr = AppContext2.CONNECTION_STRINGS["context"];
 
             if (conStr.ProviderName == "Oracle.DataAccess.Client")
             {
-                return new KbOracleDatabase2(setting);
+                return new OracleDatabase2(setting);
             }
             else if (conStr.ProviderName == "System.Data.SqlClient")
             {
-                return new KbSqlDatabase2(setting);
+                return new SqlDatabase2(setting);
             }
             else if (conStr.ProviderName == "System.Data.OleDb")
-                return new KbOleDbDatabase2(setting);
+                return new OleDbDatabase2(setting);
             else
                 throw new Exception("Provider ilişkilendirilemedi.");
         }
 
-        public static IKbDatabase2 GetDbObject(DbSettings setting, IsolationLevel isolation)
+        public static IDatabase2 GetDbObject(DbSettings setting, IsolationLevel isolation)
         {
-            ConnectionStringSettings conStr = KbAppContext.CONNECTION_STRINGS["context"];
+            ConnectionStringSettings conStr = AppContext2.CONNECTION_STRINGS["context"];
 
             if (conStr.ProviderName == "Oracle.DataAccess.Client")
             {
-                return new KbOracleDatabase2(setting, isolation);
+                return new OracleDatabase2(setting, isolation);
             }
             else if (conStr.ProviderName == "System.Data.SqlClient")
             {
-                return new KbSqlDatabase2(setting, isolation);
+                return new SqlDatabase2(setting, isolation);
             }
             else if (conStr.ProviderName == "System.Data.OleDb")
-                return new KbOleDbDatabase2(setting, isolation);
+                return new OleDbDatabase2(setting, isolation);
             else
                 throw new Exception("Provider ilişkilendirilemedi.");
         }

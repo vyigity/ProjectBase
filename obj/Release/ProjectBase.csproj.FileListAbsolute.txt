@@ -39,3 +39,9 @@ C:\Users\v-yolcu\Desktop\Projects\ProjectBase\ProjectBase\bin\Release\Oracle.Dat
 C:\Users\v-yolcu\Desktop\Projects\ProjectBase\ProjectBase\obj\Release\ProjectBase.csprojResolveAssemblyReference.cache
 C:\Users\v-yolcu\Desktop\Projects\ProjectBase\ProjectBase\obj\Release\ProjectBase.dll
 C:\Users\v-yolcu\Desktop\Projects\ProjectBase\ProjectBase\obj\Release\ProjectBase.pdb
+F:\GitHub\ProjectBase\bin\Release\ProjectBase.dll.config
+F:\GitHub\ProjectBase\bin\Release\ProjectBase.dll
+F:\GitHub\ProjectBase\bin\Release\ProjectBase.pdb
+F:\GitHub\ProjectBase\obj\Release\ProjectBase.csprojResolveAssemblyReference.cache
+F:\GitHub\ProjectBase\obj\Release\ProjectBase.dll
+F:\GitHub\ProjectBase\obj\Release\ProjectBase.pdb

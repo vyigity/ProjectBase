@@ -50,3 +50,9 @@ C:\Users\vyigity\Desktop\GitHub\ProjectBase\ProjectBase\bin\Debug\ProjectBase.pd
 C:\Users\vyigity\Desktop\GitHub\ProjectBase\ProjectBase\obj\Debug\ProjectBase.csprojResolveAssemblyReference.cache
 C:\Users\vyigity\Desktop\GitHub\ProjectBase\ProjectBase\obj\Debug\ProjectBase.dll
 C:\Users\vyigity\Desktop\GitHub\ProjectBase\ProjectBase\obj\Debug\ProjectBase.pdb
+F:\GitHub\ProjectBase\bin\Debug\ProjectBase.dll.config
+F:\GitHub\ProjectBase\bin\Debug\ProjectBase.dll
+F:\GitHub\ProjectBase\bin\Debug\ProjectBase.pdb
+F:\GitHub\ProjectBase\obj\Debug\ProjectBase.csprojResolveAssemblyReference.cache
+F:\GitHub\ProjectBase\obj\Debug\ProjectBase.dll
+F:\GitHub\ProjectBase\obj\Debug\ProjectBase.pdb
