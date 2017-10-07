@@ -13,7 +13,6 @@ namespace ProjectBase.Database
         void ClearConnection();
         void CloseConnection();
         void Commit();
-        void Dispose();
         int ExecuteQuery(string query);
         int ExecuteQuery(IDbCommand query);
         DataTable ExecuteQueryDataTable(string query);
