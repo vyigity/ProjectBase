@@ -46,7 +46,7 @@ namespace ProjectBase.Database
             }
             else if (conStr.ProviderName == "Oracle.ManagedDataAccess.Client")
             {
-                return new OracleManagedDatabase2(setting;
+                return new OracleManagedDatabase2(setting);
             }
             else if (conStr.ProviderName == "System.Data.SqlClient")
             {
