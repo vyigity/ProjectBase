@@ -44,6 +44,10 @@ namespace ProjectBase.Database
             {
                 return new OracleDatabase2(setting);
             }
+            else if (conStr.ProviderName == "Oracle.ManagedDataAccess.Client")
+            {
+                return new OracleManagedDatabase2();
+            }
             else if (conStr.ProviderName == "System.Data.SqlClient")
             {
                 return new SqlDatabase2(setting);
@@ -61,6 +65,10 @@ namespace ProjectBase.Database
             if (conStr.ProviderName == "Oracle.DataAccess.Client")
             {
                 return new OracleDatabase2(setting, isolation);
+            }
+            else if (conStr.ProviderName == "Oracle.ManagedDataAccess.Client")
+            {
+                return new OracleManagedDatabase2();
             }
             else if (conStr.ProviderName == "System.Data.SqlClient")
             {
