@@ -54,6 +54,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Oracle.DataAccess, Version=4.121.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86" />
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.122.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Configuration">
       <Private>False</Private>
@@ -77,6 +78,7 @@
     <Compile Include="Database\IDatabase2.cs" />
     <Compile Include="Database\IQueryGenerator.cs" />
     <Compile Include="Database\OleDbDatabase2.cs" />
+    <Compile Include="Database\OracleManagedDatabase2.cs" />
     <Compile Include="Database\OracleDatabase2.cs" />
     <Compile Include="Database\SqlDatabase2.cs" />
     <Compile Include="Database\QueryGeneratorFactory.cs" />

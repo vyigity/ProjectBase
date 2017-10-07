@@ -22,6 +22,10 @@ namespace ProjectBase.Database
             {
                 return new OracleDatabase2();
             }
+            else if (conStr.ProviderName == "Oracle.ManagedDataAccess.Client")
+            {
+                return new OracleManagedDatabase2();
+            }
             else if (conStr.ProviderName == "System.Data.SqlClient")
             {
                 return new SqlDatabase2();
