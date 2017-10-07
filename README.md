@@ -8,6 +8,8 @@ PB has 3 mod of data access.
 * Manuel Connection Management: Using single connection object and connection is opened and closed by developer manually.
 * Transaction Mode: PB supports PL/SQL type code writing of transactional processes. PB creates transaction and manages them automatically.
 
+PB currenty supports Oracle (Managed-UnManaged Provider), SQL Server databases and OleDb. 
+
 Also PB supports low level object mapping features.
 
 
