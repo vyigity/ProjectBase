@@ -40,7 +40,7 @@ namespace ProjectBase.Utility
             return builder.ToString();
         }
 
-        public static string generateHTMLTable(DataTable data, string cssClass, string cssClassName)
+        public static string GenerateHTMLTable(DataTable data, string cssClass, string cssClassName)
         {
             StringBuilder builder = new StringBuilder();
 
