@@ -2,7 +2,7 @@
 
 ProjectBase (PB) is a Utility and Data Access library. PB designed with a interface oriented approach to ensure extentibility and reliablity. 
 
-PB has 3 mods of data access: 
+PB has 3 type of data access: 
 
 * Automatic Connection Management: Using single connection object and while executing a command, connection is closed and opened automatically.
 * Manuel Connection Management: Using single connection object and connection is opened and closed by developer manually.
