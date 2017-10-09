@@ -1,6 +1,6 @@
 # ProjectBase
 
-ProjectBase (PB) is a Utility and Data Access library. PB has a interface oriented approach to ensure extentibility an reliablity. 
+ProjectBase (PB) is a Utility and Data Access library. PB designed with a interface oriented approach to ensure extentibility an reliablity. 
 
 PB has 3 mods of data access: 
 
