@@ -14,9 +14,9 @@ namespace ProjectBase.Database
         {
             ConnectionStringSettings conStr = AppContext2.CONNECTION_STRINGS["context"];
 
-            if (conStr.ProviderName == "Oracle.DataAccess.Client")
+            if (conStr.ProviderName == "Oracle.DataAccess.Client" || conStr.ProviderName == "Oracle.ManagedDataAccess.Client")
             {
-                return new OracleQueryGenerator();
+                return new OracleManagedQueryGenerator();
             }
             else if (conStr.ProviderName == "System.Data.SqlClient")
             {
