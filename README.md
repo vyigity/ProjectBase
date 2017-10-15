@@ -12,4 +12,24 @@ PB currenty supports Oracle (Managed-Unmanaged Provider), SQL Server databases a
 
 Also PB supports low level object mapping features.
 
+For introduction:
+
+http://vyigity.blogspot.com.tr/2017/10/veri-erisim-katmanna-giris-introduction.html
+
+For connection management examples:
+
+http://vyigity.blogspot.com.tr/2017/10/projectbase-ile-veri-taban-baglant.html
+
+For transactions examples:
+
+http://vyigity.blogspot.com.tr/2017/10/projectbase-ile-veri-taban-islemleri.html
+
+For DML examples:
+
+http://vyigity.blogspot.com.tr/2017/10/projectbase-ile-querygenerator.html
+
+For parametric database procedures and functions examples:
+
+http://vyigity.blogspot.com.tr/2017/10/projectbase-ve-querygenertor-ile-veri.html
+
 
