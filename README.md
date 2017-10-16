@@ -32,7 +32,7 @@ For parametric database procedures and functions examples:
 
 http://vyigity.blogspot.com.tr/2017/10/projectbase-ve-querygenertor-ile-veri.html
 
-For typed data select using objects examples:
+For typed data selection using objects examples:
 
 http://vyigity.blogspot.com.tr/2017/10/projectbase-ile-datatable-yerine-nesne.html
 
