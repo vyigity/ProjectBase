@@ -77,6 +77,7 @@
   <ItemGroup>
     <Compile Include="AppContext\AppContext2.cs" />
     <Compile Include="AppContext\SessionObject.cs" />
+    <Compile Include="Database\DatabaseBase.cs" />
     <Compile Include="Database\DatabaseFactory.cs" />
     <Compile Include="Database\IDatabase2.cs" />
     <Compile Include="Database\IQueryGenerator.cs" />

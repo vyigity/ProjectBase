@@ -193,7 +193,7 @@ namespace ProjectBase.Utility
             }
         }
 
-        public static Nullable<T> getPropertyNullable<T>(object obj) where T : struct
+        public static Nullable<T> GetPropertyNullable<T>(object obj) where T : struct
         {
             try
             {
