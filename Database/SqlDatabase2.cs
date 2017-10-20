@@ -13,199 +13,19 @@ using System.Threading.Tasks;
 namespace ProjectBase.Database
 {
     //vyigity
-    public class SqlDatabase2 : IDisposable, IDatabase2
+    public class SqlDatabase2 : DatabaseBase, IDisposable, IDatabase2
     {
-        SqlConnection myCon = null;
-        SqlTransaction tran = null;
-        SqlCommand command = null;
-
-        DbSettings setting = DbSettings.AutoConnectionManagement;
-        public DbSettings Setting
-        {
-            get
-            {
-                return setting;
-            }
-            set
-            {
-                switch (value)
-                {
-                    case DbSettings.AutoConnectionManagement:
-
-                        closeConnectionImmediate = true;
-                        useTransaction = false;
-
-                        break;
-                    case DbSettings.TransactionMode:
-
-                        closeConnectionImmediate = false;
-                        useTransaction = true;
-
-                        break;
-                    case DbSettings.ManuelConnectionManagement:
-
-                        closeConnectionImmediate = false;
-                        useTransaction = false;
-
-                        break;
-                    default:
-
-                        closeConnectionImmediate = true;
-                        useTransaction = false;
-
-                        break;
-                }
-
-                setting = value;
-            }
-        }
-
-        bool closeConnectionImmediate = true;
-        bool useTransaction = false;
-        bool processEnded = true;
-
-        IsolationLevel isolation = IsolationLevel.ReadCommitted;
-        public IsolationLevel Isolation
-        {
-            get
-            {
-                return isolation;
-            }
-            set
-            {
-                if (!processEnded)
-                    throw new InvalidOperationException("While running a process, isolation level cannot be changed");
-
-                isolation = value;
-            }
-        }
-
-        ConnectionStringSettings connectionString = null;
-        public ConnectionStringSettings ConnectionString
-        {
-            get
-            {
-                return connectionString;
-            }
-            set
-            {
-                if (!processEnded)
-                    throw new InvalidOperationException("While running a process, connection string cannot be changed");
-
-                connectionString = value;
-            }
-        }
-
-        public SqlDatabase2()
-        {
-            ConnectionString = AppContext2.CONNECTION_STRINGS[AppContext2.DEFAULT_DB];
-        }
-
-        public SqlDatabase2(DbSettings setting)
-        {
-            ConnectionString = AppContext2.CONNECTION_STRINGS[AppContext2.DEFAULT_DB];
-            this.Setting = setting;
-        }
-
-        public SqlDatabase2(DbSettings setting, IsolationLevel isolation)
-        {
-            ConnectionString = AppContext2.CONNECTION_STRINGS[AppContext2.DEFAULT_DB];
-            this.Setting = setting;
-            this.isolation = isolation;
-        }
-
-        void Close()
-        {
-            if (myCon.State == ConnectionState.Open && closeConnectionImmediate)
-                myCon.Close();
-        }
-
-        public void Commit()
-        {
-            if (useTransaction)
-            {
-                if (!processEnded)
-                {
-                    tran.Commit();
-                    processEnded = true;
-                }
-            }
-        }
-
-        public void RollBack()
-        {
-            if (useTransaction)
-            {
-                if (!processEnded)
-                {
-                    tran.Rollback();
-                    processEnded = true;
-                }
-            }
-        }
-
-        public void CloseConnection()
-        {
-            RollBack();
-
-            if (myCon.State == ConnectionState.Open)
-                myCon.Close();
-
-            tran = null;
-            processEnded = true;
-        }
-
-        public void ClearConnection()
-        {
-            if (myCon != null)
-            {
-                CloseConnection();
-                myCon = null;
-            }
-        }
-
-        public IDbConnection GetConnection()
-        {
-            if (myCon != null)
-            {
-
-                if (myCon.State == ConnectionState.Closed)
-                    myCon.Open();
-
-                GetTransaction();
-
-                return myCon;
-            }
-            else
-            {
-                myCon = new SqlConnection(connectionString.ConnectionString);
-
-                if (myCon.State == ConnectionState.Closed)
-                    myCon.Open();
-
-                GetTransaction();
-
-                return myCon;
-            }
-        }
-
-        void GetTransaction()
-        {
-            if (useTransaction && processEnded)
-            {
-                tran = myCon.BeginTransaction(isolation);
-                processEnded = false;
-            }
-        }
-
-        public DataTable ExecuteQueryDataTable(string query)
+        public SqlDatabase2() : base() { }
+        public SqlDatabase2(DbSettings setting) : base(setting) { }
+        public SqlDatabase2(DbSettings setting, IsolationLevel isolation) : base(setting, isolation) { }
+        public override DataTable ExecuteQueryDataTable(string query)
         {
             DataTable dt = new DataTable();
 
             try
             {
                 GetConnection();
-                SqlDataAdapter oraadap = new SqlDataAdapter(new SqlCommand(query, myCon));
+                SqlDataAdapter oraadap = new SqlDataAdapter(new SqlCommand(query, myCon as SqlConnection));
                 oraadap.Fill(dt);
                 return dt;
             }
@@ -222,11 +42,10 @@ namespace ProjectBase.Database
                 Close();
             }
         }
-
-        public DataTable ExecuteQueryDataTable(IDbCommand query)
+        public override DataTable ExecuteQueryDataTable(IDbCommand query)
         {
             DataTable dt = new DataTable();
-            command = query as SqlCommand;
+            SqlCommand command = query as SqlCommand;
 
             try
             {
@@ -249,15 +68,14 @@ namespace ProjectBase.Database
                 Close();
             }
         }
-
-        public void FillObject(DataSet set, string table, string query)
+        public override void FillObject(DataSet set, string table, string query)
         {
             DataTable dt = new DataTable();
 
             try
             {
                 GetConnection();
-                SqlDataAdapter oraadap = new SqlDataAdapter(new SqlCommand(query, myCon));
+                SqlDataAdapter oraadap = new SqlDataAdapter(new SqlCommand(query, myCon as SqlConnection));
                 oraadap.Fill(set, table);
             }
             catch (SqlException ex)
@@ -273,12 +91,11 @@ namespace ProjectBase.Database
                 Close();
             }
         }
-
-        public void FillObject(DataSet set, string table, IDbCommand query)
+        public override void FillObject(DataSet set, string table, IDbCommand query)
         {
             DataTable dt = new DataTable();
             query.Connection = myCon;
-            command = query as SqlCommand;
+            SqlCommand command = query as SqlCommand;
 
             try
             {
@@ -299,15 +116,14 @@ namespace ProjectBase.Database
                 Close();
             }
         }
-
-        public void FillObject(DataTable table, string query)
+        public override void FillObject(DataTable table, string query)
         {
             DataTable dt = new DataTable();
 
             try
             {
                 GetConnection();
-                SqlDataAdapter oraadap = new SqlDataAdapter(new SqlCommand(query, myCon));
+                SqlDataAdapter oraadap = new SqlDataAdapter(new SqlCommand(query, myCon as SqlConnection));
                 oraadap.Fill(table);
 
             }
@@ -324,11 +140,10 @@ namespace ProjectBase.Database
                 Close();
             }
         }
-
-        public void FillObject(DataTable table, IDbCommand query)
+        public override void FillObject(DataTable table, IDbCommand query)
         {
             DataTable dt = new DataTable();
-            command = query as SqlCommand;
+            SqlCommand command = query as SqlCommand;
 
             try
             {
@@ -351,15 +166,14 @@ namespace ProjectBase.Database
                 Close();
             }
         }
-
-        public int ExecuteQuery(string query)
+        public override int ExecuteQuery(string query)
         {
             SqlCommand oracomm = null;
 
             try
             {
                 GetConnection();
-                oracomm = new SqlCommand(query, myCon);
+                oracomm = new SqlCommand(query, myCon as SqlConnection);
                 return oracomm.ExecuteNonQuery();
             }
             catch (SqlException ex)
@@ -375,8 +189,7 @@ namespace ProjectBase.Database
                 Close();
             }
         }
-
-        public int ExecuteQuery(IDbCommand query)
+        public override int ExecuteQuery(IDbCommand query)
         {
             try
             {
@@ -397,14 +210,13 @@ namespace ProjectBase.Database
                 Close();
             }
         }
-
-        public object GetSingleValue(string query)
+        public override object GetSingleValue(string query)
         {
             SqlCommand oracomm = null;
             try
             {
                 GetConnection();
-                oracomm = new SqlCommand(query, myCon);
+                oracomm = new SqlCommand(query, myCon as SqlConnection);
                 return oracomm.ExecuteScalar();
             }
             catch (SqlException ex)
@@ -421,8 +233,7 @@ namespace ProjectBase.Database
             }
 
         }
-
-        public object GetSingleValue(IDbCommand query)
+        public override object GetSingleValue(IDbCommand query)
         {
             try
             {
@@ -444,15 +255,14 @@ namespace ProjectBase.Database
             }
 
         }
-
-        public IDataReader GetDataReader(string query)
+        public override IDataReader GetDataReader(string query)
         {
             SqlCommand comm = null;
 
             try
             {
                 GetConnection();
-                comm = new SqlCommand(query, myCon);
+                comm = new SqlCommand(query, myCon as SqlConnection);
                 return comm.ExecuteReader();
             }
             catch (SqlException ex)
@@ -464,8 +274,7 @@ namespace ProjectBase.Database
                 throw ex;
             }
         }
-
-        public IDataReader GetDataReader(IDbCommand query)
+        public override IDataReader GetDataReader(IDbCommand query)
         {
             try
             {
@@ -482,8 +291,7 @@ namespace ProjectBase.Database
                 throw ex;
             }
         }
-
-        public T GetObject<T>(string query)
+        public override T GetObject<T>(string query)
         {
             SqlDataReader reader = GetDataReader(query) as SqlDataReader;
 
@@ -521,8 +329,7 @@ namespace ProjectBase.Database
                 Close();
             }
         }
-
-        public T GetObject<T>(IDbCommand query)
+        public override T GetObject<T>(IDbCommand query)
         {
             SqlDataReader reader = GetDataReader(query) as SqlDataReader;
 
@@ -560,8 +367,7 @@ namespace ProjectBase.Database
                 Close();
             }
         }
-
-        public List<T> GetObjectList<T>(string query)
+        public override List<T> GetObjectList<T>(string query)
         {
             SqlDataReader reader = GetDataReader(query) as SqlDataReader;
             List<T> entityList = new List<T>();
@@ -603,8 +409,7 @@ namespace ProjectBase.Database
                 Close();
             }
         }
-
-        public List<T> GetObjectList<T>(IDbCommand query)
+        public override List<T> GetObjectList<T>(IDbCommand query)
         {
             SqlDataReader reader = GetDataReader(query) as SqlDataReader;
             List<T> entityList = new List<T>();
@@ -646,13 +451,7 @@ namespace ProjectBase.Database
                 Close();
             }
         }
-
-        public void Dispose()
-        {
-            CloseConnection();
-        }
-
-        public bool HasColumn(IDataRecord dr, string columnName)
+        public override bool HasColumn(IDataRecord dr, string columnName)
         {
             for (int i = 0; i < dr.FieldCount; i++)
             {
@@ -661,6 +460,9 @@ namespace ProjectBase.Database
             }
             return false;
         }
-
+        protected override IDbConnection GetDbSpecificConnection(string connectionString)
+        {
+            return new SqlConnection(connectionString);
+        }
     }
 }

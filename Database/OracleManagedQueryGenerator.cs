@@ -1,5 +1,4 @@
 ﻿using Oracle.ManagedDataAccess.Client;
-using Oracle.DataAccess.Types;
 using ProjectBase.Utility;
 using System;
 using System.Collections.Generic;
@@ -15,11 +14,11 @@ namespace ProjectBase.Database
     public class OracleManagedQueryGenerator : IQueryGenerator
     {
         public String TableName { get; set; }
+
         List<OracleParameter> DataParameters;
         List<OracleParameter> FilterParameters;
 
         bool isFilled = false;
-
         public string SelectText { get; set; }
         public string FilterText { get; set; }
         public string SelectTail { get; set; }

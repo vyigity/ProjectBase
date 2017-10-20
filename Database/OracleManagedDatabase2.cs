@@ -13,199 +13,19 @@ using System.Threading.Tasks;
 namespace ProjectBase.Database
 {
     //vyigity
-    public class OracleManagedDatabase2 : IDisposable, IDatabase2
+    public class OracleManagedDatabase2 : DatabaseBase, IDisposable, IDatabase2
     {
-        OracleConnection myCon = null;
-        OracleTransaction tran = null;
-        OracleCommand command = null;
-
-        DbSettings setting = DbSettings.AutoConnectionManagement;
-        public DbSettings Setting
-        {
-            get
-            {
-                return setting;
-            }
-            set
-            {
-                switch (value)
-                {
-                    case DbSettings.AutoConnectionManagement:
-
-                        closeConnectionImmediate = true;
-                        useTransaction = false;
-
-                        break;
-                    case DbSettings.TransactionMode:
-
-                        closeConnectionImmediate = false;
-                        useTransaction = true;
-
-                        break;
-                    case DbSettings.ManuelConnectionManagement:
-
-                        closeConnectionImmediate = false;
-                        useTransaction = false;
-
-                        break;
-                    default:
-
-                        closeConnectionImmediate = true;
-                        useTransaction = false;
-
-                        break;
-                }
-
-                setting = value;
-            }
-        }
-
-        bool closeConnectionImmediate = true;
-        bool useTransaction = false;
-        bool processEnded = true;
-
-        IsolationLevel isolation = IsolationLevel.ReadCommitted;
-        public IsolationLevel Isolation
-        {
-            get
-            {
-                return isolation;
-            }
-            set
-            {
-                if (!processEnded)
-                    throw new InvalidOperationException("While running a process, isolation level cannot be changed");
-
-                isolation = value;
-            }
-        }
-
-        ConnectionStringSettings connectionString = null;
-        public ConnectionStringSettings ConnectionString
-        {
-            get
-            {
-                return connectionString;
-            }
-            set
-            {
-                if (!processEnded)
-                    throw new InvalidOperationException("While running a process, connection string cannot be changed");
-
-                connectionString = value;
-            }
-        }
-
-        public OracleManagedDatabase2()
-        {
-            ConnectionString = AppContext2.CONNECTION_STRINGS[AppContext2.DEFAULT_DB];
-        }
-
-        public OracleManagedDatabase2(DbSettings setting)
-        {
-            ConnectionString = AppContext2.CONNECTION_STRINGS[AppContext2.DEFAULT_DB];
-            this.Setting = setting;
-        }
-
-        public OracleManagedDatabase2(DbSettings setting, IsolationLevel isolation)
-        {
-            ConnectionString = AppContext2.CONNECTION_STRINGS[AppContext2.DEFAULT_DB];
-            this.Setting = setting;
-            this.isolation = isolation;
-        }
-
-        void Close()
-        {
-            if (myCon.State == ConnectionState.Open && closeConnectionImmediate)
-                myCon.Close();
-        }
-
-        public void Commit()
-        {
-            if (useTransaction)
-            {
-                if (!processEnded)
-                {
-                    tran.Commit();
-                    processEnded = true;
-                }
-            }
-        }
-
-        public void RollBack()
-        {
-            if (useTransaction)
-            {
-                if (!processEnded)
-                {
-                    tran.Rollback();
-                    processEnded = true;
-                }
-            }
-        }
-
-        public void CloseConnection()
-        {
-            RollBack();
-
-            if (myCon.State == ConnectionState.Open)
-                myCon.Close();
-
-            tran = null;
-            processEnded = true;
-        }
-
-        public void ClearConnection()
-        {
-            if (myCon != null)
-            {
-                CloseConnection();
-                myCon = null;
-            }
-        }
-
-        public IDbConnection GetConnection()
-        {
-            if (myCon != null)
-            {
-              
-                if (myCon.State == ConnectionState.Closed)
-                    myCon.Open();
-
-                GetTransaction();
-
-                return myCon;
-            }
-            else
-            {
-                myCon = new OracleConnection(connectionString.ConnectionString);
-
-                if (myCon.State == ConnectionState.Closed)
-                    myCon.Open();
-
-                GetTransaction();
-
-                return myCon;
-            }
-        }
-
-        void GetTransaction()
-        {
-            if (useTransaction && processEnded)
-            {
-                tran = myCon.BeginTransaction(isolation);
-                processEnded = false;
-            }
-        }
-
-        public DataTable ExecuteQueryDataTable(string query)
+        public OracleManagedDatabase2() : base() { }
+        public OracleManagedDatabase2(DbSettings setting) : base(setting) { }
+        public OracleManagedDatabase2(DbSettings setting, IsolationLevel isolation) : base(setting, isolation) { }
+        public override DataTable ExecuteQueryDataTable(string query)
         {
             DataTable dt = new DataTable();
 
             try
             {
                 GetConnection();
-                OracleDataAdapter oraadap = new OracleDataAdapter(new OracleCommand(query, myCon));
+                OracleDataAdapter oraadap = new OracleDataAdapter(new OracleCommand(query, myCon as OracleConnection));
                 oraadap.Fill(dt);
                 return dt;
             }
@@ -222,11 +42,10 @@ namespace ProjectBase.Database
                 Close();
             }
         }
-
-        public DataTable ExecuteQueryDataTable(IDbCommand query)
+        public override DataTable ExecuteQueryDataTable(IDbCommand query)
         {
             DataTable dt = new DataTable();
-            command = query as OracleCommand;
+            OracleCommand command = query as OracleCommand;
 
             try
             {
@@ -249,15 +68,14 @@ namespace ProjectBase.Database
                 Close();
             }
         }
-
-        public void FillObject(DataSet set, string table, string query)
+        public override void FillObject(DataSet set, string table, string query)
         {
             DataTable dt = new DataTable();
 
             try
             {
                 GetConnection();
-                OracleDataAdapter oraadap = new OracleDataAdapter(new OracleCommand(query, myCon));
+                OracleDataAdapter oraadap = new OracleDataAdapter(new OracleCommand(query, myCon as OracleConnection));
                 oraadap.Fill(set, table);
             }
             catch (OracleException ex)
@@ -273,12 +91,11 @@ namespace ProjectBase.Database
                 Close();
             }
         }
-
-        public void FillObject(DataSet set, string table, IDbCommand query)
+        public override void FillObject(DataSet set, string table, IDbCommand query)
         {
             DataTable dt = new DataTable();
             query.Connection = myCon;
-            command = query as OracleCommand;
+            OracleCommand command = query as OracleCommand;
 
             try
             {
@@ -299,15 +116,14 @@ namespace ProjectBase.Database
                 Close();
             }
         }
-
-        public void FillObject(DataTable table, string query)
+        public override void FillObject(DataTable table, string query)
         {
             DataTable dt = new DataTable();
 
             try
             {
                 GetConnection();
-                OracleDataAdapter oraadap = new OracleDataAdapter(new OracleCommand(query, myCon));
+                OracleDataAdapter oraadap = new OracleDataAdapter(new OracleCommand(query, myCon as OracleConnection));
                 oraadap.Fill(table);
 
             }
@@ -324,11 +140,10 @@ namespace ProjectBase.Database
                 Close();
             }
         }
-
-        public void FillObject(DataTable table, IDbCommand query)
+        public override void FillObject(DataTable table, IDbCommand query)
         {
             DataTable dt = new DataTable();
-            command = query as OracleCommand;
+            OracleCommand command = query as OracleCommand;
 
             try
             {
@@ -351,15 +166,14 @@ namespace ProjectBase.Database
                 Close();
             }
         }
-
-        public int ExecuteQuery(string query)
+        public override int ExecuteQuery(string query)
         {
             OracleCommand oracomm = null;
 
             try
             {
                 GetConnection();
-                oracomm = new OracleCommand(query, myCon);
+                oracomm = new OracleCommand(query, myCon as OracleConnection);
                 return oracomm.ExecuteNonQuery();
             }
             catch (OracleException ex)
@@ -375,8 +189,7 @@ namespace ProjectBase.Database
                 Close();
             }
         }
-
-        public int ExecuteQuery(IDbCommand query)
+        public override int ExecuteQuery(IDbCommand query)
         {
             try
             {
@@ -397,14 +210,13 @@ namespace ProjectBase.Database
                 Close();
             }
         }
-
-        public object GetSingleValue(string query)
+        public override object GetSingleValue(string query)
         {
             OracleCommand oracomm = null;
             try
             {
                 GetConnection();
-                oracomm = new OracleCommand(query, myCon);
+                oracomm = new OracleCommand(query, myCon as OracleConnection);
                 return oracomm.ExecuteScalar();
             }
             catch (OracleException ex)
@@ -421,8 +233,7 @@ namespace ProjectBase.Database
             }
 
         }
-
-        public object GetSingleValue(IDbCommand query)
+        public override object GetSingleValue(IDbCommand query)
         {
             try
             {
@@ -444,15 +255,14 @@ namespace ProjectBase.Database
             }
 
         }
-
-        public IDataReader GetDataReader(string query)
+        public override IDataReader GetDataReader(string query)
         {
             OracleCommand comm = null;
 
             try
             {
                 GetConnection();
-                comm = new OracleCommand(query, myCon);
+                comm = new OracleCommand(query, myCon as OracleConnection);
                 return comm.ExecuteReader();
             }
             catch (OracleException ex)
@@ -464,8 +274,7 @@ namespace ProjectBase.Database
                 throw ex;
             }
         }
-
-        public IDataReader GetDataReader(IDbCommand query)
+        public override IDataReader GetDataReader(IDbCommand query)
         {
             try
             {
@@ -482,8 +291,7 @@ namespace ProjectBase.Database
                 throw ex;
             }
         }
-
-        public T GetObject<T>(string query)
+        public override T GetObject<T>(string query)
         {
             OracleDataReader reader = GetDataReader(query) as OracleDataReader;
 
@@ -521,8 +329,7 @@ namespace ProjectBase.Database
                 Close();
             }
         }
-
-        public T GetObject<T>(IDbCommand query)
+        public override T GetObject<T>(IDbCommand query)
         {
             OracleDataReader reader = GetDataReader(query) as OracleDataReader;
 
@@ -560,51 +367,7 @@ namespace ProjectBase.Database
                 Close();
             }
         }
-
-        public List<T> GetObjectList<T>(string query)
-        {
-            OracleDataReader reader = GetDataReader(query) as OracleDataReader;
-            List<T> entityList = new List<T>();
-
-            try
-            {
-                var props = typeof(T).GetProperties();
-
-                while (reader.Read())
-                {
-                    T instance = (T)Activator.CreateInstance(typeof(T));
-
-                    foreach (PropertyInfo inf in props)
-                    {
-                        if (HasColumn(reader, inf.Name))
-                        {
-                            inf.SetValue(instance, Util.IsNull(reader[inf.Name]) ? null : Util.GetProperty(reader[inf.Name], inf.PropertyType));
-                        }
-                    }
-
-                    entityList.Add(instance);
-                }
-
-                return entityList;
-            }
-            catch (OracleException ex)
-            {
-                throw ex;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                if (!reader.IsClosed)
-                    reader.Close();
-                
-                Close();
-            }
-        }
-
-        public List<T> GetObjectList<T>(IDbCommand query)
+        public override List<T> GetObjectList<T>(string query)
         {
             OracleDataReader reader = GetDataReader(query) as OracleDataReader;
             List<T> entityList = new List<T>();
@@ -646,13 +409,49 @@ namespace ProjectBase.Database
                 Close();
             }
         }
-
-        public void Dispose()
+        public override List<T> GetObjectList<T>(IDbCommand query)
         {
-            CloseConnection();
-        }
+            OracleDataReader reader = GetDataReader(query) as OracleDataReader;
+            List<T> entityList = new List<T>();
 
-        public bool HasColumn(IDataRecord dr, string columnName)
+            try
+            {
+                var props = typeof(T).GetProperties();
+
+                while (reader.Read())
+                {
+                    T instance = (T)Activator.CreateInstance(typeof(T));
+
+                    foreach (PropertyInfo inf in props)
+                    {
+                        if (HasColumn(reader, inf.Name))
+                        {
+                            inf.SetValue(instance, Util.IsNull(reader[inf.Name]) ? null : Util.GetProperty(reader[inf.Name], inf.PropertyType));
+                        }
+                    }
+
+                    entityList.Add(instance);
+                }
+
+                return entityList;
+            }
+            catch (OracleException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (!reader.IsClosed)
+                    reader.Close();
+
+                Close();
+            }
+        }
+        public override bool HasColumn(IDataRecord dr, string columnName)
         {
             for (int i = 0; i < dr.FieldCount; i++)
             {
@@ -660,6 +459,10 @@ namespace ProjectBase.Database
                     return true;
             }
             return false;
+        }
+        protected override IDbConnection GetDbSpecificConnection(string connectionString)
+        {
+            return new OracleConnection(connectionString);
         }
     }
 }

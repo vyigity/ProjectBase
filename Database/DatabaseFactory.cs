@@ -33,7 +33,7 @@ namespace ProjectBase.Database
             else if (conStr.ProviderName == "System.Data.OleDb")
                 return new OleDbDatabase2();
             else
-                throw new Exception("Provider ilişkilendirilemedi.");
+                throw new Exception("Provider is not recognized.");
         }
 
         public static IDatabase2 GetDbObject(DbSettings setting)
@@ -55,7 +55,7 @@ namespace ProjectBase.Database
             else if (conStr.ProviderName == "System.Data.OleDb")
                 return new OleDbDatabase2(setting);
             else
-                throw new Exception("Provider ilişkilendirilemedi.");
+                throw new Exception("Provider is not recognized.");
         }
 
         public static IDatabase2 GetDbObject(DbSettings setting, IsolationLevel isolation)
@@ -77,7 +77,7 @@ namespace ProjectBase.Database
             else if (conStr.ProviderName == "System.Data.OleDb")
                 return new OleDbDatabase2(setting, isolation);
             else
-                throw new Exception("Provider ilişkilendirilemedi.");
+                throw new Exception("Provider is not recognized.");
         }
     }
 }
