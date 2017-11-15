@@ -30,8 +30,14 @@ namespace ProjectBase.Database
             {
                 return new SqlDatabase2();
             }
+            else if (conStr.ProviderName == "MySql.Data.MySqlClient")
+            {
+                return new MySqlDatabase2();
+            }
             else if (conStr.ProviderName == "System.Data.OleDb")
+            {
                 return new OleDbDatabase2();
+            }
             else
                 throw new Exception("Provider is not recognized.");
         }
@@ -52,8 +58,14 @@ namespace ProjectBase.Database
             {
                 return new SqlDatabase2(setting);
             }
+            else if (conStr.ProviderName == "MySql.Data.MySqlClient")
+            {
+                return new MySqlDatabase2(setting);
+            }
             else if (conStr.ProviderName == "System.Data.OleDb")
+            {
                 return new OleDbDatabase2(setting);
+            }
             else
                 throw new Exception("Provider is not recognized.");
         }
@@ -74,8 +86,14 @@ namespace ProjectBase.Database
             {
                 return new SqlDatabase2(setting, isolation);
             }
+            else if (conStr.ProviderName == "MySql.Data.MySqlClient")
+            {
+                return new MySqlDatabase2(setting, isolation);
+            }
             else if (conStr.ProviderName == "System.Data.OleDb")
+            {
                 return new OleDbDatabase2(setting, isolation);
+            }
             else
                 throw new Exception("Provider is not recognized.");
         }

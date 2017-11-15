@@ -57,3 +57,5 @@ F:\GitHub\ProjectBase\obj\Debug\ProjectBase.dll
 F:\GitHub\ProjectBase\obj\Debug\ProjectBase.pdb
 F:\GitHub\ProjectBase\bin\Debug\Oracle.ManagedDataAccess.dll
 F:\GitHub\ProjectBase\obj\Debug\ProjectBase.csprojResolveAssemblyReference.cache
+F:\GitHub\ProjectBase\bin\Debug\MySql.Data.dll
+F:\GitHub\ProjectBase\bin\Debug\MySql.Data.xml

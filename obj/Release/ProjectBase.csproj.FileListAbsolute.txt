@@ -46,3 +46,5 @@ F:\GitHub\ProjectBase\obj\Release\ProjectBase.csprojResolveAssemblyReference.cac
 F:\GitHub\ProjectBase\obj\Release\ProjectBase.dll
 F:\GitHub\ProjectBase\obj\Release\ProjectBase.pdb
 F:\GitHub\ProjectBase\bin\Release\Oracle.ManagedDataAccess.dll
+F:\GitHub\ProjectBase\bin\Release\MySql.Data.dll
+F:\GitHub\ProjectBase\bin\Release\MySql.Data.xml

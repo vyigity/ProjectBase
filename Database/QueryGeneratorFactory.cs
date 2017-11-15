@@ -22,6 +22,10 @@ namespace ProjectBase.Database
             {
                 return new SqlQueryGenerator();
             }
+            else if (conStr.ProviderName == "MySql.Data.MySqlClient")
+            {
+                return new MySqlQueryGenerator();
+            }
             else
                 throw new Exception("Provider ilişkilendirilemedi.");
         }

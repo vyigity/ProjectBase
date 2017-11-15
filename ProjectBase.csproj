@@ -53,6 +53,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="Oracle.DataAccess, Version=4.121.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86" />
     <Reference Include="Oracle.ManagedDataAccess, Version=4.122.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
       <HintPath>..\..\DenemeProje\Deneme\packages\Oracle.ManagedDataAccess.12.2.1100\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
@@ -82,8 +83,10 @@
     <Compile Include="Database\IDatabase2.cs" />
     <Compile Include="Database\IQueryGenerator.cs" />
     <Compile Include="Database\OleDbDatabase2.cs" />
+    <Compile Include="Database\MySqlDatabase2.cs" />
     <Compile Include="Database\OracleManagedDatabase2.cs" />
     <Compile Include="Database\OracleDatabase2.cs" />
+    <Compile Include="Database\MySqlQueryGenerator.cs" />
     <Compile Include="Database\OracleQueryGenerator.cs" />
     <Compile Include="Database\SqlDatabase2.cs" />
     <Compile Include="Database\QueryGeneratorFactory.cs" />
