@@ -147,7 +147,7 @@ namespace ProjectBase.Database
                 foreach (MySqlParameter param in DataParameters)
                 {
                     bString.Append(param.ParameterName);
-                    bString.Append("=:");
+                    bString.Append("=@");
                     bString.Append(param.ParameterName);
                     bString.Append(",");
 
@@ -159,7 +159,7 @@ namespace ProjectBase.Database
                 if (FilterText != null)
                 {
                     bString.Append(" ");
-                    FilterText.Replace("@", ":");
+                    FilterText.Replace(":", "@");
                     bString.Append(FilterText);
                 }
 
@@ -186,7 +186,7 @@ namespace ProjectBase.Database
                 {
                     bString.Append(" ");
 
-                    FilterText = FilterText.Replace("@", ":");
+                    FilterText = FilterText.Replace(":", "@");
                     bString.Append(FilterText);
                 }
 
