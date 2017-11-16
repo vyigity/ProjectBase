@@ -83,120 +83,7 @@ namespace ProjectBase.Database
             {
                 if (item.ParameterName == parameterName)
                 {
-                    if (item.Value.GetType() == typeof(System.Data.SqlTypes.SqlBinary))
-                    {
-                        if (!((SqlBinary)item.Value).IsNull)
-                        {
-                            return ((SqlBinary)item.Value).Value;
-                        }
-                        else
-                            return null;
-                    }
-                    else if (item.Value.GetType() == typeof(System.Data.SqlTypes.SqlBoolean))
-                    {
-                        if (!((SqlBoolean)item.Value).IsNull)
-                        {
-                            return ((SqlBoolean)item.Value).Value;
-                        }
-                        else
-                            return null;
-                    }
-                    else if (item.Value.GetType() == typeof(System.Data.SqlTypes.SqlByte))
-                    {
-                        if (!((SqlByte)item.Value).IsNull)
-                        {
-                            return ((SqlByte)item.Value).Value;
-                        }
-                        else
-                            return null;
-                    }
-                    else if (item.Value.GetType() == typeof(System.Data.SqlTypes.SqlDateTime))
-                    {
-                        if (!((SqlDateTime)item.Value).IsNull)
-                        {
-                            return ((SqlDateTime)item.Value).Value;
-                        }
-                        else
-                            return null;
-
-                    }
-                    else if (item.Value.GetType() == typeof(System.Data.SqlTypes.SqlDecimal))
-                    {
-                        if (!((SqlDecimal)item.Value).IsNull)
-                        {
-                            return ((SqlDecimal)item.Value).Value;
-                        }
-                        else
-                            return null;
-
-                    }
-                    else if (item.Value.GetType() == typeof(System.Data.SqlTypes.SqlDouble))
-                    {
-                        if (!((SqlDouble)item.Value).IsNull)
-                        {
-                            return ((SqlDouble)item.Value).Value;
-                        }
-                        else
-                            return null;
-                    }
-                    else if (item.Value.GetType() == typeof(System.Data.SqlTypes.SqlGuid))
-                    {
-                        if (!((SqlGuid)item.Value).IsNull)
-                        {
-                            return ((SqlGuid)item.Value).Value;
-                        }
-                        else
-                            return null;
-                    }
-                    else if (item.Value.GetType() == typeof(System.Data.SqlTypes.SqlInt16))
-                    {
-                        if (!((SqlInt16)item.Value).IsNull)
-                        {
-                            return ((SqlInt16)item.Value).Value;
-                        }
-                        else
-                            return null;
-                    }
-                    else if (item.Value.GetType() == typeof(System.Data.SqlTypes.SqlInt32))
-                    {
-                        if (!((SqlInt32)item.Value).IsNull)
-                        {
-                            return ((SqlInt32)item.Value).Value;
-                        }
-                        else
-                            return null;
-                    }
-                    else if (item.Value.GetType() == typeof(System.Data.SqlTypes.SqlInt64))
-                    {
-                        if (!((SqlInt64)item.Value).IsNull)
-                        {
-                            return ((SqlInt64)item.Value).Value;
-                        }
-                        else
-                            return null;
-                    }
-                    else if (item.Value.GetType() == typeof(System.Data.SqlTypes.SqlMoney))
-                    {
-                        if (!((SqlMoney)item.Value).IsNull)
-                        {
-                            return ((SqlMoney)item.Value).Value;
-                        }
-                        else
-                            return null;
-                    }
-                    else if (item.Value.GetType() == typeof(System.Data.SqlTypes.SqlSingle))
-                    {
-                        if (!((SqlSingle)item.Value).IsNull)
-                        {
-                            return ((SqlSingle)item.Value).Value;
-                        }
-                        else
-                            return null;
-                    }
-                    else
-                    {
-                        throw new InvalidOperationException("Belirtilen değere karşılık gelen nesne tipi bulunamadı");
-                    }
+                    return item.Value;
                 }
             }
 
@@ -216,7 +103,7 @@ namespace ProjectBase.Database
                     dString.Append(param.ParameterName);
                     dString.Append(",");
 
-                    vString.Append(":");
+                    vString.Append("@");
                     vString.Append(param.ParameterName);
                     vString.Append(",");
 
@@ -254,7 +141,7 @@ namespace ProjectBase.Database
                 foreach (SqlParameter param in DataParameters)
                 {
                     bString.Append(param.ParameterName);
-                    bString.Append("=:");
+                    bString.Append("=@");
                     bString.Append(param.ParameterName);
                     bString.Append(",");
 
