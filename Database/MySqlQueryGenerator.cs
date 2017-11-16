@@ -109,7 +109,7 @@ namespace ProjectBase.Database
                     dString.Append(param.ParameterName);
                     dString.Append(",");
 
-                    vString.Append(":");
+                    vString.Append("@");
                     vString.Append(param.ParameterName);
                     vString.Append(",");
 
