@@ -12,7 +12,7 @@ namespace ProjectBase.Database
     {
         public static IQueryGenerator GetDbObject()
         {
-            ConnectionStringSettings conStr = AppContext2.CONNECTION_STRINGS["context"];
+            ConnectionStringSettings conStr = AppContext2.CONNECTION_STRINGS[AppContext2.DEFAULT_DB];
 
             if (conStr.ProviderName == "Oracle.DataAccess.Client" || conStr.ProviderName == "Oracle.ManagedDataAccess.Client")
             {
