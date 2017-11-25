@@ -44,7 +44,7 @@ namespace ProjectBase.Database
 
         public static IDatabase2 GetDbObject(DbSettings setting)
         {
-            ConnectionStringSettings conStr = AppContext2.CONNECTION_STRINGS["context"];
+            ConnectionStringSettings conStr = AppContext2.CONNECTION_STRINGS[AppContext2.DEFAULT_DB];
 
             if (conStr.ProviderName == "Oracle.DataAccess.Client")
             {
@@ -72,7 +72,7 @@ namespace ProjectBase.Database
 
         public static IDatabase2 GetDbObject(DbSettings setting, IsolationLevel isolation)
         {
-            ConnectionStringSettings conStr = AppContext2.CONNECTION_STRINGS["context"];
+            ConnectionStringSettings conStr = AppContext2.CONNECTION_STRINGS[AppContext2.DEFAULT_DB];
 
             if (conStr.ProviderName == "Oracle.DataAccess.Client")
             {
