@@ -8,7 +8,7 @@ using System.Web;
 namespace ProjectBase.AppContext
 {
     /// <summary>
-    /// Makes child object a session stored object. Object is stored in session with its name.
+    /// Makes child object a session stored object. Object is stored in session with its class name.
     /// </summary>
     public abstract class SessionObject
     {

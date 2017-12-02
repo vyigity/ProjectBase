@@ -133,7 +133,6 @@ namespace ProjectBase.Database
             this.isolation = isolation;
         }
 
-        /// <inheritdoc/>
         /// <summary>
         /// Executes a sql query and returns affected row count.
         /// </summary>
