@@ -30,7 +30,7 @@ namespace ProjectBase.Database
         /// </summary>
         public String TableName { get; set; }
         /// <summary>
-        /// Query generator will use this string as main sql query text. It can be used for any kind of command like DML and DDL. It can be used mainly for a select query. For parameter usage in query, symbols of : or @ can be used.
+        /// Query generator will use this string as main sql query text. It can be used for any kind of command like DML and DDL. It can be used mainly for a select query.
         /// </summary>
         public string SelectText { get; set; }
         /// <summary>
@@ -38,13 +38,14 @@ namespace ProjectBase.Database
         /// </summary>
         public string FilterText { get; set; }
         /// <summary>
-        /// Query generator will concate this string to end of query. It can be used for group by expressions. For parameter usage in query, symbols of : or @ can be used.
+        /// Query generator will concate this string to end of query. It can be used for group by expressions.
         /// </summary>
         public string SelectTail { get; set; }
         /// <summary>
         /// Query generator will use this string as procedure name. It can be a database function or procedure.
         /// </summary>
         public string ProcedureName { get; set; }
+        
         /// <summary>
         /// Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
         /// </summary>
@@ -53,12 +54,102 @@ namespace ProjectBase.Database
             FilterParameters.Add(new SqlParameter(parameterName, value));
         }
         /// <summary>
+        /// Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+        /// </summary>
+        public void AddFilterParameter(string parameterName, object value, ParameterDirection direction)
+        {
+            SqlParameter param = new SqlParameter(parameterName, value);
+            param.Direction = direction;
+            FilterParameters.Add(param);
+        }
+        /// <summary>
+        /// Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+        /// </summary>
+        public void AddFilterParameter(string parameterName, object value, int size, ParameterDirection direction)
+        {
+            SqlParameter param = new SqlParameter(parameterName, value);
+            param.Direction = direction;
+            param.Size = size;
+            FilterParameters.Add(param);
+        }
+        /// <summary>
+        /// Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+        /// </summary>
+        public void AddFilterParameter(string parameterName, object value, int size, byte scale, byte precision, ParameterDirection direction)
+        {
+            SqlParameter param = new SqlParameter(parameterName, value);
+            param.Direction = direction;
+            param.Size = size;
+            param.Scale = scale;
+            param.Precision = precision;
+            FilterParameters.Add(param);
+        }
+        /// <summary>
+        /// Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+        /// </summary>
+        public void AddFilterParameter(string parameterName, object dbType, object value, ParameterDirection direction)
+        {
+            SqlParameter param = new SqlParameter(parameterName, (SqlDbType)dbType);
+            param.Direction = direction;
+            param.Value = value;
+            FilterParameters.Add(param);
+        }
+        /// <summary>
+        /// Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+        /// </summary>
+        public void AddFilterParameter(string parameterName, object dbType, object value, int size, ParameterDirection direction)
+        {
+            SqlParameter param = new SqlParameter(parameterName, (SqlDbType)dbType);
+            param.Direction = direction;
+            param.Value = value;
+            param.Size = size;
+            FilterParameters.Add(param);
+        }
+        /// <summary>
+        /// Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+        /// </summary>
+        public void AddFilterParameter(string parameterName, object dbType, object value, int size, byte scale, byte precision, ParameterDirection direction)
+        {
+            SqlParameter param = new SqlParameter(parameterName, (SqlDbType)dbType);
+            param.Direction = direction;
+            param.Value = value;
+            param.Size = size;
+            param.Scale = scale;
+            param.Precision = precision;
+            FilterParameters.Add(param);
+        }
+        /// <summary>
+        /// Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+        /// </summary>
+        public void AddFilterParameter(string parameterName, DbType dbType, object value, int size, ParameterDirection direction)
+        {
+            SqlParameter param = new SqlParameter(parameterName, value);
+            param.Direction = direction;
+            param.Size = size;
+            param.DbType = dbType;
+            FilterParameters.Add(param);
+        }
+        /// <summary>
+        /// Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+        /// </summary>
+        public void AddFilterParameter(string parameterName, DbType dbType, object value, int size, byte scale, byte precision, ParameterDirection direction)
+        {
+            SqlParameter param = new SqlParameter(parameterName, value);
+            param.Direction = direction;
+            param.Size = size;
+            param.DbType = dbType;
+            param.Scale = scale;
+            param.Precision = precision;
+            FilterParameters.Add(param);
+        }
+
+        /// <summary>
         /// Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
         /// </summary>
         public void AddDataParameter(string parameterName, object value)
         {
             DataParameters.Add(new SqlParameter(parameterName, value));
-        }
+        }   
         /// <summary>
         /// Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
         /// </summary>
@@ -76,6 +167,18 @@ namespace ProjectBase.Database
             SqlParameter param = new SqlParameter(parameterName, value);
             param.Direction = direction;
             param.Size = size;
+            DataParameters.Add(param);
+        }
+        /// <summary>
+        /// Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+        /// </summary>
+        public void AddDataParameter(string parameterName, object value, int size, byte scale, byte precision, ParameterDirection direction)
+        {
+            SqlParameter param = new SqlParameter(parameterName, value);
+            param.Direction = direction;
+            param.Size = size;
+            param.Scale = scale;
+            param.Precision = precision;
             DataParameters.Add(param);
         }
         /// <summary>
@@ -102,6 +205,19 @@ namespace ProjectBase.Database
         /// <summary>
         /// Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
         /// </summary>
+        public void AddDataParameter(string parameterName, object dbType, object value, int size, byte scale, byte precision, ParameterDirection direction)
+        {
+            SqlParameter param = new SqlParameter(parameterName, (SqlDbType)dbType);
+            param.Direction = direction;
+            param.Value = value;
+            param.Size = size;
+            param.Scale = scale;
+            param.Precision = precision;
+            DataParameters.Add(param);
+        }
+        /// <summary>
+        /// Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+        /// </summary>
         public void AddDataParameter(string parameterName, DbType dbType, object value, int size, ParameterDirection direction)
         {
             SqlParameter param = new SqlParameter(parameterName, value);
@@ -110,6 +226,20 @@ namespace ProjectBase.Database
             param.DbType = dbType;
             DataParameters.Add(param);
         }
+        /// <summary>
+        /// Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+        /// </summary>
+        public void AddDataParameter(string parameterName, DbType dbType, object value, int size, byte scale, byte precision, ParameterDirection direction)
+        {
+            SqlParameter param = new SqlParameter(parameterName, value);
+            param.Direction = direction;
+            param.Size = size;
+            param.DbType = dbType;
+            param.Scale = scale;
+            param.Precision = precision;
+            DataParameters.Add(param);
+        }
+        
         /// <summary>
         /// Returns a database returned parameter.
         /// </summary>
