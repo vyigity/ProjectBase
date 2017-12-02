@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace ProjectBase.AppContext
 {
+    /// <summary>
+    /// Includes parameters that are assotiated with current application.
+    /// </summary>
     public static class AppContext2
     {
         public static string APPLICATION_NAME
@@ -22,7 +25,6 @@ namespace ProjectBase.AppContext
                     return null;
             }
         }
-
         public static bool IN_TEST
         {
             get
@@ -35,7 +37,6 @@ namespace ProjectBase.AppContext
                     return false;
             }
         }
-
         public static string DEFAULT_DB
         {
             get
@@ -48,8 +49,7 @@ namespace ProjectBase.AppContext
                     return "Context";
             }
         }
-
-        public static bool? Log_Object
+        public static bool? LogObject
         {
             get
             {
@@ -61,7 +61,6 @@ namespace ProjectBase.AppContext
                     return null;
             }
         }
-
         public static string MailUserName
         {
             get
@@ -122,7 +121,6 @@ namespace ProjectBase.AppContext
                     return null;
             }
         }
-
         public static string AppCode
         {
             get
@@ -147,8 +145,9 @@ namespace ProjectBase.AppContext
                     return null;
             }
         }
-
-
+        /// <summary>
+        /// Connection string collection that is stored in config file.
+        /// </summary>
         public static ConnectionStringSettingsCollection CONNECTION_STRINGS
         {
             get
@@ -161,7 +160,9 @@ namespace ProjectBase.AppContext
                     return null;
             }
         }
-
+        /// <summary>
+        /// Returns a parameter's value that is stored in config file.
+        /// </summary>
         public static string GetParameterValue(string ParameterName)
         {
             if (ConfigurationManager.AppSettings[ParameterName] != null)

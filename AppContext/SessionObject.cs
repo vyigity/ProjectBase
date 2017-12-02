@@ -7,6 +7,9 @@ using System.Web;
 
 namespace ProjectBase.AppContext
 {
+    /// <summary>
+    /// Makes child object a session stored object. Object is stored in session with its name.
+    /// </summary>
     public abstract class SessionObject
     {
         public SessionObject()
@@ -15,7 +18,9 @@ namespace ProjectBase.AppContext
             if (HttpContext.Current != null)
                 HttpContext.Current.Session["OBJ" + "_" + this.GetType().Name] = this;
         }
-
+        /// <summary>
+        /// Gets object from session.
+        /// </summary>
         public static T GetObjectInstance<T>()
         {
             string TypeName = typeof(T).Name;
@@ -25,7 +30,9 @@ namespace ProjectBase.AppContext
             else
                 return default(T);
         }
-
+        /// <summary>
+        /// Clears object from session.
+        /// </summary>
         public static void ClearObjectInstance<T>()
         {
             string TypeName = typeof(T).Name;

@@ -15,9 +15,21 @@ namespace ProjectBase.Database
     //vyigity
     public class OracleManagedDatabase2 : DatabaseBase, IDisposable, IDatabase2
     {
+        /// <summary>
+        /// Instantiates a new database interaction object.
+        /// </summary>
         public OracleManagedDatabase2() : base() { }
+        /// <summary>
+        /// Instantiates a new database interaction object.
+        /// </summary>
         public OracleManagedDatabase2(DbSettings setting) : base(setting) { }
+        /// <summary>
+        /// Instantiates a new database interaction object.
+        /// </summary>
         public OracleManagedDatabase2(DbSettings setting, IsolationLevel isolation) : base(setting, isolation) { }
+        /// <summary>
+        /// Executes a sql select query and returns results as a data table object.
+        /// </summary>
         public override DataTable ExecuteQueryDataTable(string query)
         {
             DataTable dt = new DataTable();
@@ -42,6 +54,9 @@ namespace ProjectBase.Database
                 Close();
             }
         }
+        /// <summary>
+        /// Executes a sql select command and returns results as a data table object.
+        /// </summary>
         public override DataTable ExecuteQueryDataTable(IDbCommand query)
         {
             DataTable dt = new DataTable();
@@ -68,6 +83,9 @@ namespace ProjectBase.Database
                 Close();
             }
         }
+        /// <summary>
+        /// Executes a sql select query and fills a dataset object.
+        /// </summary>
         public override void FillObject(DataSet set, string table, string query)
         {
             DataTable dt = new DataTable();
@@ -91,6 +109,9 @@ namespace ProjectBase.Database
                 Close();
             }
         }
+        /// <summary>
+        /// Executes a sql select command and fills a dataset object.
+        /// </summary>
         public override void FillObject(DataSet set, string table, IDbCommand query)
         {
             DataTable dt = new DataTable();
@@ -116,6 +137,9 @@ namespace ProjectBase.Database
                 Close();
             }
         }
+        /// <summary>
+        /// Executes a sql select query and fills a data table object.
+        /// </summary>
         public override void FillObject(DataTable table, string query)
         {
             DataTable dt = new DataTable();
@@ -140,6 +164,9 @@ namespace ProjectBase.Database
                 Close();
             }
         }
+        /// <summary>
+        /// Executes a sql select command and fills a data table object.
+        /// </summary>
         public override void FillObject(DataTable table, IDbCommand query)
         {
             DataTable dt = new DataTable();
@@ -166,6 +193,9 @@ namespace ProjectBase.Database
                 Close();
             }
         }
+        /// <summary>
+        /// Executes a sql query and returns affected row count.
+        /// </summary>
         public override int ExecuteQuery(string query)
         {
             OracleCommand oracomm = null;
@@ -189,6 +219,9 @@ namespace ProjectBase.Database
                 Close();
             }
         }
+        /// <summary>
+        /// Executes a sql command and returns affected row count.
+        /// </summary>
         public override int ExecuteQuery(IDbCommand query)
         {
             try
@@ -210,6 +243,9 @@ namespace ProjectBase.Database
                 Close();
             }
         }
+        /// <summary>
+        /// Executes a sql select query and returns results result as a single value.
+        /// </summary>
         public override object GetSingleValue(string query)
         {
             OracleCommand oracomm = null;
@@ -233,6 +269,9 @@ namespace ProjectBase.Database
             }
 
         }
+        /// <summary>
+        /// Executes a sql select command and returns results result as a single value.
+        /// </summary>
         public override object GetSingleValue(IDbCommand query)
         {
             try
@@ -255,6 +294,9 @@ namespace ProjectBase.Database
             }
 
         }
+        /// <summary>
+        /// Executes a sql select query and returns a data reader object.
+        /// </summary>
         public override IDataReader GetDataReader(string query)
         {
             OracleCommand comm = null;
@@ -274,6 +316,9 @@ namespace ProjectBase.Database
                 throw ex;
             }
         }
+        /// <summary>
+        /// Executes a sql select command and returns a data reader object.
+        /// </summary>
         public override IDataReader GetDataReader(IDbCommand query)
         {
             try
@@ -291,6 +336,9 @@ namespace ProjectBase.Database
                 throw ex;
             }
         }
+        /// <summary>
+        /// Executes a sql select query and returns results as a desired type object.
+        /// </summary>
         public override T GetObject<T>(string query)
         {
             OracleDataReader reader = GetDataReader(query) as OracleDataReader;
@@ -329,6 +377,9 @@ namespace ProjectBase.Database
                 Close();
             }
         }
+        /// <summary>
+        /// Executes a sql select command and returns results as a desired type object.
+        /// </summary>
         public override T GetObject<T>(IDbCommand query)
         {
             OracleDataReader reader = GetDataReader(query) as OracleDataReader;
@@ -367,6 +418,9 @@ namespace ProjectBase.Database
                 Close();
             }
         }
+        /// <summary>
+        /// Executes a sql select query and returns results as a list of desired type objects.
+        /// </summary>
         public override List<T> GetObjectList<T>(string query)
         {
             OracleDataReader reader = GetDataReader(query) as OracleDataReader;
@@ -409,6 +463,9 @@ namespace ProjectBase.Database
                 Close();
             }
         }
+        /// <summary>
+        /// Executes a sql select command and returns results as a list of desired type objects.
+        /// </summary>
         public override List<T> GetObjectList<T>(IDbCommand query)
         {
             OracleDataReader reader = GetDataReader(query) as OracleDataReader;
@@ -451,6 +508,9 @@ namespace ProjectBase.Database
                 Close();
             }
         }
+        /// <summary>
+        /// Verifies if a data record has desired column using case insensitive compare methot.
+        /// </summary>
         public override bool HasColumn(IDataRecord dr, string columnName)
         {
             for (int i = 0; i < dr.FieldCount; i++)

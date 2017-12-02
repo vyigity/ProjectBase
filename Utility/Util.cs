@@ -18,12 +18,18 @@ namespace ProjectBase.Utility
 {
     public struct ByteFile { public string FileName; public byte[] Data;}
 
+    /// <summary>
+    /// Includes beneficial util functions.
+    /// </summary>
     public static class Util
     {
         public static string EmailRegExp = @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z";
 
         public static string DateInStringRegEx = @"(0[1-9]|[12][0-9]|3[01]|[1-9])[- /.](0[1-9]|1[012]|[1-9])[- /.](19|2)\d\d\d";
-        
+
+        /// <summary>
+        /// Generates HTML coded list from a enumerable object.
+        /// </summary>
         public static string GenerateHTMLList(IEnumerable<string> data)
         {
             StringBuilder builder = new StringBuilder("<ul>");
@@ -39,7 +45,9 @@ namespace ProjectBase.Utility
 
             return builder.ToString();
         }
-
+        /// <summary>
+        /// Generates HTML coded table from a data table object.
+        /// </summary>
         public static string GenerateHTMLTable(DataTable data, string cssClass, string cssClassName)
         {
             StringBuilder builder = new StringBuilder();
@@ -87,7 +95,9 @@ namespace ProjectBase.Utility
 
             return builder.ToString();
         }
-
+        /// <summary>
+        /// Serializes a object to XML
+        /// </summary>
         public static string SerializeObjectXml<T>(T obj)
         {          
             StringWriter swriter = new StringWriter();
@@ -95,7 +105,9 @@ namespace ProjectBase.Utility
             sxml.Serialize(swriter, obj);
             return swriter.ToString();
         }
-
+        /// <summary>
+        /// Serializes a object to XML according to given object type.
+        /// </summary>
         public static string SerializeObjectXml(object obj, Type objType)
         {
             StringWriter swriter = new StringWriter();
@@ -103,19 +115,25 @@ namespace ProjectBase.Utility
             sxml.Serialize(swriter, obj);
             return swriter.ToString();
         }
-
+        /// <summary>
+        /// Deserializes a object from XML
+        /// </summary>
         public static T DeSeriliazeObjectXml<T>(string xmlString)
         {
             XmlSerializer sxml = new XmlSerializer(typeof(T));
             return (T)sxml.Deserialize(new StringReader(xmlString));
         }
-
+        /// <summary>
+        /// Deserializes a object from XML according to given object type.
+        /// </summary>
         public static object DeSeriliazeObjectXml(string xmlString, Type objectType)
         {
             XmlSerializer sxml = new XmlSerializer(objectType);
             return sxml.Deserialize(new StringReader(xmlString));
         }
-
+        /// <summary>
+        /// Serializes a object to binary Array
+        /// </summary>
         public static byte[] SerializeObjectBinary(object obj)
         {
             MemoryStream stream = new MemoryStream();
@@ -124,7 +142,9 @@ namespace ProjectBase.Utility
 
             return stream.ToArray();
         }
-
+        /// <summary>
+        /// Deserializes a object from binary Array
+        /// </summary>
         public static object DeSerializeObjectBinary(byte[] objBinary)
         {
             MemoryStream stream = new MemoryStream();
@@ -133,12 +153,16 @@ namespace ProjectBase.Utility
             BinaryFormatter formatter = new BinaryFormatter();
             return formatter.Deserialize(stream); ;
         }
-
+        /// <summary>
+        /// If value is null or System.DbNull, returns true.
+        /// </summary>
         public static bool IsNull(object obj)
         {
             return obj == System.DBNull.Value || obj == null;
         }
-
+        /// <summary>
+        /// Converts a object data type to another acorrding to T.
+        /// </summary>
         public static T GetProperty<T>(object obj)
         {
             if (IsNull(obj))
@@ -146,7 +170,9 @@ namespace ProjectBase.Utility
             else
                 return (T)Convert.ChangeType(obj, typeof(T));
         }
-
+        /// <summary>
+        /// Converts a object data type to another acorrding to T. If value is null, returns given default value.
+        /// </summary>
         public static T GetProperty<T>(object obj, T defaultValue)
         {
             if (IsNull(obj))
@@ -154,7 +180,9 @@ namespace ProjectBase.Utility
             else
                 return (T)Convert.ChangeType(obj, typeof(T));
         }
-
+        /// <summary>
+        /// Converts a object data type to another acorrding to given object type.
+        /// </summary>
         public static object GetProperty(object obj, Type objectType)
         {
             Type  objectTypeTmp = null;
@@ -173,7 +201,9 @@ namespace ProjectBase.Utility
                 return Convert.ChangeType(obj, objectTypeTmp);
             }
         }
-
+        /// <summary>
+        /// Converts a object data type to another acorrding to given object type. If value is null, returns given default value.
+        /// </summary>
         public static object GetProperty(object Obj, Type objectType, object defaultValue)
         {
             Type objectTypeTmp = null;
@@ -192,7 +222,9 @@ namespace ProjectBase.Utility
                 return Convert.ChangeType(Obj, objectTypeTmp);
             }
         }
-
+        /// <summary>
+        /// Converts a nullable object data type to another acorrding to T.
+        /// </summary>
         public static Nullable<T> GetPropertyNullable<T>(object obj) where T : struct
         {
             try
@@ -207,7 +239,9 @@ namespace ProjectBase.Utility
                 return null;
             }
         }
-
+        /// <summary>
+        /// Converts a object's all properties' values to upper case.
+        /// </summary>
         public static T ToUpperProperty<T>(T obj)
         {
             var props = typeof(T).GetProperties();
@@ -227,7 +261,9 @@ namespace ProjectBase.Utility
 
             return obj;
         }
-
+        /// <summary>
+        /// Converts a object's all properties' values to upper case except some given properties.
+        /// </summary>
         public static T ToUpperProperty<T>(T obj, params string[] exceptionProperties)
         {
             var props = typeof(T).GetProperties();
@@ -248,7 +284,9 @@ namespace ProjectBase.Utility
 
             return obj;
         }
-
+        /// <summary>
+        /// Converts a object's all properties' values to lower case.
+        /// </summary>
         public static T ToLowerProperty<T>(T obj)
         {
             var props = typeof(T).GetProperties();
@@ -269,7 +307,9 @@ namespace ProjectBase.Utility
 
             return obj;
         }
-
+        /// <summary>
+        /// Converts a object's all properties' values to lower case except some given properties.
+        /// </summary>
         public static T ToLowerProperty<T>(T obj, params string[] exceptionProperties)
         {
             var props = typeof(T).GetProperties();
@@ -290,7 +330,9 @@ namespace ProjectBase.Utility
 
             return obj;
         }
-
+        /// <summary>
+        /// Converts a string value to upper case. If string value is null, returns null.
+        /// </summary>
         public static string GetUpperString(object val)
         {
             if (!IsNull(val))
@@ -300,7 +342,9 @@ namespace ProjectBase.Utility
             else
                 return null;
         }
-
+        /// <summary>
+        /// Converts a string value to lower case. If string value is null, returns null.
+        /// </summary>
         public static string GetLowerString(object val)
         {
             if (!IsNull(val))
@@ -310,7 +354,9 @@ namespace ProjectBase.Utility
             else
                 return null;
         }
-
+        /// <summary>
+        /// Converts a string value to space cleared upper case. If string value is null, returns null.
+        /// </summary>
         public static string GetClearUpperString(object val)
         {
             string value = ClearString(val);
@@ -322,7 +368,9 @@ namespace ProjectBase.Utility
             else
                 return null;
         }
-
+        /// <summary>
+        /// Converts a string value to space cleared lower case. If string value is null, returns null.
+        /// </summary>
         public static string GetClearLowerString(object val)
         {
             string value = ClearString(val);
@@ -334,7 +382,9 @@ namespace ProjectBase.Utility
             else
                 return null;
         }
-
+        /// <summary>
+        /// Clears a string from spaces. If string value is null, returns null.
+        /// </summary>
         public static string ClearString(object val)
         {
             if (IsNull(val) || string.IsNullOrWhiteSpace(val.ToString()))
@@ -344,7 +394,9 @@ namespace ProjectBase.Utility
             else
                 return val.ToString().Trim();
         }
-
+        /// <summary>
+        /// Copies a object's properties' values to another.
+        /// </summary>
         public static T CopyObject<T>(object from, T to)
         {
             Type tfrom = from.GetType();
@@ -364,7 +416,9 @@ namespace ProjectBase.Utility
 
             return to;            
         }
-
+        /// <summary>
+        /// Generates a dynamic object from a object.
+        /// </summary>
         public static object GetDynamicObject(object convertObject, Dictionary<string, object> extraProperty)
         {
             dynamic expando = new ExpandoObject();
@@ -393,7 +447,9 @@ namespace ProjectBase.Utility
 
             return expando;
         }
-
+        /// <summary>
+        /// Copies a object's properties' values to another with a deeper methot.
+        /// </summary>
         public static T CopyObjectDeeper<T>(object from, T to)
         {
             Type tfrom = from.GetType();
@@ -424,7 +480,9 @@ namespace ProjectBase.Utility
 
             return to;
         }
-
+        /// <summary>
+        /// Copies a object's properties' values to another with a deeper methot.
+        /// </summary>
         public static object CopyObjectDeeper(object from, object to, Type objectType)
         {
             Type tfrom = from.GetType();
@@ -455,7 +513,9 @@ namespace ProjectBase.Utility
 
             return to;
         }
-
+        /// <summary>
+        /// Get class names in a given assembly name and namespace.
+        /// </summary>
         public static List<string> GetClassList(string assemblyName, string nameSpace, bool removeNameSpace)
         {
             if (!removeNameSpace)
@@ -467,7 +527,9 @@ namespace ProjectBase.Utility
                 return Assembly.Load(assemblyName).GetTypes().ToList().Where(t => t.Namespace == nameSpace).Select(r => r.Name).ToList();
             }
         }
-
+        /// <summary>
+        /// Get class and interface names in a given assembly name and namespace.
+        /// </summary>
         public static List<string> GetClassListWithInterface(string assemblyName, string nameSpace, bool removeNameSpace, params string[] interfaces)
         {
             if (!removeNameSpace)
@@ -479,7 +541,9 @@ namespace ProjectBase.Utility
                 return Assembly.Load(assemblyName).GetTypes().ToList().Where(t => t.Namespace == nameSpace && t.GetInterfaces().ToList().Exists(r => interfaces.Contains(r.Name))).Select(r => r.Name).ToList();
             }
         }
-
+        /// <summary>
+        /// Detects property value changes between two objects.
+        /// </summary>
         public static List<PropertyDifference> DetectPropertyChanges<T>(T object1, T object2, params string[] exceptionProperties)
         {
             List<PropertyDifference> ChangedProperties = new List<PropertyDifference>();
@@ -507,7 +571,9 @@ namespace ProjectBase.Utility
 
             return ChangedProperties;
         }
-
+        /// <summary>
+        /// Finds date string in a given string with regular expression.
+        /// </summary>
         public static DateTime? FindDateInString(string searchString)
         {
             Regex ex = new Regex(DateInStringRegEx);
@@ -518,7 +584,9 @@ namespace ProjectBase.Utility
             else
                 return null;
         }
-
+        /// <summary>
+        /// Returns english localized string from given turkish localized string.
+        /// </summary>
         public static string GetEnglishLocalizedString(string searchString)
         {
             if (!IsNull(searchString))
@@ -536,7 +604,9 @@ namespace ProjectBase.Utility
             else
                 return null;
         }
-
+        /// <summary>
+        /// Returns zipped file that includes given files.
+        /// </summary>
         public static byte[] ZipThat(IEnumerable<ByteFile> files)
         {
             using (MemoryStream mst = new MemoryStream())

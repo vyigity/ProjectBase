@@ -10,6 +10,9 @@ namespace ProjectBase.Database
 {
     public static class QueryGeneratorFactory
     {
+        /// <summary>
+        /// Instantiates a new encapsulated QueryGenerator object.
+        /// </summary>
         public static IQueryGenerator GetDbObject()
         {
             ConnectionStringSettings conStr = AppContext2.CONNECTION_STRINGS[AppContext2.DEFAULT_DB];
@@ -27,7 +30,7 @@ namespace ProjectBase.Database
                 return new MySqlQueryGenerator();
             }
             else
-                throw new Exception("Provider ilişkilendirilemedi.");
+                throw new Exception("Provider is not recognized.");
         }
     }
 }

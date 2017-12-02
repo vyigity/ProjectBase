@@ -14,6 +14,9 @@ namespace ProjectBase.Database
 
     public static class DatabaseFactory
     {
+        /// <summary>
+        /// Instantiates a new encapsulated database interaction object.
+        /// </summary>
         public static IDatabase2 GetDbObject()
         {
             ConnectionStringSettings conStr = AppContext2.CONNECTION_STRINGS[AppContext2.DEFAULT_DB];
@@ -41,7 +44,9 @@ namespace ProjectBase.Database
             else
                 throw new Exception("Provider is not recognized.");
         }
-
+        /// <summary>
+        /// Instantiates a new encapsulated database interaction object according to database setting.
+        /// </summary>
         public static IDatabase2 GetDbObject(DbSettings setting)
         {
             ConnectionStringSettings conStr = AppContext2.CONNECTION_STRINGS[AppContext2.DEFAULT_DB];
@@ -69,7 +74,9 @@ namespace ProjectBase.Database
             else
                 throw new Exception("Provider is not recognized.");
         }
-
+        /// <summary>
+        /// Instantiates a new encapsulated database interaction object according to database setting and transaction isolation.
+        /// </summary>
         public static IDatabase2 GetDbObject(DbSettings setting, IsolationLevel isolation)
         {
             ConnectionStringSettings conStr = AppContext2.CONNECTION_STRINGS[AppContext2.DEFAULT_DB];

@@ -4,46 +4,74 @@ using ProjectBase.Utility;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.OleDb;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ProjectBase.Database
 {
-    //vyigity
+    /// <summary>
+    /// Can be used for database command generation with helper functions.
+    /// </summary>
     public class OracleQueryGenerator : IQueryGenerator
-    {
-        public String TableName { get; set; }
+    {     
         List<OracleParameter> DataParameters;
         List<OracleParameter> FilterParameters;
-
         bool isFilled = false;
-
-        public string SelectText { get; set; }
-        public string FilterText { get; set; }
-        public string SelectTail { get; set; }
-        public string ProcedureName { get; set; }
-
         OracleCommand command = new OracleCommand();
 
+        public OracleQueryGenerator()
+        {
+            DataParameters = new List<OracleParameter>();
+            FilterParameters = new List<OracleParameter>();
+        }
+
+        /// <summary>
+        /// Query generator will use this string as table name while generating update and insert statements.
+        /// </summary>
+        public String TableName { get; set; }
+        /// <summary>
+        /// Query generator will use this string as main sql query text. It can be used for any kind of command like DML and DDL. It can be used mainly for a select query. For parameter usage in query, symbols of : or @ can be used.
+        /// </summary>
+        public string SelectText { get; set; }
+        /// <summary>
+        /// Query generator will concate this string to end of query. String must include sql key word like WHERE. For parameter usage in query, symbols of : or @ can be used. For UPDATE generation, this must be used for specify filter text.
+        /// </summary>
+        public string FilterText { get; set; }
+        /// <summary>
+        /// Query generator will concate this string to end of query. It can be used for group by expressions. For parameter usage in query, symbols of : or @ can be used.
+        /// </summary>
+        public string SelectTail { get; set; }
+        /// <summary>
+        /// Query generator will use this string as procedure name. It can be a database function or procedure.
+        /// </summary>
+        public string ProcedureName { get; set; }
+        /// <summary>
+        /// Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+        /// </summary>
         public void AddFilterParameter(string parameterName, object value)
         {
             FilterParameters.Add(new OracleParameter(parameterName, value));
         }
-
+        /// <summary>
+        /// Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+        /// </summary>
         public void AddDataParameter(string parameterName, object value)
         {
             DataParameters.Add(new OracleParameter(parameterName, value));
         }
-
+        /// <summary>
+        /// Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+        /// </summary>
         public void AddDataParameter(string parameterName, object value, ParameterDirection direction)
         {
             OracleParameter param = new OracleParameter(parameterName, value);
             param.Direction = direction;
             DataParameters.Add(param);
         }
-
+        /// <summary>
+        /// Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+        /// </summary>
         public void AddDataParameter(string parameterName, object value, int size, ParameterDirection direction)
         {
             OracleParameter param = new OracleParameter(parameterName, value);
@@ -51,17 +79,23 @@ namespace ProjectBase.Database
             param.Size = size;
             DataParameters.Add(param);
         }
-
+        /// <summary>
+        /// Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+        /// </summary>
         public void AddDataParameter(string parameterName, object dbBaseDbType, object value, ParameterDirection direction)
         {
             DataParameters.Add(new OracleParameter(parameterName, (OracleDbType)dbBaseDbType, value, direction));
         }
-
+        /// <summary>
+        /// Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+        /// </summary>
         public void AddDataParameter(string parameterName, object dbBaseDbType, object value, int size, ParameterDirection direction)
         {
             DataParameters.Add(new OracleParameter(parameterName, (OracleDbType)dbBaseDbType, size, value, direction));
         }
-
+        /// <summary>
+        /// Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+        /// </summary>
         public void AddDataParameter(string parameterName, DbType dbType, object value, int size, ParameterDirection direction)
         {
             OracleParameter param = new OracleParameter(parameterName, value);
@@ -70,13 +104,9 @@ namespace ProjectBase.Database
             param.DbType = dbType;
             DataParameters.Add(param);
         }
-
-        public OracleQueryGenerator()
-        {
-            DataParameters = new List<OracleParameter>();
-            FilterParameters = new List<OracleParameter>();
-        }
-
+        /// <summary>
+        /// Returns a database returned parameter.
+        /// </summary>
         public object GetParameterValue(string parameterName)
         {
             foreach (OracleParameter item in command.Parameters)
@@ -211,7 +241,9 @@ namespace ProjectBase.Database
 
             throw new KeyNotFoundException("Belirtilen anahtar değerine sahip bir parametre bulunamadı");
         }
-
+        /// <summary>
+        /// Returns generated insert command.
+        /// </summary>
         public IDbCommand GetInsertCommand()
         {
             if (!isFilled)
@@ -251,7 +283,9 @@ namespace ProjectBase.Database
 
             return command;
         }
-
+        /// <summary>
+        /// Returns generated update command.
+        /// </summary>
         public IDbCommand GetUpdateCommand()
         {
             if (!isFilled)
@@ -291,7 +325,9 @@ namespace ProjectBase.Database
 
             return command;
         }
-
+        /// <summary>
+        /// Returns generated general command.
+        /// </summary>
         public IDbCommand GetSelectCommandBasic()
         {
             if (!isFilled)
@@ -323,7 +359,9 @@ namespace ProjectBase.Database
 
             return command;
         }
-
+        /// <summary>
+        /// Returns generated procedure command.
+        /// </summary>
         public IDbCommand GetProcedure()
         {
             if (!isFilled)
@@ -341,7 +379,9 @@ namespace ProjectBase.Database
 
             return command;
         }
-
+        /// <summary>
+        /// Clears all query generater instance.
+        /// </summary>
         public void Clear()
         {
             if (DataParameters != null)

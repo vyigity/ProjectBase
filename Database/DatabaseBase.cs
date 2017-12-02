@@ -24,6 +24,10 @@ namespace ProjectBase.Database
         protected IDbConnection myCon = null;
 
         protected IDbTransaction tran = null;
+
+        /// <summary>
+        /// Gets or sets transaction isolation level.
+        /// </summary>
         public IsolationLevel Isolation
         {
             get
@@ -40,6 +44,10 @@ namespace ProjectBase.Database
         }
 
         protected ConnectionStringSettings connectionString = null;
+
+        /// <summary>
+        /// Gets or sets connection string that is used by database interaction class.
+        /// </summary>
         public ConnectionStringSettings ConnectionString
         {
             get
@@ -54,6 +62,10 @@ namespace ProjectBase.Database
                 connectionString = value;
             }
         }
+
+        /// <summary>
+        /// Gets or sets database access mode.
+        /// </summary>
         public DbSettings Setting
         {
             get
@@ -93,47 +105,134 @@ namespace ProjectBase.Database
                 setting = value;
             }
         }
+
+        /// <summary>
+        /// Instantiates a new database interaction object.
+        /// </summary>
         public DatabaseBase()
         {
             ConnectionString = AppContext2.CONNECTION_STRINGS[AppContext2.DEFAULT_DB];
         }
+
+        /// <summary>
+        /// Instantiates a new database interaction object.
+        /// </summary>
         public DatabaseBase(DbSettings setting)
         {
             ConnectionString = AppContext2.CONNECTION_STRINGS[AppContext2.DEFAULT_DB];
             this.Setting = setting;
         }
+
+        /// <summary>
+        /// Instantiates a new database interaction object.
+        /// </summary>
         public DatabaseBase(DbSettings setting, IsolationLevel isolation)
         {
             ConnectionString = AppContext2.CONNECTION_STRINGS[AppContext2.DEFAULT_DB];
             this.Setting = setting;
             this.isolation = isolation;
         }
+
+        /// <inheritdoc/>
+        /// <summary>
+        /// Executes a sql query and returns affected row count.
+        /// </summary>
         abstract public int ExecuteQuery(string query);
+
+        /// <summary>
+        /// Executes a sql command and returns affected row count.
+        /// </summary>
         abstract public int ExecuteQuery(IDbCommand query);
+
+        /// <summary>
+        /// Executes a sql select query and returns results as a data table object.
+        /// </summary>
         abstract public DataTable ExecuteQueryDataTable(string query);
+
+        /// <summary>
+        /// Executes a sql select command and returns results as a data table object.
+        /// </summary>
         abstract public DataTable ExecuteQueryDataTable(IDbCommand query);
+
+        /// <summary>
+        /// Executes a sql select query and fills a data table object.
+        /// </summary>
         abstract public void FillObject(DataTable table, string query);
+
+        /// <summary>
+        /// Executes a sql select command and fills a data table object.
+        /// </summary>
         abstract public void FillObject(DataTable table, IDbCommand query);
+
+        /// <summary>
+        /// Executes a sql select query and fills a dataset object.
+        /// </summary>
         abstract public void FillObject(DataSet set, string table, string query);
+
+        /// <summary>
+        /// Executes a sql select command and fills a dataset object.
+        /// </summary>
         abstract public void FillObject(DataSet set, string table, IDbCommand query);
+
+        /// <summary>
+        /// Executes a sql select query and returns a data reader object.
+        /// </summary>
         abstract public IDataReader GetDataReader(string query);
+
+        /// <summary>
+        /// Executes a sql select command and returns a data reader object.
+        /// </summary>
         abstract public IDataReader GetDataReader(IDbCommand query);
+
+        /// <summary>
+        /// Executes a sql select query and returns results as a desired type object.
+        /// </summary>
         abstract public T GetObject<T>(string query);
+
+        /// <summary>
+        /// Executes a sql select command and returns results as a desired type object.
+        /// </summary>
         abstract public T GetObject<T>(IDbCommand query);
+
+        /// <summary>
+        /// Executes a sql select query and returns results as a list of desired type objects.
+        /// </summary>
         abstract public List<T> GetObjectList<T>(string query);
+
+        /// <summary>
+        /// Executes a sql select command and returns results as a list of desired type objects.
+        /// </summary>
         abstract public List<T> GetObjectList<T>(IDbCommand query);
+
+        /// <summary>
+        /// Executes a sql select query and returns results result as a single value.
+        /// </summary>
         abstract public object GetSingleValue(string query);
+
+        /// <summary>
+        /// Executes a sql select command and returns results result as a single value.
+        /// </summary>
         abstract public object GetSingleValue(IDbCommand query);
+
+        /// <summary>
+        /// Verifies if a data record has desired column using case insensitive compare methot.
+        /// </summary>
         abstract public bool HasColumn(IDataRecord dr, string columnName);
+
+        /// <summary>
+        /// Disposes database interaction object.
+        /// </summary>
         public void Dispose()
         {
             CloseConnection();
         }
+
         protected void Close()
         {
             if (myCon.State == ConnectionState.Open && closeConnectionImmediate)
                 myCon.Close();
         }
+
         protected void GetTransaction()
         {
             if (useTransaction && processEnded)
@@ -142,6 +241,10 @@ namespace ProjectBase.Database
                 processEnded = false;
             }
         }
+
+        /// <summary>
+        /// Commits current transaction.
+        /// </summary>
         public virtual void Commit()
         {
             if (useTransaction)
@@ -153,6 +256,10 @@ namespace ProjectBase.Database
                 }
             }
         }
+
+        /// <summary>
+        /// Rollbacks current transaction.
+        /// </summary>
         public virtual void RollBack()
         {
             if (useTransaction)
@@ -164,6 +271,10 @@ namespace ProjectBase.Database
                 }
             }
         }
+
+        /// <summary>
+        /// Rollbacks current transaction if in transaction mod and closes current connection.
+        /// </summary>
         public virtual void CloseConnection()
         {
             RollBack();
@@ -174,6 +285,10 @@ namespace ProjectBase.Database
             tran = null;
             processEnded = true;
         }
+
+        /// <summary>
+        /// Rollbacks current transaction if in transaction mod and closes current connection.
+        /// </summary>
         public virtual void ClearConnection()
         {
             if (myCon != null)
@@ -182,7 +297,12 @@ namespace ProjectBase.Database
                 myCon = null;
             }
         }
+
         abstract protected IDbConnection GetDbSpecificConnection(string connectionString);
+
+        /// <summary>
+        /// Returns current connection object.
+        /// </summary>
         public virtual IDbConnection GetConnection()
         {
             if (myCon != null)
