@@ -48,3 +48,4 @@ F:\GitHub\ProjectBase\obj\Release\ProjectBase.pdb
 F:\GitHub\ProjectBase\bin\Release\Oracle.ManagedDataAccess.dll
 F:\GitHub\ProjectBase\bin\Release\MySql.Data.dll
 F:\GitHub\ProjectBase\bin\Release\MySql.Data.xml
+F:\GitHub\ProjectBase\bin\Release\ProjectBase.XML

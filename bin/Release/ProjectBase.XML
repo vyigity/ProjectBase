@@ -1,0 +1,1773 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ProjectBase</name>
+    </assembly>
+    <members>
+        <member name="T:ProjectBase.AppContext.AppContext2">
+            <summary>
+            Includes parameters that are assotiated with current application.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.AppContext.AppContext2.CONNECTION_STRINGS">
+            <summary>
+            Connection string collection that is stored in config file.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.AppContext.AppContext2.GetParameterValue(System.String)">
+            <summary>
+            Returns a parameter's value that is stored in config file.
+            </summary>
+        </member>
+        <member name="T:ProjectBase.AppContext.SessionObject">
+            <summary>
+            Makes child object a session stored object. Object is stored in session with its class name.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.AppContext.SessionObject.GetObjectInstance``1">
+            <summary>
+            Gets object from session.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.AppContext.SessionObject.ClearObjectInstance``1">
+            <summary>
+            Clears object from session.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.DatabaseBase.Isolation">
+            <summary>
+            Gets or sets transaction isolation level.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.DatabaseBase.ConnectionString">
+            <summary>
+            Gets or sets connection string that is used by database interaction class.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.DatabaseBase.Setting">
+            <summary>
+            Gets or sets database access mode.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.DatabaseBase.#ctor">
+            <summary>
+            Instantiates a new database interaction object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.DatabaseBase.#ctor(ProjectBase.Database.DbSettings)">
+            <summary>
+            Instantiates a new database interaction object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.DatabaseBase.#ctor(ProjectBase.Database.DbSettings,System.Data.IsolationLevel)">
+            <summary>
+            Instantiates a new database interaction object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.DatabaseBase.ExecuteQuery(System.String)">
+            <summary>
+            Executes a sql query and returns affected row count.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.DatabaseBase.ExecuteQuery(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql command and returns affected row count.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.DatabaseBase.ExecuteQueryDataTable(System.String)">
+            <summary>
+            Executes a sql select query and returns results as a data table object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.DatabaseBase.ExecuteQueryDataTable(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and returns results as a data table object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.DatabaseBase.FillObject(System.Data.DataTable,System.String)">
+            <summary>
+            Executes a sql select query and fills a data table object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.DatabaseBase.FillObject(System.Data.DataTable,System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and fills a data table object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.DatabaseBase.FillObject(System.Data.DataSet,System.String,System.String)">
+            <summary>
+            Executes a sql select query and fills a dataset object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.DatabaseBase.FillObject(System.Data.DataSet,System.String,System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and fills a dataset object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.DatabaseBase.GetDataReader(System.String)">
+            <summary>
+            Executes a sql select query and returns a data reader object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.DatabaseBase.GetDataReader(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and returns a data reader object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.DatabaseBase.GetObject``1(System.String)">
+            <summary>
+            Executes a sql select query and returns results as a desired type object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.DatabaseBase.GetObject``1(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and returns results as a desired type object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.DatabaseBase.GetObjectList``1(System.String)">
+            <summary>
+            Executes a sql select query and returns results as a list of desired type objects.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.DatabaseBase.GetObjectList``1(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and returns results as a list of desired type objects.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.DatabaseBase.GetSingleValue(System.String)">
+            <summary>
+            Executes a sql select query and returns results result as a single value.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.DatabaseBase.GetSingleValue(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and returns results result as a single value.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.DatabaseBase.HasColumn(System.Data.IDataRecord,System.String)">
+            <summary>
+            Verifies if a data record has desired column using case insensitive compare methot.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.DatabaseBase.Dispose">
+            <summary>
+            Disposes database interaction object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.DatabaseBase.Commit">
+            <summary>
+            Commits current transaction.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.DatabaseBase.RollBack">
+            <summary>
+            Rollbacks current transaction.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.DatabaseBase.CloseConnection">
+            <summary>
+            Rollbacks current transaction if in transaction mod and closes current connection.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.DatabaseBase.ClearConnection">
+            <summary>
+            Rollbacks current transaction if in transaction mod and closes current connection.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.DatabaseBase.GetConnection">
+            <summary>
+            Returns current connection object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.DatabaseFactory.GetDbObject">
+            <summary>
+            Instantiates a new encapsulated database interaction object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.DatabaseFactory.GetDbObject(ProjectBase.Database.DbSettings)">
+            <summary>
+            Instantiates a new encapsulated database interaction object according to database setting.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.DatabaseFactory.GetDbObject(ProjectBase.Database.DbSettings,System.Data.IsolationLevel)">
+            <summary>
+            Instantiates a new encapsulated database interaction object according to database setting and transaction isolation.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.IDatabase2.ConnectionString">
+            <summary>
+            Gets or sets connection string that is used by database interaction class.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.IDatabase2.Isolation">
+            <summary>
+            Gets or sets transaction isolation level.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.IDatabase2.Setting">
+            <summary>
+            Gets or sets database access mode.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IDatabase2.ClearConnection">
+            <summary>
+            Rollbacks current transaction if in transaction mod and closes current connection.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IDatabase2.CloseConnection">
+            <summary>
+            Rollbacks current transaction if in transaction mod and closes current connection.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IDatabase2.Commit">
+            <summary>
+            Commits current transaction.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IDatabase2.ExecuteQuery(System.String)">
+            <summary>
+            Executes a sql query and returns affected row count.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IDatabase2.ExecuteQuery(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql command and returns affected row count.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IDatabase2.ExecuteQueryDataTable(System.String)">
+            <summary>
+            Executes a sql select query and returns results as a data table object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IDatabase2.ExecuteQueryDataTable(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and returns results as a data table object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IDatabase2.FillObject(System.Data.DataTable,System.String)">
+            <summary>
+            Executes a sql select query and fills a data table object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IDatabase2.FillObject(System.Data.DataTable,System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and fills a data table object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IDatabase2.FillObject(System.Data.DataSet,System.String,System.String)">
+            <summary>
+            Executes a sql select query and fills a dataset object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IDatabase2.FillObject(System.Data.DataSet,System.String,System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and fills a dataset object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IDatabase2.GetConnection">
+            <summary>
+            Returns current connection object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IDatabase2.GetDataReader(System.String)">
+            <summary>
+            Executes a sql select query and returns a data reader object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IDatabase2.GetDataReader(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and returns a data reader object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IDatabase2.GetObject``1(System.String)">
+            <summary>
+            Executes a sql select query and returns results as a desired type object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IDatabase2.GetObject``1(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and returns results as a desired type object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IDatabase2.GetObjectList``1(System.String)">
+            <summary>
+            Executes a sql select query and returns results as a list of desired type objects.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IDatabase2.GetObjectList``1(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and returns results as a list of desired type objects.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IDatabase2.GetSingleValue(System.String)">
+            <summary>
+            Executes a sql select query and returns results result as a single value.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IDatabase2.GetSingleValue(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and returns results result as a single value.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IDatabase2.HasColumn(System.Data.IDataRecord,System.String)">
+            <summary>
+            Verifies if a data record has desired column using case insensitive compare methot.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IDatabase2.RollBack">
+            <summary>
+            Rollbacks current transaction.
+            </summary>
+        </member>
+        <member name="T:ProjectBase.Database.IQueryGenerator">
+            <summary>
+            Can be used for database command generation with helper functions.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.IQueryGenerator.TableName">
+            <summary>
+            Query generator will use this string as table name while generating update and insert statements.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.IQueryGenerator.SelectText">
+            <summary>
+            Query generator will use this string as main sql query text. It can be used for any kind of command like DML and DDL. It can be used mainly for a select query.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.IQueryGenerator.FilterText">
+            <summary>
+            Query generator will concate this string to end of query. String must include sql key word like WHERE. For parameter usage in query, symbols of : or @ can be used. For UPDATE generation, this must be used for specify filter text.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.IQueryGenerator.SelectTail">
+            <summary>
+            Query generator will concate this string to end of query. It can be used for group by expressions.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.IQueryGenerator.ProcedureName">
+            <summary>
+            Query generator will use this string as procedure name. It can be a database function or procedure.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IQueryGenerator.AddFilterParameter(System.String,System.Object)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IQueryGenerator.AddFilterParameter(System.String,System.Object,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IQueryGenerator.AddFilterParameter(System.String,System.Object,System.Object,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IQueryGenerator.AddFilterParameter(System.String,System.Object,System.Int32,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IQueryGenerator.AddFilterParameter(System.String,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IQueryGenerator.AddFilterParameter(System.String,System.Object,System.Object,System.Int32,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IQueryGenerator.AddFilterParameter(System.String,System.Object,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IQueryGenerator.AddFilterParameter(System.String,System.Data.DbType,System.Object,System.Int32,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IQueryGenerator.AddFilterParameter(System.String,System.Data.DbType,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IQueryGenerator.AddDataParameter(System.String,System.Object)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IQueryGenerator.AddDataParameter(System.String,System.Object,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IQueryGenerator.AddDataParameter(System.String,System.Object,System.Object,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IQueryGenerator.AddDataParameter(System.String,System.Object,System.Int32,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IQueryGenerator.AddDataParameter(System.String,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IQueryGenerator.AddDataParameter(System.String,System.Object,System.Object,System.Int32,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IQueryGenerator.AddDataParameter(System.String,System.Object,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IQueryGenerator.AddDataParameter(System.String,System.Data.DbType,System.Object,System.Int32,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IQueryGenerator.AddDataParameter(System.String,System.Data.DbType,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IQueryGenerator.GetParameterValue(System.String)">
+            <summary>
+            Returns a database returned parameter.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IQueryGenerator.GetInsertCommand">
+            <summary>
+            Returns generated insert command.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IQueryGenerator.GetUpdateCommand">
+            <summary>
+            Returns generated update command.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IQueryGenerator.GetSelectCommandBasic">
+            <summary>
+            Returns generated general command.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IQueryGenerator.GetProcedure">
+            <summary>
+            Returns generated procedure command.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IQueryGenerator.Clear">
+            <summary>
+            Clears all query generater instance.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OleDbDatabase2.#ctor">
+            <summary>
+            Instantiates a new database interaction object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OleDbDatabase2.#ctor(ProjectBase.Database.DbSettings)">
+            <summary>
+            Instantiates a new database interaction object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OleDbDatabase2.#ctor(ProjectBase.Database.DbSettings,System.Data.IsolationLevel)">
+            <summary>
+            Instantiates a new database interaction object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OleDbDatabase2.ExecuteQueryDataTable(System.String)">
+            <summary>
+            Executes a sql select query and returns results as a data table object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OleDbDatabase2.ExecuteQueryDataTable(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and returns results as a data table object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OleDbDatabase2.FillObject(System.Data.DataSet,System.String,System.String)">
+            <summary>
+            Executes a sql select query and fills a dataset object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OleDbDatabase2.FillObject(System.Data.DataSet,System.String,System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and fills a dataset object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OleDbDatabase2.FillObject(System.Data.DataTable,System.String)">
+            <summary>
+            Executes a sql select query and fills a data table object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OleDbDatabase2.FillObject(System.Data.DataTable,System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and fills a data table object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OleDbDatabase2.ExecuteQuery(System.String)">
+            <summary>
+            Executes a sql query and returns affected row count.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OleDbDatabase2.ExecuteQuery(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql command and returns affected row count.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OleDbDatabase2.GetSingleValue(System.String)">
+            <summary>
+            Executes a sql select query and returns results result as a single value.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OleDbDatabase2.GetSingleValue(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and returns results result as a single value.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OleDbDatabase2.GetDataReader(System.String)">
+            <summary>
+            Executes a sql select query and returns a data reader object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OleDbDatabase2.GetDataReader(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and returns a data reader object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OleDbDatabase2.GetObject``1(System.String)">
+            <summary>
+            Executes a sql select query and returns results as a desired type object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OleDbDatabase2.GetObject``1(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and returns results as a desired type object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OleDbDatabase2.GetObjectList``1(System.String)">
+            <summary>
+            Executes a sql select query and returns results as a list of desired type objects.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OleDbDatabase2.GetObjectList``1(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and returns results as a list of desired type objects.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OleDbDatabase2.HasColumn(System.Data.IDataRecord,System.String)">
+            <summary>
+            Verifies if a data record has desired column using case insensitive compare methot.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlDatabase2.#ctor">
+            <summary>
+            Instantiates a new database interaction object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlDatabase2.#ctor(ProjectBase.Database.DbSettings)">
+            <summary>
+            Instantiates a new database interaction object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlDatabase2.#ctor(ProjectBase.Database.DbSettings,System.Data.IsolationLevel)">
+            <summary>
+            Instantiates a new database interaction object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlDatabase2.ExecuteQueryDataTable(System.String)">
+            <summary>
+            Executes a sql select query and returns results as a data table object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlDatabase2.ExecuteQueryDataTable(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and returns results as a data table object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlDatabase2.FillObject(System.Data.DataSet,System.String,System.String)">
+            <summary>
+            Executes a sql select query and fills a dataset object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlDatabase2.FillObject(System.Data.DataSet,System.String,System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and fills a dataset object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlDatabase2.FillObject(System.Data.DataTable,System.String)">
+            <summary>
+            Executes a sql select query and fills a data table object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlDatabase2.FillObject(System.Data.DataTable,System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and fills a data table object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlDatabase2.ExecuteQuery(System.String)">
+            <summary>
+            Executes a sql query and returns affected row count.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlDatabase2.ExecuteQuery(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql command and returns affected row count.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlDatabase2.GetSingleValue(System.String)">
+            <summary>
+            Executes a sql select query and returns results result as a single value.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlDatabase2.GetSingleValue(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and returns results result as a single value.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlDatabase2.GetDataReader(System.String)">
+            <summary>
+            Executes a sql select query and returns a data reader object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlDatabase2.GetDataReader(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and returns a data reader object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlDatabase2.GetObject``1(System.String)">
+            <summary>
+            Executes a sql select query and returns results as a desired type object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlDatabase2.GetObject``1(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and returns results as a desired type object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlDatabase2.GetObjectList``1(System.String)">
+            <summary>
+            Executes a sql select query and returns results as a list of desired type objects.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlDatabase2.GetObjectList``1(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and returns results as a list of desired type objects.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlDatabase2.HasColumn(System.Data.IDataRecord,System.String)">
+            <summary>
+            Verifies if a data record has desired column using case insensitive compare methot.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedDatabase2.#ctor">
+            <summary>
+            Instantiates a new database interaction object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedDatabase2.#ctor(ProjectBase.Database.DbSettings)">
+            <summary>
+            Instantiates a new database interaction object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedDatabase2.#ctor(ProjectBase.Database.DbSettings,System.Data.IsolationLevel)">
+            <summary>
+            Instantiates a new database interaction object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedDatabase2.ExecuteQueryDataTable(System.String)">
+            <summary>
+            Executes a sql select query and returns results as a data table object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedDatabase2.ExecuteQueryDataTable(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and returns results as a data table object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedDatabase2.FillObject(System.Data.DataSet,System.String,System.String)">
+            <summary>
+            Executes a sql select query and fills a dataset object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedDatabase2.FillObject(System.Data.DataSet,System.String,System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and fills a dataset object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedDatabase2.FillObject(System.Data.DataTable,System.String)">
+            <summary>
+            Executes a sql select query and fills a data table object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedDatabase2.FillObject(System.Data.DataTable,System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and fills a data table object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedDatabase2.ExecuteQuery(System.String)">
+            <summary>
+            Executes a sql query and returns affected row count.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedDatabase2.ExecuteQuery(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql command and returns affected row count.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedDatabase2.GetSingleValue(System.String)">
+            <summary>
+            Executes a sql select query and returns results result as a single value.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedDatabase2.GetSingleValue(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and returns results result as a single value.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedDatabase2.GetDataReader(System.String)">
+            <summary>
+            Executes a sql select query and returns a data reader object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedDatabase2.GetDataReader(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and returns a data reader object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedDatabase2.GetObject``1(System.String)">
+            <summary>
+            Executes a sql select query and returns results as a desired type object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedDatabase2.GetObject``1(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and returns results as a desired type object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedDatabase2.GetObjectList``1(System.String)">
+            <summary>
+            Executes a sql select query and returns results as a list of desired type objects.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedDatabase2.GetObjectList``1(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and returns results as a list of desired type objects.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedDatabase2.HasColumn(System.Data.IDataRecord,System.String)">
+            <summary>
+            Verifies if a data record has desired column using case insensitive compare methot.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleDatabase2.#ctor">
+            <summary>
+            Instantiates a new database interaction object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleDatabase2.#ctor(ProjectBase.Database.DbSettings)">
+            <summary>
+            Instantiates a new database interaction object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleDatabase2.#ctor(ProjectBase.Database.DbSettings,System.Data.IsolationLevel)">
+            <summary>
+            Instantiates a new database interaction object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleDatabase2.ExecuteQueryDataTable(System.String)">
+            <summary>
+            Executes a sql select query and returns results as a data table object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleDatabase2.ExecuteQueryDataTable(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and returns results as a data table object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleDatabase2.FillObject(System.Data.DataSet,System.String,System.String)">
+            <summary>
+            Executes a sql select query and fills a dataset object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleDatabase2.FillObject(System.Data.DataSet,System.String,System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and fills a dataset object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleDatabase2.FillObject(System.Data.DataTable,System.String)">
+            <summary>
+            Executes a sql select query and fills a data table object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleDatabase2.FillObject(System.Data.DataTable,System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and fills a data table object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleDatabase2.ExecuteQuery(System.String)">
+            <summary>
+            Executes a sql query and returns affected row count.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleDatabase2.ExecuteQuery(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql command and returns affected row count.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleDatabase2.GetSingleValue(System.String)">
+            <summary>
+            Executes a sql select query and returns results result as a single value.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleDatabase2.GetSingleValue(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and returns results result as a single value.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleDatabase2.GetDataReader(System.String)">
+            <summary>
+            Executes a sql select query and returns a data reader object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleDatabase2.GetDataReader(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and returns a data reader object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleDatabase2.GetObject``1(System.String)">
+            <summary>
+            Executes a sql select query and returns results as a desired type object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleDatabase2.GetObject``1(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and returns results as a desired type object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleDatabase2.GetObjectList``1(System.String)">
+            <summary>
+            Executes a sql select query and returns results as a list of desired type objects.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleDatabase2.GetObjectList``1(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and returns results as a list of desired type objects.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleDatabase2.HasColumn(System.Data.IDataRecord,System.String)">
+            <summary>
+            Verifies if a data record has desired column using case insensitive compare methot.
+            </summary>
+        </member>
+        <member name="T:ProjectBase.Database.MySqlQueryGenerator">
+            <summary>
+            Can be used for database command generation with helper functions.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.MySqlQueryGenerator.TableName">
+            <summary>
+            Query generator will use this string as table name while generating update and insert statements.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.MySqlQueryGenerator.SelectText">
+            <summary>
+            Query generator will use this string as main sql query text. It can be used for any kind of command like DML and DDL. It can be used mainly for a select query.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.MySqlQueryGenerator.FilterText">
+            <summary>
+            Query generator will concate this string to end of query. String must include sql key word like WHERE. For parameter usage in query, symbols of : or @ can be used. For UPDATE generation, this must be used for specify filter text.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.MySqlQueryGenerator.SelectTail">
+            <summary>
+            Query generator will concate this string to end of query. It can be used for group by expressions.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.MySqlQueryGenerator.ProcedureName">
+            <summary>
+            Query generator will use this string as procedure name. It can be a database function or procedure.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlQueryGenerator.AddFilterParameter(System.String,System.Object)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlQueryGenerator.AddFilterParameter(System.String,System.Object,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlQueryGenerator.AddFilterParameter(System.String,System.Object,System.Int32,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlQueryGenerator.AddFilterParameter(System.String,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlQueryGenerator.AddFilterParameter(System.String,System.Object,System.Object,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlQueryGenerator.AddFilterParameter(System.String,System.Object,System.Object,System.Int32,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlQueryGenerator.AddFilterParameter(System.String,System.Object,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlQueryGenerator.AddFilterParameter(System.String,System.Data.DbType,System.Object,System.Int32,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlQueryGenerator.AddFilterParameter(System.String,System.Data.DbType,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlQueryGenerator.AddDataParameter(System.String,System.Object)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlQueryGenerator.AddDataParameter(System.String,System.Object,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlQueryGenerator.AddDataParameter(System.String,System.Object,System.Int32,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlQueryGenerator.AddDataParameter(System.String,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlQueryGenerator.AddDataParameter(System.String,System.Object,System.Object,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlQueryGenerator.AddDataParameter(System.String,System.Object,System.Object,System.Int32,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlQueryGenerator.AddDataParameter(System.String,System.Object,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlQueryGenerator.AddDataParameter(System.String,System.Data.DbType,System.Object,System.Int32,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlQueryGenerator.AddDataParameter(System.String,System.Data.DbType,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlQueryGenerator.GetParameterValue(System.String)">
+            <summary>
+            Returns a database returned parameter.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlQueryGenerator.GetInsertCommand">
+            <summary>
+            Returns generated insert command.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlQueryGenerator.GetUpdateCommand">
+            <summary>
+            Returns generated update command.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlQueryGenerator.GetSelectCommandBasic">
+            <summary>
+            Returns generated general command.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlQueryGenerator.GetProcedure">
+            <summary>
+            Returns generated procedure command.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.MySqlQueryGenerator.Clear">
+            <summary>
+            Clears all query generater instance.
+            </summary>
+        </member>
+        <member name="T:ProjectBase.Database.OracleQueryGenerator">
+            <summary>
+            Can be used for database command generation with helper functions.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.OracleQueryGenerator.TableName">
+            <summary>
+            Query generator will use this string as table name while generating update and insert statements.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.OracleQueryGenerator.SelectText">
+            <summary>
+            Query generator will use this string as main sql query text. It can be used for any kind of command like DML and DDL. It can be used mainly for a select query.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.OracleQueryGenerator.FilterText">
+            <summary>
+            Query generator will concate this string to end of query. String must include sql key word like WHERE. For parameter usage in query, symbols of : or @ can be used. For UPDATE generation, this must be used for specify filter text.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.OracleQueryGenerator.SelectTail">
+            <summary>
+            Query generator will concate this string to end of query. It can be used for group by expressions.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.OracleQueryGenerator.ProcedureName">
+            <summary>
+            Query generator will use this string as procedure name. It can be a database function or procedure.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleQueryGenerator.AddFilterParameter(System.String,System.Object)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleQueryGenerator.AddFilterParameter(System.String,System.Object,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleQueryGenerator.AddFilterParameter(System.String,System.Object,System.Int32,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleQueryGenerator.AddFilterParameter(System.String,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleQueryGenerator.AddFilterParameter(System.String,System.Object,System.Object,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleQueryGenerator.AddFilterParameter(System.String,System.Object,System.Object,System.Int32,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleQueryGenerator.AddFilterParameter(System.String,System.Object,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleQueryGenerator.AddFilterParameter(System.String,System.Data.DbType,System.Object,System.Int32,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleQueryGenerator.AddFilterParameter(System.String,System.Data.DbType,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleQueryGenerator.AddDataParameter(System.String,System.Object)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleQueryGenerator.AddDataParameter(System.String,System.Object,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleQueryGenerator.AddDataParameter(System.String,System.Object,System.Int32,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleQueryGenerator.AddDataParameter(System.String,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleQueryGenerator.AddDataParameter(System.String,System.Object,System.Object,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleQueryGenerator.AddDataParameter(System.String,System.Object,System.Object,System.Int32,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleQueryGenerator.AddDataParameter(System.String,System.Object,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleQueryGenerator.AddDataParameter(System.String,System.Data.DbType,System.Object,System.Int32,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleQueryGenerator.AddDataParameter(System.String,System.Data.DbType,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleQueryGenerator.GetParameterValue(System.String)">
+            <summary>
+            Returns a database returned parameter.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleQueryGenerator.GetInsertCommand">
+            <summary>
+            Returns generated insert command.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleQueryGenerator.GetUpdateCommand">
+            <summary>
+            Returns generated update command.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleQueryGenerator.GetSelectCommandBasic">
+            <summary>
+            Returns generated general command.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleQueryGenerator.GetProcedure">
+            <summary>
+            Returns generated procedure command.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleQueryGenerator.Clear">
+            <summary>
+            Clears all query generater instance.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlDatabase2.#ctor">
+            <summary>
+            Instantiates a new database interaction object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlDatabase2.#ctor(ProjectBase.Database.DbSettings)">
+            <summary>
+            Instantiates a new database interaction object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlDatabase2.#ctor(ProjectBase.Database.DbSettings,System.Data.IsolationLevel)">
+            <summary>
+            Instantiates a new database interaction object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlDatabase2.ExecuteQueryDataTable(System.String)">
+            <summary>
+            Executes a sql select query and returns results as a data table object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlDatabase2.ExecuteQueryDataTable(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and returns results as a data table object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlDatabase2.FillObject(System.Data.DataSet,System.String,System.String)">
+            <summary>
+            Executes a sql select query and fills a dataset object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlDatabase2.FillObject(System.Data.DataSet,System.String,System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and fills a dataset object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlDatabase2.FillObject(System.Data.DataTable,System.String)">
+            <summary>
+            Executes a sql select query and fills a data table object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlDatabase2.FillObject(System.Data.DataTable,System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and fills a data table object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlDatabase2.ExecuteQuery(System.String)">
+            <summary>
+            Executes a sql query and returns affected row count.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlDatabase2.ExecuteQuery(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql command and returns affected row count.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlDatabase2.GetSingleValue(System.String)">
+            <summary>
+            Executes a sql select query and returns results result as a single value.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlDatabase2.GetSingleValue(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and returns results result as a single value.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlDatabase2.GetDataReader(System.String)">
+            <summary>
+            Executes a sql select query and returns a data reader object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlDatabase2.GetDataReader(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and returns a data reader object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlDatabase2.GetObject``1(System.String)">
+            <summary>
+            Executes a sql select query and returns results as a desired type object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlDatabase2.GetObject``1(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and returns results as a desired type object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlDatabase2.GetObjectList``1(System.String)">
+            <summary>
+            Executes a sql select query and returns results as a list of desired type objects.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlDatabase2.GetObjectList``1(System.Data.IDbCommand)">
+            <summary>
+            Executes a sql select command and returns results as a list of desired type objects.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlDatabase2.HasColumn(System.Data.IDataRecord,System.String)">
+            <summary>
+            Verifies if a data record has desired column using case insensitive compare methot.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.QueryGeneratorFactory.GetDbObject">
+            <summary>
+            Instantiates a new encapsulated QueryGenerator object.
+            </summary>
+        </member>
+        <member name="T:ProjectBase.Database.SqlQueryGenerator">
+            <summary>
+            Can be used for database command generation with helper functions.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.SqlQueryGenerator.TableName">
+            <summary>
+            Query generator will use this string as table name while generating update and insert statements.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.SqlQueryGenerator.SelectText">
+            <summary>
+            Query generator will use this string as main sql query text. It can be used for any kind of command like DML and DDL. It can be used mainly for a select query.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.SqlQueryGenerator.FilterText">
+            <summary>
+            Query generator will concate this string to end of query. String must include sql key word like WHERE. For parameter usage in query, symbols of : or @ can be used. For UPDATE generation, this must be used for specify filter text.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.SqlQueryGenerator.SelectTail">
+            <summary>
+            Query generator will concate this string to end of query. It can be used for group by expressions.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.SqlQueryGenerator.ProcedureName">
+            <summary>
+            Query generator will use this string as procedure name. It can be a database function or procedure.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlQueryGenerator.AddFilterParameter(System.String,System.Object)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlQueryGenerator.AddFilterParameter(System.String,System.Object,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlQueryGenerator.AddFilterParameter(System.String,System.Object,System.Int32,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlQueryGenerator.AddFilterParameter(System.String,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlQueryGenerator.AddFilterParameter(System.String,System.Object,System.Object,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlQueryGenerator.AddFilterParameter(System.String,System.Object,System.Object,System.Int32,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlQueryGenerator.AddFilterParameter(System.String,System.Object,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlQueryGenerator.AddFilterParameter(System.String,System.Data.DbType,System.Object,System.Int32,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlQueryGenerator.AddFilterParameter(System.String,System.Data.DbType,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlQueryGenerator.AddDataParameter(System.String,System.Object)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlQueryGenerator.AddDataParameter(System.String,System.Object,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlQueryGenerator.AddDataParameter(System.String,System.Object,System.Int32,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlQueryGenerator.AddDataParameter(System.String,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlQueryGenerator.AddDataParameter(System.String,System.Object,System.Object,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlQueryGenerator.AddDataParameter(System.String,System.Object,System.Object,System.Int32,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlQueryGenerator.AddDataParameter(System.String,System.Object,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlQueryGenerator.AddDataParameter(System.String,System.Data.DbType,System.Object,System.Int32,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlQueryGenerator.AddDataParameter(System.String,System.Data.DbType,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlQueryGenerator.GetParameterValue(System.String)">
+            <summary>
+            Returns a database returned parameter.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlQueryGenerator.GetInsertCommand">
+            <summary>
+            Returns generated insert command.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlQueryGenerator.GetUpdateCommand">
+            <summary>
+            Returns generated update command.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlQueryGenerator.GetSelectCommandBasic">
+            <summary>
+            Returns generated general command.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlQueryGenerator.GetProcedure">
+            <summary>
+            Returns generated procedure command.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.SqlQueryGenerator.Clear">
+            <summary>
+            Clears all query generater instance.
+            </summary>
+        </member>
+        <member name="T:ProjectBase.Database.OracleManagedQueryGenerator">
+            <summary>
+            Can be used for database command generation with helper functions.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.OracleManagedQueryGenerator.TableName">
+            <summary>
+            Query generator will use this string as table name while generating update and insert statements.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.OracleManagedQueryGenerator.SelectText">
+            <summary>
+            Query generator will use this string as main sql query text. It can be used for any kind of command like DML and DDL. It can be used mainly for a select query.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.OracleManagedQueryGenerator.FilterText">
+            <summary>
+            Query generator will concate this string to end of query. String must include sql key word like WHERE. For parameter usage in query, symbols of : or @ can be used. For UPDATE generation, this must be used for specify filter text.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.OracleManagedQueryGenerator.SelectTail">
+            <summary>
+            Query generator will concate this string to end of query. It can be used for group by expressions.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.OracleManagedQueryGenerator.ProcedureName">
+            <summary>
+            Query generator will use this string as procedure name. It can be a database function or procedure.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedQueryGenerator.AddFilterParameter(System.String,System.Object)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedQueryGenerator.AddFilterParameter(System.String,System.Object,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedQueryGenerator.AddFilterParameter(System.String,System.Object,System.Int32,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedQueryGenerator.AddFilterParameter(System.String,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedQueryGenerator.AddFilterParameter(System.String,System.Object,System.Object,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedQueryGenerator.AddFilterParameter(System.String,System.Object,System.Object,System.Int32,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedQueryGenerator.AddFilterParameter(System.String,System.Object,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedQueryGenerator.AddFilterParameter(System.String,System.Data.DbType,System.Object,System.Int32,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedQueryGenerator.AddFilterParameter(System.String,System.Data.DbType,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedQueryGenerator.AddDataParameter(System.String,System.Object)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedQueryGenerator.AddDataParameter(System.String,System.Object,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedQueryGenerator.AddDataParameter(System.String,System.Object,System.Int32,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedQueryGenerator.AddDataParameter(System.String,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedQueryGenerator.AddDataParameter(System.String,System.Object,System.Object,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedQueryGenerator.AddDataParameter(System.String,System.Object,System.Object,System.Int32,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedQueryGenerator.AddDataParameter(System.String,System.Object,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedQueryGenerator.AddDataParameter(System.String,System.Data.DbType,System.Object,System.Int32,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedQueryGenerator.AddDataParameter(System.String,System.Data.DbType,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedQueryGenerator.GetParameterValue(System.String)">
+            <summary>
+            Returns a database returned parameter.
+            </summary>      
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedQueryGenerator.GetInsertCommand">
+            <summary>
+            Returns generated insert command.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedQueryGenerator.GetUpdateCommand">
+            <summary>
+            Returns generated update command.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedQueryGenerator.GetSelectCommandBasic">
+            <summary>
+            Returns generated general command.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedQueryGenerator.GetProcedure">
+            <summary>
+            Returns generated procedure command.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.OracleManagedQueryGenerator.Clear">
+            <summary>
+            Clears all query generater instance.
+            </summary>
+        </member>
+        <member name="T:ProjectBase.Utility.CacheManager">
+            <summary>
+            Manages cache interactions.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Utility.CacheManager.AddToCache(System.String,System.Object,System.DateTime,System.Web.Caching.CacheItemPriority)">
+            <summary>
+            Adds a value to cache.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Utility.CacheManager.AddToCache(System.String,System.Object,System.TimeSpan,System.Web.Caching.CacheItemPriority)">
+            <summary>
+            Adds a value to cache.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Utility.CacheManager.AddToShortTimeCache(System.String,System.Object,System.Web.Caching.CacheItemPriority)">
+            <summary>
+            Adds a value to cache for 4 sec.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Utility.CacheManager.GetFromCache(System.String)">
+            <summary>
+            Gets a value that is stored in cache with a given key.
+            </summary>
+        </member>
+        <member name="T:ProjectBase.Utility.Util">
+            <summary>
+            Includes beneficial util functions.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Utility.Util.GenerateHTMLList(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Generates HTML coded list from a enumerable object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Utility.Util.GenerateHTMLTable(System.Data.DataTable,System.String,System.String)">
+            <summary>
+            Generates HTML coded table from a data table object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Utility.Util.SerializeObjectXml``1(``0)">
+            <summary>
+            Serializes a object to XML
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Utility.Util.SerializeObjectXml(System.Object,System.Type)">
+            <summary>
+            Serializes a object to XML according to given object type.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Utility.Util.DeSeriliazeObjectXml``1(System.String)">
+            <summary>
+            Deserializes a object from XML
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Utility.Util.DeSeriliazeObjectXml(System.String,System.Type)">
+            <summary>
+            Deserializes a object from XML according to given object type.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Utility.Util.SerializeObjectBinary(System.Object)">
+            <summary>
+            Serializes a object to binary Array
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Utility.Util.DeSerializeObjectBinary(System.Byte[])">
+            <summary>
+            Deserializes a object from binary Array
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Utility.Util.IsNull(System.Object)">
+            <summary>
+            If value is null or System.DbNull, returns true.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Utility.Util.GetProperty``1(System.Object)">
+            <summary>
+            Converts a object data type to another acorrding to T.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Utility.Util.GetProperty``1(System.Object,``0)">
+            <summary>
+            Converts a object data type to another acorrding to T. If value is null, returns given default value.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Utility.Util.GetProperty(System.Object,System.Type)">
+            <summary>
+            Converts a object data type to another acorrding to given object type.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Utility.Util.GetProperty(System.Object,System.Type,System.Object)">
+            <summary>
+            Converts a object data type to another acorrding to given object type. If value is null, returns given default value.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Utility.Util.GetPropertyNullable``1(System.Object)">
+            <summary>
+            Converts a nullable object data type to another acorrding to T.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Utility.Util.ToUpperProperty``1(``0)">
+            <summary>
+            Converts a object's all properties' values to upper case.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Utility.Util.ToUpperProperty``1(``0,System.String[])">
+            <summary>
+            Converts a object's all properties' values to upper case except some given properties.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Utility.Util.ToLowerProperty``1(``0)">
+            <summary>
+            Converts a object's all properties' values to lower case.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Utility.Util.ToLowerProperty``1(``0,System.String[])">
+            <summary>
+            Converts a object's all properties' values to lower case except some given properties.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Utility.Util.GetUpperString(System.Object)">
+            <summary>
+            Converts a string value to upper case. If string value is null, returns null.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Utility.Util.GetLowerString(System.Object)">
+            <summary>
+            Converts a string value to lower case. If string value is null, returns null.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Utility.Util.GetClearUpperString(System.Object)">
+            <summary>
+            Converts a string value to space cleared upper case. If string value is null, returns null.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Utility.Util.GetClearLowerString(System.Object)">
+            <summary>
+            Converts a string value to space cleared lower case. If string value is null, returns null.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Utility.Util.ClearString(System.Object)">
+            <summary>
+            Clears a string from spaces. If string value is null, returns null.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Utility.Util.CopyObject``1(System.Object,``0)">
+            <summary>
+            Copies a object's properties' values to another.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Utility.Util.GetDynamicObject(System.Object,System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Generates a dynamic object from a object.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Utility.Util.CopyObjectDeeper``1(System.Object,``0)">
+            <summary>
+            Copies a object's properties' values to another with a deeper methot.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Utility.Util.CopyObjectDeeper(System.Object,System.Object,System.Type)">
+            <summary>
+            Copies a object's properties' values to another with a deeper methot.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Utility.Util.GetClassList(System.String,System.String,System.Boolean)">
+            <summary>
+            Get class names in a given assembly name and namespace.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Utility.Util.GetClassListWithInterface(System.String,System.String,System.Boolean,System.String[])">
+            <summary>
+            Get class and interface names in a given assembly name and namespace.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Utility.Util.DetectPropertyChanges``1(``0,``0,System.String[])">
+            <summary>
+            Detects property value changes between two objects.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Utility.Util.FindDateInString(System.String)">
+            <summary>
+            Finds date string in a given string with regular expression.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Utility.Util.GetEnglishLocalizedString(System.String)">
+            <summary>
+            Returns english localized string from given turkish localized string.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Utility.Util.ZipThat(System.Collections.Generic.IEnumerable{ProjectBase.Utility.ByteFile})">
+            <summary>
+            Returns zipped file that includes given files.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -29,7 +29,7 @@ namespace ProjectBase.Database
         /// <summary>
         /// Query generator will use this string as table name while generating update and insert statements.
         /// </summary>
-        public String TableName { get; set; }
+        public string TableName { get; set; }
         /// <summary>
         /// Query generator will use this string as main sql query text. It can be used for any kind of command like DML and DDL. It can be used mainly for a select query.
         /// </summary>
@@ -46,16 +46,16 @@ namespace ProjectBase.Database
         /// Query generator will use this string as procedure name. It can be a database function or procedure.
         /// </summary>
         public string ProcedureName { get; set; }
-       
+
         /// <summary>
-        /// Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+        /// Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
         /// </summary>
         public void AddFilterParameter(string parameterName, object value)
         {
             FilterParameters.Add(new OracleParameter(parameterName, value));
         }
         /// <summary>
-        /// Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+        /// Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
         /// </summary>
         public void AddFilterParameter(string parameterName, object value, ParameterDirection direction)
         {
@@ -64,7 +64,7 @@ namespace ProjectBase.Database
             FilterParameters.Add(param);
         }
         /// <summary>
-        /// Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+        /// Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
         /// </summary>
         public void AddFilterParameter(string parameterName, object value, int size, ParameterDirection direction)
         {
@@ -74,7 +74,7 @@ namespace ProjectBase.Database
             FilterParameters.Add(param);
         }
         /// <summary>
-        /// Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+        /// Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
         /// </summary>
         public void AddFilterParameter(string parameterName, object value, int size, byte scale, byte precision, ParameterDirection direction)
         {
@@ -86,21 +86,21 @@ namespace ProjectBase.Database
             FilterParameters.Add(param);
         }
         /// <summary>
-        /// Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+        /// Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
         /// </summary>
         public void AddFilterParameter(string parameterName, object dbBaseDbType, object value, ParameterDirection direction)
         {
             FilterParameters.Add(new OracleParameter(parameterName, (OracleDbType)dbBaseDbType, value, direction));
         }
         /// <summary>
-        /// Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+        /// Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
         /// </summary>
         public void AddFilterParameter(string parameterName, object dbBaseDbType, object value, int size, ParameterDirection direction)
         {
             FilterParameters.Add(new OracleParameter(parameterName, (OracleDbType)dbBaseDbType, size, value, direction));
         }
         /// <summary>
-        /// Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+        /// Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
         /// </summary>
         public void AddFilterParameter(string parameterName, object dbBaseDbType, object value, int size, byte scale, byte precision, ParameterDirection direction)
         {
@@ -110,7 +110,7 @@ namespace ProjectBase.Database
             FilterParameters.Add(param);
         }
         /// <summary>
-        /// Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+        /// Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
         /// </summary>
         public void AddFilterParameter(string parameterName, DbType dbType, object value, int size, ParameterDirection direction)
         {
@@ -121,7 +121,7 @@ namespace ProjectBase.Database
             FilterParameters.Add(param);
         }
         /// <summary>
-        /// Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+        /// Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
         /// </summary>
         public void AddFilterParameter(string parameterName, DbType dbType, object value, int size, byte scale, byte precision, ParameterDirection direction)
         {
@@ -351,12 +351,12 @@ namespace ProjectBase.Database
                     }
                     else
                     {
-                        throw new InvalidOperationException("Belirtilen değere karşılık gelen nesne tipi bulunamadı");
+                        throw new InvalidOperationException("Type is invalid.");
                     }
                 }
             }
 
-            throw new KeyNotFoundException("Belirtilen anahtar değerine sahip bir parametre bulunamadı");
+            throw new KeyNotFoundException("Key not found.");
         }
         /// <summary>
         /// Returns generated insert command.
