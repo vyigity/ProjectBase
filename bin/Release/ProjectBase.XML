@@ -351,47 +351,47 @@
         </member>
         <member name="M:ProjectBase.Database.IQueryGenerator.AddFilterParameter(System.String,System.Object)">
             <summary>
-            Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
             </summary>
         </member>
         <member name="M:ProjectBase.Database.IQueryGenerator.AddFilterParameter(System.String,System.Object,System.Data.ParameterDirection)">
             <summary>
-            Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
             </summary>
         </member>
         <member name="M:ProjectBase.Database.IQueryGenerator.AddFilterParameter(System.String,System.Object,System.Object,System.Data.ParameterDirection)">
             <summary>
-            Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
             </summary>
         </member>
         <member name="M:ProjectBase.Database.IQueryGenerator.AddFilterParameter(System.String,System.Object,System.Int32,System.Data.ParameterDirection)">
             <summary>
-            Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
             </summary>
         </member>
         <member name="M:ProjectBase.Database.IQueryGenerator.AddFilterParameter(System.String,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
             <summary>
-            Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
             </summary>
         </member>
         <member name="M:ProjectBase.Database.IQueryGenerator.AddFilterParameter(System.String,System.Object,System.Object,System.Int32,System.Data.ParameterDirection)">
             <summary>
-            Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
             </summary>
         </member>
         <member name="M:ProjectBase.Database.IQueryGenerator.AddFilterParameter(System.String,System.Object,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
             <summary>
-            Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
             </summary>
         </member>
         <member name="M:ProjectBase.Database.IQueryGenerator.AddFilterParameter(System.String,System.Data.DbType,System.Object,System.Int32,System.Data.ParameterDirection)">
             <summary>
-            Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
             </summary>
         </member>
         <member name="M:ProjectBase.Database.IQueryGenerator.AddFilterParameter(System.String,System.Data.DbType,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
             <summary>
-            Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
             </summary>
         </member>
         <member name="M:ProjectBase.Database.IQueryGenerator.AddDataParameter(System.String,System.Object)">
@@ -466,7 +466,7 @@
         </member>
         <member name="M:ProjectBase.Database.IQueryGenerator.Clear">
             <summary>
-            Clears all query generater instance.
+            Clears all query generator instance.
             </summary>
         </member>
         <member name="M:ProjectBase.Database.OleDbDatabase2.#ctor">
@@ -1016,7 +1016,7 @@
         </member>
         <member name="M:ProjectBase.Database.MySqlQueryGenerator.Clear">
             <summary>
-            Clears all query generater instance.
+            Clears all query generator instance.
             </summary>
         </member>
         <member name="T:ProjectBase.Database.OracleQueryGenerator">
@@ -1166,7 +1166,7 @@
         </member>
         <member name="M:ProjectBase.Database.OracleQueryGenerator.Clear">
             <summary>
-            Clears all query generater instance.
+            Clears all query generator instance.
             </summary>
         </member>
         <member name="M:ProjectBase.Database.SqlDatabase2.#ctor">
@@ -1421,7 +1421,7 @@
         </member>
         <member name="M:ProjectBase.Database.SqlQueryGenerator.Clear">
             <summary>
-            Clears all query generater instance.
+            Clears all query generator instance.
             </summary>
         </member>
         <member name="T:ProjectBase.Database.OracleManagedQueryGenerator">
@@ -1571,7 +1571,7 @@
         </member>
         <member name="M:ProjectBase.Database.OracleManagedQueryGenerator.Clear">
             <summary>
-            Clears all query generater instance.
+            Clears all query generator instance.
             </summary>
         </member>
         <member name="T:ProjectBase.Utility.CacheManager">

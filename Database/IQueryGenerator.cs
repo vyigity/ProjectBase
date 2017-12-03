@@ -29,39 +29,39 @@ namespace ProjectBase.Database
         string ProcedureName { get; set; }
 
         /// <summary>
-        /// Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+        /// Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
         /// </summary>
         void AddFilterParameter(string parameterName, object value);
         /// <summary>
-        /// Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+        /// Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
         /// </summary>
         void AddFilterParameter(string parameterName, object value, ParameterDirection direction);
         /// <summary>
-        /// Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+        /// Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
         /// </summary>
         void AddFilterParameter(string parameterName, object dbType, object value, ParameterDirection direction);
         /// <summary>
-        /// Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+        /// Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
         /// </summary>
         void AddFilterParameter(string parameterName, object value, int size, ParameterDirection direction);
         /// <summary>
-        /// Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+        /// Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
         /// </summary>
         void AddFilterParameter(string parameterName, object value, int size, byte scale, byte precision, ParameterDirection direction);
         /// <summary>
-        /// Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+        /// Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
         /// </summary>
         void AddFilterParameter(string parameterName, object dbType, object value, int size, ParameterDirection direction);
         /// <summary>
-        /// Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+        /// Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
         /// </summary>
         void AddFilterParameter(string parameterName, object dbType, object value, int size, byte scale, byte precision, ParameterDirection direction);
         /// <summary>
-        /// Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+        /// Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
         /// </summary>
         void AddFilterParameter(string parameterName, DbType dbType, object value, int size, ParameterDirection direction);
         /// <summary>
-        /// Query generator will use this parameter for non-generated sql statement that is given with SelectText property.
+        /// Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
         /// </summary>
         void AddFilterParameter(string parameterName, DbType dbType, object value, int size, byte scale, byte precision, ParameterDirection direction);
 
@@ -123,7 +123,7 @@ namespace ProjectBase.Database
         /// </summary>
         IDbCommand GetProcedure();
         /// <summary>
-        /// Clears all query generater instance.
+        /// Clears all query generator instance.
         /// </summary>
         void Clear();
     }

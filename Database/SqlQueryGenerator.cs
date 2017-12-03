@@ -394,7 +394,7 @@ namespace ProjectBase.Database
             return command;
         }
         /// <summary>
-        /// Clears all query generater instance.
+        /// Clears all query generator instance.
         /// </summary>
         public void Clear()
         {
