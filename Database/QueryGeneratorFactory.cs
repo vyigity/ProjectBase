@@ -21,7 +21,7 @@ namespace ProjectBase.Database
             {
                 return new OracleManagedQueryGenerator();
             }
-            if (conStr.ProviderName == "Oracle.DataAccess.Client")
+            else if (conStr.ProviderName == "Oracle.DataAccess.Client")
             {
                 return new OracleQueryGenerator();
             }
