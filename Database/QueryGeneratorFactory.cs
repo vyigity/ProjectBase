@@ -17,9 +17,13 @@ namespace ProjectBase.Database
         {
             ConnectionStringSettings conStr = AppContext2.CONNECTION_STRINGS[AppContext2.DEFAULT_DB];
 
-            if (conStr.ProviderName == "Oracle.DataAccess.Client" || conStr.ProviderName == "Oracle.ManagedDataAccess.Client")
+            if (conStr.ProviderName == "Oracle.ManagedDataAccess.Client")
             {
                 return new OracleManagedQueryGenerator();
+            }
+            if (conStr.ProviderName == "Oracle.DataAccess.Client")
+            {
+                return new OracleQueryGenerator();
             }
             else if (conStr.ProviderName == "System.Data.SqlClient")
             {
