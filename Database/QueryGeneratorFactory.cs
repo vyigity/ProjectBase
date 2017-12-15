@@ -36,5 +36,29 @@ namespace ProjectBase.Database
             else
                 throw new Exception("Provider is not recognized.");
         }
+
+        public static IQueryGenerator GetDbObject(ParameterMode ParameterProcessingMode)
+        {
+            ConnectionStringSettings conStr = AppContext2.CONNECTION_STRINGS[AppContext2.DEFAULT_DB];
+
+            if (conStr.ProviderName == "Oracle.ManagedDataAccess.Client")
+            {
+                return new OracleManagedQueryGenerator(ParameterProcessingMode);
+            }
+            else if (conStr.ProviderName == "Oracle.DataAccess.Client")
+            {
+                return new OracleQueryGenerator(ParameterProcessingMode);
+            }
+            else if (conStr.ProviderName == "System.Data.SqlClient")
+            {
+                return new SqlQueryGenerator(ParameterProcessingMode);
+            }
+            else if (conStr.ProviderName == "MySql.Data.MySqlClient")
+            {
+                return new MySqlQueryGenerator(ParameterProcessingMode);
+            }
+            else
+                throw new Exception("Provider is not recognized.");
+        }
     }
 }

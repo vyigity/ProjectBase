@@ -34,6 +34,31 @@
             Clears object from session.
             </summary>
         </member>
+        <member name="P:ProjectBase.Database.CommandStringProcessor.DbBasedParameterCharacter">
+            <summary>
+            Parameter character that is used by specific database.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.CommandStringProcessor.ParameterCharacters">
+            <summary>
+            List of parameter characters that are used by all databases.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.CommandStringProcessor.GlobalParameterRegExp">
+            <summary>
+            Regular expression text to find global parameters.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.CommandStringProcessor.GetPreparedGlobalCommandString(System.String)">
+            <summary>
+            Produces processable command text from raw command text that includes global parameter definitions.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.CommandStringProcessor.GetPreparedLocalCommandString(System.String)">
+            <summary>
+            Produces database specific processable command text from raw command text that includes database based parameter definitions.
+            </summary>
+        </member>
         <member name="P:ProjectBase.Database.DatabaseBase.Isolation">
             <summary>
             Gets or sets transaction isolation level.
@@ -874,31 +899,6 @@
             Can be used for database command generation with helper functions.
             </summary>
         </member>
-        <member name="P:ProjectBase.Database.MySqlQueryGenerator.TableName">
-            <summary>
-            Query generator will use this string as table name while generating update and insert statements.
-            </summary>
-        </member>
-        <member name="P:ProjectBase.Database.MySqlQueryGenerator.SelectText">
-            <summary>
-            Query generator will use this string as main sql query text. It can be used for any kind of command like DML and DDL. It can be used mainly for a select query.
-            </summary>
-        </member>
-        <member name="P:ProjectBase.Database.MySqlQueryGenerator.FilterText">
-            <summary>
-            Query generator will concate this string to end of query. String must include sql key word like WHERE. For parameter usage in query, symbols of : or @ can be used. For UPDATE generation, this must be used for specify filter text.
-            </summary>
-        </member>
-        <member name="P:ProjectBase.Database.MySqlQueryGenerator.SelectTail">
-            <summary>
-            Query generator will concate this string to end of query. It can be used for group by expressions.
-            </summary>
-        </member>
-        <member name="P:ProjectBase.Database.MySqlQueryGenerator.ProcedureName">
-            <summary>
-            Query generator will use this string as procedure name. It can be a database function or procedure.
-            </summary>
-        </member>
         <member name="M:ProjectBase.Database.MySqlQueryGenerator.AddFilterParameter(System.String,System.Object)">
             <summary>
             Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
@@ -1024,31 +1024,6 @@
             Can be used for database command generation with helper functions.
             </summary>
         </member>
-        <member name="P:ProjectBase.Database.OracleQueryGenerator.TableName">
-            <summary>
-            Query generator will use this string as table name while generating update and insert statements.
-            </summary>
-        </member>
-        <member name="P:ProjectBase.Database.OracleQueryGenerator.SelectText">
-            <summary>
-            Query generator will use this string as main sql query text. It can be used for any kind of command like DML and DDL. It can be used mainly for a select query.
-            </summary>
-        </member>
-        <member name="P:ProjectBase.Database.OracleQueryGenerator.FilterText">
-            <summary>
-            Query generator will concate this string to end of query. String must include sql key word like WHERE. For parameter usage in query, symbols of : or @ can be used. For UPDATE generation, this must be used for specify filter text.
-            </summary>
-        </member>
-        <member name="P:ProjectBase.Database.OracleQueryGenerator.SelectTail">
-            <summary>
-            Query generator will concate this string to end of query. It can be used for group by expressions.
-            </summary>
-        </member>
-        <member name="P:ProjectBase.Database.OracleQueryGenerator.ProcedureName">
-            <summary>
-            Query generator will use this string as procedure name. It can be a database function or procedure.
-            </summary>
-        </member>
         <member name="M:ProjectBase.Database.OracleQueryGenerator.AddFilterParameter(System.String,System.Object)">
             <summary>
             Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
@@ -1169,6 +1144,156 @@
             Clears all query generator instance.
             </summary>
         </member>
+        <member name="T:ProjectBase.Database.QueryGeneratorBase">
+            <summary>
+            Can be used for database command generation with helper functions.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.QueryGeneratorBase.TableName">
+            <summary>
+            Query generator will use this string as table name while generating update and insert statements.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.QueryGeneratorBase.SelectText">
+            <summary>
+            Query generator will use this string as main sql query text. It can be used for any kind of command like DML and DDL. It can be used mainly for a select query.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.QueryGeneratorBase.FilterText">
+            <summary>
+            Query generator will concate this string to end of query. String must include sql key word like WHERE. For parameter usage in query, symbols of : or @ can be used. For UPDATE generation, this must be used for specify filter text.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.QueryGeneratorBase.SelectTail">
+            <summary>
+            Query generator will concate this string to end of query. It can be used for group by expressions.
+            </summary>
+        </member>
+        <member name="P:ProjectBase.Database.QueryGeneratorBase.ProcedureName">
+            <summary>
+            Query generator will use this string as procedure name. It can be a database function or procedure.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.QueryGeneratorBase.AddFilterParameter(System.String,System.Object)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.QueryGeneratorBase.AddFilterParameter(System.String,System.Object,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.QueryGeneratorBase.AddFilterParameter(System.String,System.Object,System.Object,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.QueryGeneratorBase.AddFilterParameter(System.String,System.Object,System.Int32,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.QueryGeneratorBase.AddFilterParameter(System.String,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.QueryGeneratorBase.AddFilterParameter(System.String,System.Object,System.Object,System.Int32,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.QueryGeneratorBase.AddFilterParameter(System.String,System.Object,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.QueryGeneratorBase.AddFilterParameter(System.String,System.Data.DbType,System.Object,System.Int32,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.QueryGeneratorBase.AddFilterParameter(System.String,System.Data.DbType,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.QueryGeneratorBase.AddDataParameter(System.String,System.Object)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.QueryGeneratorBase.AddDataParameter(System.String,System.Object,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.QueryGeneratorBase.AddDataParameter(System.String,System.Object,System.Object,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.QueryGeneratorBase.AddDataParameter(System.String,System.Object,System.Int32,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.QueryGeneratorBase.AddDataParameter(System.String,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.QueryGeneratorBase.AddDataParameter(System.String,System.Object,System.Object,System.Int32,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.QueryGeneratorBase.AddDataParameter(System.String,System.Object,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.QueryGeneratorBase.AddDataParameter(System.String,System.Data.DbType,System.Object,System.Int32,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.QueryGeneratorBase.AddDataParameter(System.String,System.Data.DbType,System.Object,System.Int32,System.Byte,System.Byte,System.Data.ParameterDirection)">
+            <summary>
+            Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.QueryGeneratorBase.GetParameterValue(System.String)">
+            <summary>
+            Returns a database returned parameter.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.QueryGeneratorBase.GetInsertCommand">
+            <summary>
+            Returns generated insert command.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.QueryGeneratorBase.GetUpdateCommand">
+            <summary>
+            Returns generated update command.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.QueryGeneratorBase.GetSelectCommandBasic">
+            <summary>
+            Returns generated general command.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.QueryGeneratorBase.GetProcedure">
+            <summary>
+            Returns generated procedure command.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.QueryGeneratorBase.Clear">
+            <summary>
+            Clears all query generator instance.
+            </summary>
+        </member>
         <member name="M:ProjectBase.Database.SqlDatabase2.#ctor">
             <summary>
             Instantiates a new database interaction object.
@@ -1277,31 +1402,6 @@
         <member name="T:ProjectBase.Database.SqlQueryGenerator">
             <summary>
             Can be used for database command generation with helper functions.
-            </summary>
-        </member>
-        <member name="P:ProjectBase.Database.SqlQueryGenerator.TableName">
-            <summary>
-            Query generator will use this string as table name while generating update and insert statements.
-            </summary>
-        </member>
-        <member name="P:ProjectBase.Database.SqlQueryGenerator.SelectText">
-            <summary>
-            Query generator will use this string as main sql query text. It can be used for any kind of command like DML and DDL. It can be used mainly for a select query.
-            </summary>
-        </member>
-        <member name="P:ProjectBase.Database.SqlQueryGenerator.FilterText">
-            <summary>
-            Query generator will concate this string to end of query. String must include sql key word like WHERE. For parameter usage in query, symbols of : or @ can be used. For UPDATE generation, this must be used for specify filter text.
-            </summary>
-        </member>
-        <member name="P:ProjectBase.Database.SqlQueryGenerator.SelectTail">
-            <summary>
-            Query generator will concate this string to end of query. It can be used for group by expressions.
-            </summary>
-        </member>
-        <member name="P:ProjectBase.Database.SqlQueryGenerator.ProcedureName">
-            <summary>
-            Query generator will use this string as procedure name. It can be a database function or procedure.
             </summary>
         </member>
         <member name="M:ProjectBase.Database.SqlQueryGenerator.AddFilterParameter(System.String,System.Object)">
@@ -1427,31 +1527,6 @@
         <member name="T:ProjectBase.Database.OracleManagedQueryGenerator">
             <summary>
             Can be used for database command generation with helper functions.
-            </summary>
-        </member>
-        <member name="P:ProjectBase.Database.OracleManagedQueryGenerator.TableName">
-            <summary>
-            Query generator will use this string as table name while generating update and insert statements.
-            </summary>
-        </member>
-        <member name="P:ProjectBase.Database.OracleManagedQueryGenerator.SelectText">
-            <summary>
-            Query generator will use this string as main sql query text. It can be used for any kind of command like DML and DDL. It can be used mainly for a select query.
-            </summary>
-        </member>
-        <member name="P:ProjectBase.Database.OracleManagedQueryGenerator.FilterText">
-            <summary>
-            Query generator will concate this string to end of query. String must include sql key word like WHERE. For parameter usage in query, symbols of : or @ can be used. For UPDATE generation, this must be used for specify filter text.
-            </summary>
-        </member>
-        <member name="P:ProjectBase.Database.OracleManagedQueryGenerator.SelectTail">
-            <summary>
-            Query generator will concate this string to end of query. It can be used for group by expressions.
-            </summary>
-        </member>
-        <member name="P:ProjectBase.Database.OracleManagedQueryGenerator.ProcedureName">
-            <summary>
-            Query generator will use this string as procedure name. It can be a database function or procedure.
             </summary>
         </member>
         <member name="M:ProjectBase.Database.OracleManagedQueryGenerator.AddFilterParameter(System.String,System.Object)">

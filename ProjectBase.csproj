@@ -79,6 +79,7 @@
   <ItemGroup>
     <Compile Include="AppContext\AppContext2.cs" />
     <Compile Include="AppContext\SessionObject.cs" />
+    <Compile Include="Database\CommandStringProcessor.cs" />
     <Compile Include="Database\DatabaseBase.cs" />
     <Compile Include="Database\DatabaseFactory.cs" />
     <Compile Include="Database\IDatabase2.cs" />
@@ -89,6 +90,7 @@
     <Compile Include="Database\OracleDatabase2.cs" />
     <Compile Include="Database\MySqlQueryGenerator.cs" />
     <Compile Include="Database\OracleQueryGenerator.cs" />
+    <Compile Include="Database\QueryGeneratorBase.cs" />
     <Compile Include="Database\SqlDatabase2.cs" />
     <Compile Include="Database\QueryGeneratorFactory.cs" />
     <Compile Include="Database\SqlQueryGenerator.cs" />
