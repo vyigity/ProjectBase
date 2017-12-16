@@ -36,4 +36,8 @@ For typed data selection using objects examples:
 
 http://vyigity.blogspot.com.tr/2017/10/projectbase-ile-datatable-yerine-nesne.html
 
+For global parametre usage examples:
+
+http://vyigity.blogspot.com.tr/2017/12/projectbase-kutuphanesi-ile-evrensel.html
+
 
