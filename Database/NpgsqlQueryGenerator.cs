@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Npgsql;
+using NpgsqlTypes;
 using ProjectBase.Utility;
 using System;
 using System.Collections.Generic;
@@ -12,23 +13,23 @@ namespace ProjectBase.Database
     /// <summary>
     /// Can be used for database command generation with helper functions.
     /// </summary>
-    public class MySqlQueryGenerator : QueryGeneratorBase,IQueryGenerator
+    public class NpgsqlQueryGenerator : QueryGeneratorBase,IQueryGenerator
     {
-        List<MySqlParameter> DataParameters;
-        List<MySqlParameter> FilterParameters;
+        List<NpgsqlParameter> DataParameters;
+        List<NpgsqlParameter> FilterParameters;
         bool isFilled = false;
-        MySqlCommand command = new MySqlCommand();
+        NpgsqlCommand command = new NpgsqlCommand();
 
-        public MySqlQueryGenerator() : base('@')
+        public NpgsqlQueryGenerator() : base('@')
         {
-            DataParameters = new List<MySqlParameter>();
-            FilterParameters = new List<MySqlParameter>();
+            DataParameters = new List<NpgsqlParameter>();
+            FilterParameters = new List<NpgsqlParameter>();
         }
 
-        public MySqlQueryGenerator(ParameterMode ParameterProcessingMode) : base('@')
+        public NpgsqlQueryGenerator(ParameterMode ParameterProcessingMode) : base('@')
         {
-            DataParameters = new List<MySqlParameter>();
-            FilterParameters = new List<MySqlParameter>();
+            DataParameters = new List<NpgsqlParameter>();
+            FilterParameters = new List<NpgsqlParameter>();
             this.ParameterProcessingMode = ParameterProcessingMode;
         }
 
@@ -37,14 +38,14 @@ namespace ProjectBase.Database
         /// </summary>
         public override void AddFilterParameter(string parameterName, object value)
         {
-            FilterParameters.Add(new MySqlParameter(parameterName, value));
+            FilterParameters.Add(new NpgsqlParameter(parameterName, value));
         }
         /// <summary>
         /// Query generator will use this parameter for non-generated sql statement that is given with FilterText property.
         /// </summary>
         public override void AddFilterParameter(string parameterName, object value, ParameterDirection direction)
         {
-            MySqlParameter param = new MySqlParameter(parameterName, value);
+            NpgsqlParameter param = new NpgsqlParameter(parameterName, value);
             param.Direction = direction;
             FilterParameters.Add(param);
         }
@@ -53,7 +54,7 @@ namespace ProjectBase.Database
         /// </summary>
         public override void AddFilterParameter(string parameterName, object value, int size, ParameterDirection direction)
         {
-            MySqlParameter param = new MySqlParameter(parameterName, value);
+            NpgsqlParameter param = new NpgsqlParameter(parameterName, value);
             param.Direction = direction;
             param.Size = size;
             FilterParameters.Add(param);
@@ -63,7 +64,7 @@ namespace ProjectBase.Database
         /// </summary>
         public override void AddFilterParameter(string parameterName, object value, int size, byte scale, byte precision, ParameterDirection direction)
         {
-            MySqlParameter param = new MySqlParameter(parameterName, value);
+            NpgsqlParameter param = new NpgsqlParameter(parameterName, value);
             param.Direction = direction;
             param.Size = size;
             param.Scale = scale;
@@ -75,9 +76,9 @@ namespace ProjectBase.Database
         /// </summary>
         public override void AddFilterParameter(string parameterName, object dbBaseDbType, object value, ParameterDirection direction)
         {
-            MySqlParameter param = new MySqlParameter(parameterName, value);
+            NpgsqlParameter param = new NpgsqlParameter(parameterName, value);
             param.Direction = direction;
-            param.MySqlDbType = (MySqlDbType)dbBaseDbType;
+            param.NpgsqlDbType = (NpgsqlDbType)dbBaseDbType;
             FilterParameters.Add(param);
         }
         /// <summary>
@@ -85,10 +86,10 @@ namespace ProjectBase.Database
         /// </summary>
         public override void AddFilterParameter(string parameterName, object dbBaseDbType, object value, int size, ParameterDirection direction)
         {
-            MySqlParameter param = new MySqlParameter(parameterName, value);
+            NpgsqlParameter param = new NpgsqlParameter(parameterName, value);
             param.Direction = direction;
             param.Size = size;
-            param.MySqlDbType = (MySqlDbType)dbBaseDbType;
+            param.NpgsqlDbType = (NpgsqlDbType)dbBaseDbType;
             FilterParameters.Add(param);
         }
         /// <summary>
@@ -96,12 +97,12 @@ namespace ProjectBase.Database
         /// </summary>
         public override void AddFilterParameter(string parameterName, object dbBaseDbType, object value, int size, byte scale, byte precision, ParameterDirection direction)
         {
-            MySqlParameter param = new MySqlParameter(parameterName, value);
+            NpgsqlParameter param = new NpgsqlParameter(parameterName, value);
             param.Direction = direction;
             param.Size = size;
             param.Scale = scale;
             param.Precision = precision;
-            param.MySqlDbType = (MySqlDbType)dbBaseDbType;
+            param.NpgsqlDbType = (NpgsqlDbType)dbBaseDbType;
             FilterParameters.Add(param);
         }
         /// <summary>
@@ -109,7 +110,7 @@ namespace ProjectBase.Database
         /// </summary>
         public override void AddFilterParameter(string parameterName, DbType dbType, object value, int size, ParameterDirection direction)
         {
-            MySqlParameter param = new MySqlParameter(parameterName, value);
+            NpgsqlParameter param = new NpgsqlParameter(parameterName, value);
             param.Direction = direction;
             param.Size = size;
             param.DbType = dbType;
@@ -120,7 +121,7 @@ namespace ProjectBase.Database
         /// </summary>
         public override void AddFilterParameter(string parameterName, DbType dbType, object value, int size, byte scale, byte precision, ParameterDirection direction)
         {
-            MySqlParameter param = new MySqlParameter(parameterName, value);
+            NpgsqlParameter param = new NpgsqlParameter(parameterName, value);
             param.Direction = direction;
             param.Size = size;
             param.Scale = scale;
@@ -134,14 +135,14 @@ namespace ProjectBase.Database
         /// </summary>
         public override void AddDataParameter(string parameterName, object value)
         {
-            DataParameters.Add(new MySqlParameter(parameterName, value));
+            DataParameters.Add(new NpgsqlParameter(parameterName, value));
         }
         /// <summary>
         /// Query generator will use this parameter while generating update and insert statements or procedure calls. For statement generation, parameter name must be same with column name in database table.
         /// </summary>
         public override void AddDataParameter(string parameterName, object value, ParameterDirection direction)
         {
-            MySqlParameter param = new MySqlParameter(parameterName, value);
+            NpgsqlParameter param = new NpgsqlParameter(parameterName, value);
             param.Direction = direction;
             DataParameters.Add(param);
         }
@@ -150,7 +151,7 @@ namespace ProjectBase.Database
         /// </summary>
         public override void AddDataParameter(string parameterName, object value, int size, ParameterDirection direction)
         {
-            MySqlParameter param = new MySqlParameter(parameterName, value);
+            NpgsqlParameter param = new NpgsqlParameter(parameterName, value);
             param.Direction = direction;
             param.Size = size;
             DataParameters.Add(param);
@@ -160,7 +161,7 @@ namespace ProjectBase.Database
         /// </summary>
         public override void AddDataParameter(string parameterName, object value, int size, byte scale, byte precision, ParameterDirection direction)
         {
-            MySqlParameter param = new MySqlParameter(parameterName, value);
+            NpgsqlParameter param = new NpgsqlParameter(parameterName, value);
             param.Direction = direction;
             param.Size = size;
             param.Scale = scale;
@@ -172,9 +173,9 @@ namespace ProjectBase.Database
         /// </summary>
         public override void AddDataParameter(string parameterName, object dbBaseDbType, object value, ParameterDirection direction)
         {
-            MySqlParameter param = new MySqlParameter(parameterName, value);
+            NpgsqlParameter param = new NpgsqlParameter(parameterName, value);
             param.Direction = direction;
-            param.MySqlDbType = (MySqlDbType)dbBaseDbType;
+            param.NpgsqlDbType = (NpgsqlDbType)dbBaseDbType;
             DataParameters.Add(param);
         }
         /// <summary>
@@ -182,10 +183,10 @@ namespace ProjectBase.Database
         /// </summary>
         public override void AddDataParameter(string parameterName, object dbBaseDbType, object value, int size, ParameterDirection direction)
         {
-            MySqlParameter param = new MySqlParameter(parameterName, value);
+            NpgsqlParameter param = new NpgsqlParameter(parameterName, value);
             param.Direction = direction;
             param.Size = size;
-            param.MySqlDbType = (MySqlDbType)dbBaseDbType;
+            param.NpgsqlDbType = (NpgsqlDbType)dbBaseDbType;
             DataParameters.Add(param);
         }
         /// <summary>
@@ -193,12 +194,12 @@ namespace ProjectBase.Database
         /// </summary>
         public override void AddDataParameter(string parameterName, object dbBaseDbType, object value, int size, byte scale, byte precision, ParameterDirection direction)
         {
-            MySqlParameter param = new MySqlParameter(parameterName, value);
+            NpgsqlParameter param = new NpgsqlParameter(parameterName, value);
             param.Direction = direction;
             param.Size = size;
             param.Scale = scale;
             param.Precision = precision;
-            param.MySqlDbType = (MySqlDbType)dbBaseDbType;
+            param.NpgsqlDbType = (NpgsqlDbType)dbBaseDbType;
             DataParameters.Add(param);
         }
         /// <summary>
@@ -206,7 +207,7 @@ namespace ProjectBase.Database
         /// </summary>
         public override void AddDataParameter(string parameterName, DbType dbType, object value, int size, ParameterDirection direction)
         {
-            MySqlParameter param = new MySqlParameter(parameterName, value);
+            NpgsqlParameter param = new NpgsqlParameter(parameterName, value);
             param.Direction = direction;
             param.Size = size;
             param.DbType = dbType;
@@ -217,7 +218,7 @@ namespace ProjectBase.Database
         /// </summary>
         public override void AddDataParameter(string parameterName, DbType dbType, object value, int size, byte scale, byte precision, ParameterDirection direction)
         {
-            MySqlParameter param = new MySqlParameter(parameterName, value);
+            NpgsqlParameter param = new NpgsqlParameter(parameterName, value);
             param.Direction = direction;
             param.Size = size;
             param.Scale = scale;
@@ -231,7 +232,7 @@ namespace ProjectBase.Database
         /// </summary>
         public override object GetParameterValue(string parameterName)
         {
-            foreach (MySqlParameter item in command.Parameters)
+            foreach (NpgsqlParameter item in command.Parameters)
             {
                 if (item.ParameterName == parameterName)
                 {
@@ -252,9 +253,11 @@ namespace ProjectBase.Database
                 StringBuilder dString = new StringBuilder("(");
                 StringBuilder vString = new StringBuilder("(");
 
-                foreach (MySqlParameter param in DataParameters)
+                foreach (NpgsqlParameter param in DataParameters)
                 {
+                    dString.Append("\"");
                     dString.Append(param.ParameterName);
+                    dString.Append("\"");
                     dString.Append(",");
 
                     vString.Append(StringProcessor.DbBasedParameterCharacter);
@@ -270,7 +273,10 @@ namespace ProjectBase.Database
                 dString.Append(")");
                 vString.Append(")");
 
+                bString.Append("\"");
                 bString.Append(TableName);
+                bString.Append("\"");
+
                 bString.Append(dString.ToString());
 
                 bString.Append(" VALUES ");
@@ -291,12 +297,16 @@ namespace ProjectBase.Database
             if (!isFilled)
             {
                 StringBuilder bString = new StringBuilder("UPDATE ");
+                bString.Append("\"");
                 bString.Append(TableName);
+                bString.Append("\"");
                 bString.Append(" SET ");
 
-                foreach (MySqlParameter param in DataParameters)
+                foreach (NpgsqlParameter param in DataParameters)
                 {
+                    bString.Append("\"");
                     bString.Append(param.ParameterName);
+                    bString.Append("\"");
                     bString.Append("=");
                     bString.Append(StringProcessor.DbBasedParameterCharacter);
                     bString.Append(param.ParameterName);
@@ -313,7 +323,7 @@ namespace ProjectBase.Database
                     bString.Append(GetPreparedCommandString(FilterText, CommandStringType.Filter));
                 }
 
-                foreach (MySqlParameter param in FilterParameters)
+                foreach (NpgsqlParameter param in FilterParameters)
                 {
                     command.Parameters.Add(param);
                 }
@@ -340,7 +350,7 @@ namespace ProjectBase.Database
                     bString.Append(GetPreparedCommandString(FilterText, CommandStringType.Filter));
                 }
 
-                foreach (MySqlParameter param in FilterParameters)
+                foreach (NpgsqlParameter param in FilterParameters)
                 {
                     command.Parameters.Add(param);
                 }
@@ -365,7 +375,7 @@ namespace ProjectBase.Database
         {
             if (!isFilled)
             {
-                foreach (MySqlParameter param in DataParameters)
+                foreach (NpgsqlParameter param in DataParameters)
                 {
                     command.Parameters.Add(param);
                 }
@@ -393,7 +403,7 @@ namespace ProjectBase.Database
             FilterText = null;
             SelectTail = null;
             ProcedureName = null;
-            command = new MySqlCommand();
+            command = new NpgsqlCommand();
             isFilled = false;
         }
     }

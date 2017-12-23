@@ -41,6 +41,10 @@ namespace ProjectBase.Database
             {
                 return new OleDbDatabase2();
             }
+            else if (conStr.ProviderName == "Npgsql")
+            {
+                return new NpgsqlDatabase2();
+            }
             else
                 throw new Exception("Provider is not recognized.");
         }
@@ -71,6 +75,10 @@ namespace ProjectBase.Database
             {
                 return new OleDbDatabase2(setting);
             }
+            else if (conStr.ProviderName == "Npgsql")
+            {
+                return new NpgsqlDatabase2(setting);
+            }
             else
                 throw new Exception("Provider is not recognized.");
         }
@@ -100,6 +108,10 @@ namespace ProjectBase.Database
             else if (conStr.ProviderName == "System.Data.OleDb")
             {
                 return new OleDbDatabase2(setting, isolation);
+            }
+            else if (conStr.ProviderName == "Npgsql")
+            {
+                return new NpgsqlDatabase2(setting, isolation);
             }
             else
                 throw new Exception("Provider is not recognized.");

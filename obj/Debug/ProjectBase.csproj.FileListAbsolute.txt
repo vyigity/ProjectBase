@@ -59,3 +59,7 @@ F:\GitHub\ProjectBase\bin\Debug\Oracle.ManagedDataAccess.dll
 F:\GitHub\ProjectBase\obj\Debug\ProjectBase.csprojResolveAssemblyReference.cache
 F:\GitHub\ProjectBase\bin\Debug\MySql.Data.dll
 F:\GitHub\ProjectBase\bin\Debug\MySql.Data.xml
+F:\GitHub\ProjectBase\bin\Debug\Npgsql.dll
+F:\GitHub\ProjectBase\bin\Debug\System.Threading.Tasks.Extensions.dll
+F:\GitHub\ProjectBase\bin\Debug\Npgsql.xml
+F:\GitHub\ProjectBase\bin\Debug\System.Threading.Tasks.Extensions.xml

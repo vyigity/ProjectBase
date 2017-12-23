@@ -33,6 +33,10 @@ namespace ProjectBase.Database
             {
                 return new MySqlQueryGenerator();
             }
+            else if (conStr.ProviderName == "Npgsql")
+            {
+                return new NpgsqlQueryGenerator();
+            }
             else
                 throw new Exception("Provider is not recognized.");
         }
@@ -56,6 +60,10 @@ namespace ProjectBase.Database
             else if (conStr.ProviderName == "MySql.Data.MySqlClient")
             {
                 return new MySqlQueryGenerator(ParameterProcessingMode);
+            }
+            else if (conStr.ProviderName == "Npgsql")
+            {
+                return new NpgsqlQueryGenerator(ParameterProcessingMode);
             }
             else
                 throw new Exception("Provider is not recognized.");

@@ -49,3 +49,7 @@ F:\GitHub\ProjectBase\bin\Release\Oracle.ManagedDataAccess.dll
 F:\GitHub\ProjectBase\bin\Release\MySql.Data.dll
 F:\GitHub\ProjectBase\bin\Release\MySql.Data.xml
 F:\GitHub\ProjectBase\bin\Release\ProjectBase.XML
+F:\GitHub\ProjectBase\bin\Release\Npgsql.dll
+F:\GitHub\ProjectBase\bin\Release\System.Threading.Tasks.Extensions.dll
+F:\GitHub\ProjectBase\bin\Release\Npgsql.xml
+F:\GitHub\ProjectBase\bin\Release\System.Threading.Tasks.Extensions.xml

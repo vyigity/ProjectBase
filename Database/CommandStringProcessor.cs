@@ -26,13 +26,13 @@ namespace ProjectBase.Database
 
         public CommandStringProcessor()
         {
-            ParameterCharacters = new List<char>() { ':', '@' };
+            ParameterCharacters = new List<char>() { ':', '@', '$' };
             GlobalParameterRegExp = "\\.p\\.\\w";
         }
 
         public CommandStringProcessor(char dbBasedParameterCharacter)
         {
-            ParameterCharacters = new List<char>() { ':', '@' };
+            ParameterCharacters = new List<char>() { ':', '@', '$' };
             GlobalParameterRegExp = "\\.p\\.\\w";
             DbBasedParameterCharacter = dbBasedParameterCharacter;
         }
