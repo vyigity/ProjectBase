@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace ProjectBase.Database
 {
     //vyigity
-    public class MySqlDatabase2 : DatabaseBase, IDisposable, IDatabase2
+    public class MySqlDatabase2 : DatabaseBase, IDisposable, IDatabase2, IDatabaseAsync2
     {
         /// <summary>
         /// Instantiates a new database interaction object.
@@ -88,8 +88,6 @@ namespace ProjectBase.Database
         /// </summary>
         public override void FillObject(DataSet set, string table, string query)
         {
-            DataTable dt = new DataTable();
-
             try
             {
                 GetConnection();
@@ -114,7 +112,6 @@ namespace ProjectBase.Database
         /// </summary>
         public override void FillObject(DataSet set, string table, IDbCommand query)
         {
-            DataTable dt = new DataTable();
             query.Connection = myCon;
             MySqlCommand command = query as MySqlCommand;
 
@@ -142,8 +139,6 @@ namespace ProjectBase.Database
         /// </summary>
         public override void FillObject(DataTable table, string query)
         {
-            DataTable dt = new DataTable();
-
             try
             {
                 GetConnection();
@@ -169,7 +164,6 @@ namespace ProjectBase.Database
         /// </summary>
         public override void FillObject(DataTable table, IDbCommand query)
         {
-            DataTable dt = new DataTable();
             MySqlCommand command = query as MySqlCommand;
 
             try
@@ -523,6 +517,534 @@ namespace ProjectBase.Database
         protected override IDbConnection GetDbSpecificConnection(string connectionString)
         {
             return new MySqlConnection(connectionString);
+        }
+
+        /// <summary>
+        /// Asynchronously executes a sql query and returns affected row count.
+        /// </summary>
+        public Task<int> ExecuteQueryAsync(string query)
+        {
+            MySqlCommand oracomm = null;
+
+            try
+            {
+                GetConnection();
+                oracomm = new MySqlCommand(query, myCon as MySqlConnection);
+                return Task.Run(() => { return oracomm.ExecuteNonQuery(); });
+            }
+            catch (MySqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Close();
+            }
+        }
+        /// <summary>
+        /// Asynchronously executes a sql command and returns affected row count.
+        /// </summary>
+        public Task<int> ExecuteQueryAsync(IDbCommand query)
+        {
+            try
+            {
+                GetConnection();
+                query.Connection = myCon;
+                return Task.Run(() => { return query.ExecuteNonQuery(); });
+            }
+            catch (MySqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Close();
+            }
+        }
+        /// <summary>
+        /// Asynchronously executes a sql select query and returns results as a data table object.
+        /// </summary>
+        public Task<DataTable> ExecuteQueryDataTableAsync(string query)
+        {
+            DataTable dt = new DataTable();
+
+            try
+            {
+                GetConnection();
+                MySqlDataAdapter oraadap = new MySqlDataAdapter(new MySqlCommand(query, myCon as MySqlConnection));
+                return Task.Run(() => { oraadap.Fill(dt); return dt; });
+            }
+            catch (MySqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Close();
+            }
+        }
+        /// <summary>
+        /// Asynchronously executes a sql select command and returns results as a data table object.
+        /// </summary>
+        public Task<DataTable> ExecuteQueryDataTableAsync(IDbCommand query)
+        {
+            DataTable dt = new DataTable();
+            MySqlCommand command = query as MySqlCommand;
+
+            try
+            {
+                GetConnection();
+                query.Connection = myCon;
+                MySqlDataAdapter oraadap = new MySqlDataAdapter(command);
+                return Task.Run(() => { oraadap.Fill(dt); return dt; });
+            }
+            catch (MySqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Close();
+            }
+        }
+        /// <summary>
+        /// Asynchronously executes a sql select query and fills a dataset object.
+        /// </summary>
+        public Task FillObjectAsync(DataTable table, string query)
+        {
+            try
+            {
+                GetConnection();
+                MySqlDataAdapter oraadap = new MySqlDataAdapter(new MySqlCommand(query, myCon as MySqlConnection));
+                return Task.Run(() => { oraadap.Fill(table); return table; });
+            }
+            catch (MySqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Close();
+            }
+        }
+        /// <summary>
+        /// Asynchronously executes a sql select command and fills a dataset object.
+        /// </summary>
+        public Task FillObjectAsync(DataTable table, IDbCommand query)
+        {
+            MySqlCommand command = query as MySqlCommand;
+
+            try
+            {
+                GetConnection();
+                query.Connection = myCon;
+                MySqlDataAdapter oraadap = new MySqlDataAdapter(command);
+                return Task.Run(() => { oraadap.Fill(table); return table; });
+            }
+            catch (MySqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Close();
+            }
+        }
+        /// <summary>
+        /// Asynchronously executes a sql select query and fills a data table object.
+        /// </summary>
+        public Task FillObjectAsync(DataSet set, string table, string query)
+        {
+            try
+            {
+                GetConnection();
+                MySqlDataAdapter oraadap = new MySqlDataAdapter(new MySqlCommand(query, myCon as MySqlConnection));
+                return Task.Run(() => { oraadap.Fill(set, table); });
+            }
+            catch (MySqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Close();
+            }
+        }
+        /// <summary>
+        /// Asynchronously executes a sql select command and fills a data table object.
+        /// </summary>
+        public Task FillObjectAsync(DataSet set, string table, IDbCommand query)
+        {
+            query.Connection = myCon;
+            MySqlCommand command = query as MySqlCommand;
+
+            try
+            {
+                GetConnection();
+                MySqlDataAdapter oraadap = new MySqlDataAdapter(command);
+                return Task.Run(() => { oraadap.Fill(set, table); });
+            }
+            catch (MySqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Close();
+            }
+        }
+        /// <summary>
+        /// Asynchronously executes a sql select query and returns a data reader object.
+        /// </summary>
+        public Task<IDataReader> GetDataReaderAsync(string query)
+        {
+            MySqlCommand comm = null;
+
+            try
+            {
+                GetConnection();
+                comm = new MySqlCommand(query, myCon as MySqlConnection);
+                return Task.Run(() => { return (IDataReader)comm.ExecuteReader(); });
+            }
+            catch (MySqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        /// <summary>
+        /// Asynchronously executes a sql select command and returns a data reader object.
+        /// </summary>
+        public Task<IDataReader> GetDataReaderAsync(IDbCommand query)
+        {
+            try
+            {
+                GetConnection();
+                query.Connection = myCon;
+                return Task.Run(() => { return (IDataReader)query.ExecuteReader(); });
+            }
+            catch (MySqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        /// <summary>
+        /// Asynchronously executes a sql select query and returns results as a desired type object.
+        /// </summary>
+        public Task<T> GetObjectAsync<T>(string query)
+        {
+            GetConnection();
+
+            return Task.Run(() =>
+            {
+                MySqlDataReader reader = GetDataReaderNoConnection(query) as MySqlDataReader;
+
+                try
+                {
+                    T instance = (T)Activator.CreateInstance(typeof(T));
+
+                    reader.Read();
+
+                    var props = typeof(T).GetProperties();
+
+                    foreach (PropertyInfo inf in props)
+                    {
+                        if (HasColumn(reader, inf.Name))
+                        {
+                            inf.SetValue(instance, Util.IsNull(reader[inf.Name]) ? null : Util.GetProperty(reader[inf.Name], inf.PropertyType));
+                        }
+                    }
+
+                    return instance;
+
+                }
+                catch (MySqlException ex)
+                {
+                    throw ex;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    if (!reader.IsClosed)
+                        reader.Close();
+
+                    Close();
+                }
+            });
+        }
+        /// <summary>
+        /// Asynchronously executes a sql select command and returns results as a desired type object.
+        /// </summary>
+        public Task<T> GetObjectAsync<T>(IDbCommand query)
+        {
+            GetConnection();
+
+            return Task.Run(() =>
+            {
+                MySqlDataReader reader = GetDataReaderNoConnection(query) as MySqlDataReader;
+
+                try
+                {
+                    T instance = (T)Activator.CreateInstance(typeof(T));
+
+                    reader.Read();
+
+                    var props = typeof(T).GetProperties();
+
+                    foreach (PropertyInfo inf in props)
+                    {
+                        if (HasColumn(reader, inf.Name))
+                        {
+                            inf.SetValue(instance, Util.IsNull(reader[inf.Name]) ? null : Util.GetProperty(reader[inf.Name], inf.PropertyType));
+                        }
+                    }
+
+                    return instance;
+                }
+                catch (MySqlException ex)
+                {
+                    throw ex;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    if (!reader.IsClosed)
+                        reader.Close();
+
+                    Close();
+                }
+            });
+        }
+        /// <summary>
+        /// Asynchronously executes a sql select query and returns results as a list of desired type objects.
+        /// </summary>
+        public Task<List<T>> GetObjectListAsync<T>(string query)
+        {
+            List<T> entityList = new List<T>();
+
+            GetConnection();
+
+            return Task.Run(() =>
+            {
+                MySqlDataReader reader = GetDataReaderNoConnection(query) as MySqlDataReader;
+
+                try
+                {
+                    var props = typeof(T).GetProperties();
+
+                    while (reader.Read())
+                    {
+                        T instance = (T)Activator.CreateInstance(typeof(T));
+
+                        foreach (PropertyInfo inf in props)
+                        {
+                            if (HasColumn(reader, inf.Name))
+                            {
+                                inf.SetValue(instance, Util.IsNull(reader[inf.Name]) ? null : Util.GetProperty(reader[inf.Name], inf.PropertyType));
+                            }
+                        }
+
+                        entityList.Add(instance);
+                    }
+
+                    return entityList;
+                }
+                catch (MySqlException ex)
+                {
+                    throw ex;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    if (!reader.IsClosed)
+                        reader.Close();
+
+                    Close();
+                }
+            });
+        }
+        /// <summary>
+        /// Asynchronously executes a sql select command and returns results as a list of desired type objects.
+        /// </summary>
+        public Task<List<T>> GetObjectListAsync<T>(IDbCommand query)
+        {
+            List<T> entityList = new List<T>();
+
+            GetConnection();
+
+            return Task.Run(() =>
+            {
+                MySqlDataReader reader = GetDataReaderNoConnection(query) as MySqlDataReader;
+
+                try
+                {
+                    var props = typeof(T).GetProperties();
+
+                    while (reader.Read())
+                    {
+                        T instance = (T)Activator.CreateInstance(typeof(T));
+
+                        foreach (PropertyInfo inf in props)
+                        {
+                            if (HasColumn(reader, inf.Name))
+                            {
+                                inf.SetValue(instance, Util.IsNull(reader[inf.Name]) ? null : Util.GetProperty(reader[inf.Name], inf.PropertyType));
+                            }
+                        }
+
+                        entityList.Add(instance);
+                    }
+
+                    return entityList;
+                }
+                catch (MySqlException ex)
+                {
+                    throw ex;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    if (!reader.IsClosed)
+                        reader.Close();
+
+                    Close();
+                }
+            });
+        }
+        /// <summary>
+        /// Asynchronously executes a sql select query and returns results result as a single value.
+        /// </summary>
+        public Task<object> GetSingleValueAsync(string query)
+        {
+            MySqlCommand oracomm = null;
+            try
+            {
+                GetConnection();
+                oracomm = new MySqlCommand(query, myCon as MySqlConnection);
+                return Task.Run(() => { return oracomm.ExecuteScalar(); });
+            }
+            catch (MySqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Close();
+            }
+        }
+        /// <summary>
+        /// Asynchronously executes a sql select command and returns results result as a single value.
+        /// </summary>
+        public Task<object> GetSingleValueAsync(IDbCommand query)
+        {
+            try
+            {
+                GetConnection();
+                query.Connection = myCon;
+                return Task.Run(() => { return query.ExecuteScalar(); });
+            }
+            catch (MySqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Close();
+            }
+        }
+
+        private IDataReader GetDataReaderNoConnection(string query)
+        {
+            MySqlCommand comm = null;
+
+            try
+            {
+                comm = new MySqlCommand(query, myCon as MySqlConnection);
+                return comm.ExecuteReader();
+            }
+            catch (MySqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        private IDataReader GetDataReaderNoConnection(IDbCommand query)
+        {
+            try
+            {
+                query.Connection = myCon;
+                return query.ExecuteReader();
+            }
+            catch (MySqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

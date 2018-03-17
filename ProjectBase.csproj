@@ -90,6 +90,7 @@
     <Compile Include="Database\CommandStringProcessor.cs" />
     <Compile Include="Database\DatabaseBase.cs" />
     <Compile Include="Database\DatabaseFactory.cs" />
+    <Compile Include="Database\IDatabaseAsync2.cs" />
     <Compile Include="Database\IDatabase2.cs" />
     <Compile Include="Database\IQueryGenerator.cs" />
     <Compile Include="Database\NpgsqlDatabase2.cs" />

@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace ProjectBase.Database
 {
     //vyigity
-    public class NpgsqlDatabase2 : DatabaseBase, IDisposable, IDatabase2
+    public class NpgsqlDatabase2 : DatabaseBase, IDisposable, IDatabase2, IDatabaseAsync2
     {
         /// <summary>
         /// Instantiates a new database interaction object.
@@ -88,8 +88,6 @@ namespace ProjectBase.Database
         /// </summary>
         public override void FillObject(DataSet set, string table, string query)
         {
-            DataTable dt = new DataTable();
-
             try
             {
                 GetConnection();
@@ -114,7 +112,6 @@ namespace ProjectBase.Database
         /// </summary>
         public override void FillObject(DataSet set, string table, IDbCommand query)
         {
-            DataTable dt = new DataTable();
             query.Connection = myCon;
             NpgsqlCommand command = query as NpgsqlCommand;
 
@@ -142,8 +139,6 @@ namespace ProjectBase.Database
         /// </summary>
         public override void FillObject(DataTable table, string query)
         {
-            DataTable dt = new DataTable();
-
             try
             {
                 GetConnection();
@@ -169,7 +164,6 @@ namespace ProjectBase.Database
         /// </summary>
         public override void FillObject(DataTable table, IDbCommand query)
         {
-            DataTable dt = new DataTable();
             NpgsqlCommand command = query as NpgsqlCommand;
 
             try
@@ -523,6 +517,534 @@ namespace ProjectBase.Database
         protected override IDbConnection GetDbSpecificConnection(string connectionString)
         {
             return new NpgsqlConnection(connectionString);
+        }
+
+        /// <summary>
+        /// Asynchronously executes a sql query and returns affected row count.
+        /// </summary>
+        public Task<int> ExecuteQueryAsync(string query)
+        {
+            NpgsqlCommand oracomm = null;
+
+            try
+            {
+                GetConnection();
+                oracomm = new NpgsqlCommand(query, myCon as NpgsqlConnection);
+                return Task.Run(() => { return oracomm.ExecuteNonQuery(); });
+            }
+            catch (NpgsqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Close();
+            }
+        }
+        /// <summary>
+        /// Asynchronously executes a sql command and returns affected row count.
+        /// </summary>
+        public Task<int> ExecuteQueryAsync(IDbCommand query)
+        {
+            try
+            {
+                GetConnection();
+                query.Connection = myCon;
+                return Task.Run(() => { return query.ExecuteNonQuery(); });
+            }
+            catch (NpgsqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Close();
+            }
+        }
+        /// <summary>
+        /// Asynchronously executes a sql select query and returns results as a data table object.
+        /// </summary>
+        public Task<DataTable> ExecuteQueryDataTableAsync(string query)
+        {
+            DataTable dt = new DataTable();
+
+            try
+            {
+                GetConnection();
+                NpgsqlDataAdapter oraadap = new NpgsqlDataAdapter(new NpgsqlCommand(query, myCon as NpgsqlConnection));
+                return Task.Run(() => { oraadap.Fill(dt); return dt; });
+            }
+            catch (NpgsqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Close();
+            }
+        }
+        /// <summary>
+        /// Asynchronously executes a sql select command and returns results as a data table object.
+        /// </summary>
+        public Task<DataTable> ExecuteQueryDataTableAsync(IDbCommand query)
+        {
+            DataTable dt = new DataTable();
+            NpgsqlCommand command = query as NpgsqlCommand;
+
+            try
+            {
+                GetConnection();
+                query.Connection = myCon;
+                NpgsqlDataAdapter oraadap = new NpgsqlDataAdapter(command);
+                return Task.Run(() => { oraadap.Fill(dt); return dt; });
+            }
+            catch (NpgsqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Close();
+            }
+        }
+        /// <summary>
+        /// Asynchronously executes a sql select query and fills a dataset object.
+        /// </summary>
+        public Task FillObjectAsync(DataTable table, string query)
+        {
+            try
+            {
+                GetConnection();
+                NpgsqlDataAdapter oraadap = new NpgsqlDataAdapter(new NpgsqlCommand(query, myCon as NpgsqlConnection));
+                return Task.Run(() => { oraadap.Fill(table); return table; });
+            }
+            catch (NpgsqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Close();
+            }
+        }
+        /// <summary>
+        /// Asynchronously executes a sql select command and fills a dataset object.
+        /// </summary>
+        public Task FillObjectAsync(DataTable table, IDbCommand query)
+        {
+            NpgsqlCommand command = query as NpgsqlCommand;
+
+            try
+            {
+                GetConnection();
+                query.Connection = myCon;
+                NpgsqlDataAdapter oraadap = new NpgsqlDataAdapter(command);
+                return Task.Run(() => { oraadap.Fill(table); return table; });
+            }
+            catch (NpgsqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Close();
+            }
+        }
+        /// <summary>
+        /// Asynchronously executes a sql select query and fills a data table object.
+        /// </summary>
+        public Task FillObjectAsync(DataSet set, string table, string query)
+        {
+            try
+            {
+                GetConnection();
+                NpgsqlDataAdapter oraadap = new NpgsqlDataAdapter(new NpgsqlCommand(query, myCon as NpgsqlConnection));
+                return Task.Run(() => { oraadap.Fill(set, table); });
+            }
+            catch (NpgsqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Close();
+            }
+        }
+        /// <summary>
+        /// Asynchronously executes a sql select command and fills a data table object.
+        /// </summary>
+        public Task FillObjectAsync(DataSet set, string table, IDbCommand query)
+        {
+            query.Connection = myCon;
+            NpgsqlCommand command = query as NpgsqlCommand;
+
+            try
+            {
+                GetConnection();
+                NpgsqlDataAdapter oraadap = new NpgsqlDataAdapter(command);
+                return Task.Run(() => { oraadap.Fill(set, table); });
+            }
+            catch (NpgsqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Close();
+            }
+        }
+        /// <summary>
+        /// Asynchronously executes a sql select query and returns a data reader object.
+        /// </summary>
+        public Task<IDataReader> GetDataReaderAsync(string query)
+        {
+            NpgsqlCommand comm = null;
+
+            try
+            {
+                GetConnection();
+                comm = new NpgsqlCommand(query, myCon as NpgsqlConnection);
+                return Task.Run(() => { return (IDataReader)comm.ExecuteReader(); });
+            }
+            catch (NpgsqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        /// <summary>
+        /// Asynchronously executes a sql select command and returns a data reader object.
+        /// </summary>
+        public Task<IDataReader> GetDataReaderAsync(IDbCommand query)
+        {
+            try
+            {
+                GetConnection();
+                query.Connection = myCon;
+                return Task.Run(() => { return (IDataReader)query.ExecuteReader(); });
+            }
+            catch (NpgsqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        /// <summary>
+        /// Asynchronously executes a sql select query and returns results as a desired type object.
+        /// </summary>
+        public Task<T> GetObjectAsync<T>(string query)
+        {
+            GetConnection();
+
+            return Task.Run(() =>
+            {
+                NpgsqlDataReader reader = GetDataReaderNoConnection(query) as NpgsqlDataReader;
+
+                try
+                {
+                    T instance = (T)Activator.CreateInstance(typeof(T));
+
+                    reader.Read();
+
+                    var props = typeof(T).GetProperties();
+
+                    foreach (PropertyInfo inf in props)
+                    {
+                        if (HasColumn(reader, inf.Name))
+                        {
+                            inf.SetValue(instance, Util.IsNull(reader[inf.Name]) ? null : Util.GetProperty(reader[inf.Name], inf.PropertyType));
+                        }
+                    }
+
+                    return instance;
+
+                }
+                catch (NpgsqlException ex)
+                {
+                    throw ex;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    if (!reader.IsClosed)
+                        reader.Close();
+
+                    Close();
+                }
+            });
+        }
+        /// <summary>
+        /// Asynchronously executes a sql select command and returns results as a desired type object.
+        /// </summary>
+        public Task<T> GetObjectAsync<T>(IDbCommand query)
+        {
+            GetConnection();
+
+            return Task.Run(() =>
+            {
+                NpgsqlDataReader reader = GetDataReaderNoConnection(query) as NpgsqlDataReader;
+
+                try
+                {
+                    T instance = (T)Activator.CreateInstance(typeof(T));
+
+                    reader.Read();
+
+                    var props = typeof(T).GetProperties();
+
+                    foreach (PropertyInfo inf in props)
+                    {
+                        if (HasColumn(reader, inf.Name))
+                        {
+                            inf.SetValue(instance, Util.IsNull(reader[inf.Name]) ? null : Util.GetProperty(reader[inf.Name], inf.PropertyType));
+                        }
+                    }
+
+                    return instance;
+                }
+                catch (NpgsqlException ex)
+                {
+                    throw ex;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    if (!reader.IsClosed)
+                        reader.Close();
+
+                    Close();
+                }
+            });
+        }
+        /// <summary>
+        /// Asynchronously executes a sql select query and returns results as a list of desired type objects.
+        /// </summary>
+        public Task<List<T>> GetObjectListAsync<T>(string query)
+        {
+            List<T> entityList = new List<T>();
+
+            GetConnection();
+
+            return Task.Run(() =>
+            {
+                NpgsqlDataReader reader = GetDataReaderNoConnection(query) as NpgsqlDataReader;
+
+                try
+                {
+                    var props = typeof(T).GetProperties();
+
+                    while (reader.Read())
+                    {
+                        T instance = (T)Activator.CreateInstance(typeof(T));
+
+                        foreach (PropertyInfo inf in props)
+                        {
+                            if (HasColumn(reader, inf.Name))
+                            {
+                                inf.SetValue(instance, Util.IsNull(reader[inf.Name]) ? null : Util.GetProperty(reader[inf.Name], inf.PropertyType));
+                            }
+                        }
+
+                        entityList.Add(instance);
+                    }
+
+                    return entityList;
+                }
+                catch (NpgsqlException ex)
+                {
+                    throw ex;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    if (!reader.IsClosed)
+                        reader.Close();
+
+                    Close();
+                }
+            });
+        }
+        /// <summary>
+        /// Asynchronously executes a sql select command and returns results as a list of desired type objects.
+        /// </summary>
+        public Task<List<T>> GetObjectListAsync<T>(IDbCommand query)
+        {
+            List<T> entityList = new List<T>();
+
+            GetConnection();
+
+            return Task.Run(() =>
+            {
+                NpgsqlDataReader reader = GetDataReaderNoConnection(query) as NpgsqlDataReader;
+
+                try
+                {
+                    var props = typeof(T).GetProperties();
+
+                    while (reader.Read())
+                    {
+                        T instance = (T)Activator.CreateInstance(typeof(T));
+
+                        foreach (PropertyInfo inf in props)
+                        {
+                            if (HasColumn(reader, inf.Name))
+                            {
+                                inf.SetValue(instance, Util.IsNull(reader[inf.Name]) ? null : Util.GetProperty(reader[inf.Name], inf.PropertyType));
+                            }
+                        }
+
+                        entityList.Add(instance);
+                    }
+
+                    return entityList;
+                }
+                catch (NpgsqlException ex)
+                {
+                    throw ex;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                    if (!reader.IsClosed)
+                        reader.Close();
+
+                    Close();
+                }
+            });
+        }
+        /// <summary>
+        /// Asynchronously executes a sql select query and returns results result as a single value.
+        /// </summary>
+        public Task<object> GetSingleValueAsync(string query)
+        {
+            NpgsqlCommand oracomm = null;
+            try
+            {
+                GetConnection();
+                oracomm = new NpgsqlCommand(query, myCon as NpgsqlConnection);
+                return Task.Run(() => { return oracomm.ExecuteScalar(); });
+            }
+            catch (NpgsqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Close();
+            }
+        }
+        /// <summary>
+        /// Asynchronously executes a sql select command and returns results result as a single value.
+        /// </summary>
+        public Task<object> GetSingleValueAsync(IDbCommand query)
+        {
+            try
+            {
+                GetConnection();
+                query.Connection = myCon;
+                return Task.Run(() => { return query.ExecuteScalar(); });
+            }
+            catch (NpgsqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Close();
+            }
+        }
+
+        private IDataReader GetDataReaderNoConnection(string query)
+        {
+            NpgsqlCommand comm = null;
+
+            try
+            {
+                comm = new NpgsqlCommand(query, myCon as NpgsqlConnection);
+                return comm.ExecuteReader();
+            }
+            catch (NpgsqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        private IDataReader GetDataReaderNoConnection(IDbCommand query)
+        {
+            try
+            {
+                query.Connection = myCon;
+                return query.ExecuteReader();
+            }
+            catch (NpgsqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

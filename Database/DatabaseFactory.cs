@@ -116,5 +116,33 @@ namespace ProjectBase.Database
             else
                 throw new Exception("Provider is not recognized.");
         }
+
+        /// <summary>
+        /// Instantiates a new encapsulated asynchronous database interaction object.
+        /// </summary>
+        public static IDatabaseAsync2 GetDbObjectAsync()
+        {
+            ConnectionStringSettings conStr = AppContext2.CONNECTION_STRINGS[AppContext2.DEFAULT_DB];
+
+            return GetDbObject() as IDatabaseAsync2;
+        }
+        /// <summary>
+        /// Instantiates a new encapsulated asynchronous database interaction object according to database setting.
+        /// </summary>
+        public static IDatabaseAsync2 GetDbObjectAsync(DbSettings setting)
+        {
+            ConnectionStringSettings conStr = AppContext2.CONNECTION_STRINGS[AppContext2.DEFAULT_DB];
+
+            return GetDbObject(setting) as IDatabaseAsync2;
+        }
+        /// <summary>
+        /// Instantiates a new encapsulated asynchronous database interaction object according to database setting and transaction isolation.
+        /// </summary>
+        public static IDatabaseAsync2 GetDbObjectAsync(DbSettings setting, IsolationLevel isolation)
+        {
+            ConnectionStringSettings conStr = AppContext2.CONNECTION_STRINGS[AppContext2.DEFAULT_DB];
+
+            return GetDbObject(setting, isolation) as IDatabaseAsync2;
+        }
     }
 }
