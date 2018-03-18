@@ -10,7 +10,7 @@ PB has 3 type of data access:
 
 PB currently supports Oracle (Managed-Unmanaged Provider), SQL Server databases and OleDb. PB supports MySql provider with v2.0.0 and PostgreSQL with v3.0.0.
 
-PB supports asynchronous proggramming with v4.0.0-beta.
+PB supports asynchronous programming with v4.0.0-beta.
 
 Also PB supports low level object mapping features.
 
