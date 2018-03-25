@@ -10,6 +10,8 @@ PB has 3 type of data access:
 
 PB currently supports Oracle (Managed-Unmanaged Provider), SQL Server databases and OleDb. PB supports MySql provider with v2.0.0 and PostgreSQL with v3.0.0.
 
+PB supports asynchronous programming with v4.0.0-beta.
+
 Also PB supports low level object mapping features.
 
 For introduction:
@@ -39,5 +41,9 @@ http://vyigity.blogspot.com.tr/2017/10/projectbase-ile-datatable-yerine-nesne.ht
 For global parameter usage examples:
 
 http://vyigity.blogspot.com.tr/2017/12/projectbase-kutuphanesi-ile-evrensel.html
+
+For asynchronous programming examples:
+
+http://vyigity.blogspot.com.tr/2018/03/projectbase-pb-ile-asenkron-programlama.html
 
 
