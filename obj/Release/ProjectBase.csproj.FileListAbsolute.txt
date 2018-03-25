@@ -50,6 +50,5 @@ F:\GitHub\ProjectBase\bin\Release\System.Threading.Tasks.Extensions.dll
 F:\GitHub\ProjectBase\bin\Release\MySql.Data.xml
 F:\GitHub\ProjectBase\bin\Release\Npgsql.xml
 F:\GitHub\ProjectBase\bin\Release\System.Threading.Tasks.Extensions.xml
-F:\GitHub\ProjectBase\obj\Release\ProjectBase.csprojResolveAssemblyReference.cache
 F:\GitHub\ProjectBase\obj\Release\ProjectBase.dll
 F:\GitHub\ProjectBase\obj\Release\ProjectBase.pdb
