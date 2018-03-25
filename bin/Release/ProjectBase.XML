@@ -2239,6 +2239,11 @@
             Instantiates a new encapsulated QueryGenerator object.
             </summary>
         </member>
+        <member name="M:ProjectBase.Database.QueryGeneratorFactory.GetDbObject(ProjectBase.Database.ParameterMode)">
+            <summary>
+            Instantiates a new encapsulated QueryGenerator object with parameter processing mode.
+            </summary>
+        </member>
         <member name="T:ProjectBase.Database.SqlQueryGenerator">
             <summary>
             Can be used for database command generation with helper functions.

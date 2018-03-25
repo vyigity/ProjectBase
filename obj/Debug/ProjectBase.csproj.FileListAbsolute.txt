@@ -62,3 +62,4 @@ F:\GitHub\ProjectBase\bin\Debug\Npgsql.dll
 F:\GitHub\ProjectBase\bin\Debug\System.Threading.Tasks.Extensions.dll
 F:\GitHub\ProjectBase\bin\Debug\Npgsql.xml
 F:\GitHub\ProjectBase\bin\Debug\System.Threading.Tasks.Extensions.xml
+F:\GitHub\ProjectBase\obj\Debug\ProjectBase.csprojResolveAssemblyReference.cache

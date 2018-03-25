@@ -41,6 +41,9 @@ namespace ProjectBase.Database
                 throw new Exception("Provider is not recognized.");
         }
 
+        /// <summary>
+        /// Instantiates a new encapsulated QueryGenerator object with parameter processing mode.
+        /// </summary>
         public static IQueryGenerator GetDbObject(ParameterMode ParameterProcessingMode)
         {
             ConnectionStringSettings conStr = AppContext2.CONNECTION_STRINGS[AppContext2.DEFAULT_DB];

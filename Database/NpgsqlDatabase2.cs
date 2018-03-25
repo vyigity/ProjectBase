@@ -514,6 +514,7 @@ namespace ProjectBase.Database
             }
             return false;
         }
+
         protected override IDbConnection GetDbSpecificConnection(string connectionString)
         {
             return new NpgsqlConnection(connectionString);
