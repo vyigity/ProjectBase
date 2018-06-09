@@ -122,8 +122,6 @@ namespace ProjectBase.Database
         /// </summary>
         public static IDatabaseAsync2 GetDbObjectAsync()
         {
-            ConnectionStringSettings conStr = AppContext2.CONNECTION_STRINGS[AppContext2.DEFAULT_DB];
-
             return GetDbObject() as IDatabaseAsync2;
         }
         /// <summary>
@@ -131,8 +129,6 @@ namespace ProjectBase.Database
         /// </summary>
         public static IDatabaseAsync2 GetDbObjectAsync(DbSettings setting)
         {
-            ConnectionStringSettings conStr = AppContext2.CONNECTION_STRINGS[AppContext2.DEFAULT_DB];
-
             return GetDbObject(setting) as IDatabaseAsync2;
         }
         /// <summary>
@@ -140,8 +136,6 @@ namespace ProjectBase.Database
         /// </summary>
         public static IDatabaseAsync2 GetDbObjectAsync(DbSettings setting, IsolationLevel isolation)
         {
-            ConnectionStringSettings conStr = AppContext2.CONNECTION_STRINGS[AppContext2.DEFAULT_DB];
-
             return GetDbObject(setting, isolation) as IDatabaseAsync2;
         }
     }
