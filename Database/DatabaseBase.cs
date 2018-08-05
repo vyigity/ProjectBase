@@ -358,7 +358,7 @@ namespace ProjectBase.Database
         }
 
         /// <summary>
-        /// Project Base returns true if there is an available transaction that is not committed or rolled back.
+        /// ProjectBase returns true if there is an available transaction that is not committed or rolled back.
         /// </summary>
         public bool IsProcessEnded(IDbTransaction exTransaction)
         {
