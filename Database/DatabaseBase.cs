@@ -325,5 +325,44 @@ namespace ProjectBase.Database
                 return myCon;
             }
         }
+
+        /// <summary>
+        /// ProjectBase uses an external transaction.
+        /// </summary>
+        public void UseExternalTransaction(IDbTransaction exTransaction)
+        {
+            if (setting == DbSettings.TransactionMode)
+            {
+                if (processEnded && (myCon == null || myCon.State == ConnectionState.Closed))
+                {
+                    if (exTransaction.Connection.State == ConnectionState.Open)
+                    {
+                        myCon = exTransaction.Connection;
+                        tran = exTransaction;
+                        processEnded = false;
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("External connection must be in a opened state.");
+                    }
+                }
+                else
+                {
+                    throw new InvalidOperationException("Currently used connection is not in closed state or there is a currently available transaction. This operation requires a clean state.");
+                }
+            }
+            else
+            {
+                throw new InvalidOperationException("This operation is available only in transaction mode.");
+            }
+        }
+
+        /// <summary>
+        /// Project Base returns true if there is an available transaction that is not committed or rolled back.
+        /// </summary>
+        public bool IsProcessEnded(IDbTransaction exTransaction)
+        {
+            return processEnded;
+        }
     }
 }

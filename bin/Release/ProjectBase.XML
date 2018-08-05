@@ -204,6 +204,16 @@
             Returns current connection object.
             </summary>
         </member>
+        <member name="M:ProjectBase.Database.DatabaseBase.UseExternalTransaction(System.Data.IDbTransaction)">
+            <summary>
+            ProjectBase uses an external transaction.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.DatabaseBase.IsProcessEnded(System.Data.IDbTransaction)">
+            <summary>
+            Project Base returns true if there is an available transaction that is not committed or rolled back.
+            </summary>
+        </member>
         <member name="M:ProjectBase.Database.DatabaseFactory.GetDbObject">
             <summary>
             Instantiates a new encapsulated database interaction object.

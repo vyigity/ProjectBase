@@ -52,3 +52,15 @@ F:\GitHub\ProjectBase\bin\Release\Npgsql.xml
 F:\GitHub\ProjectBase\bin\Release\System.Threading.Tasks.Extensions.xml
 F:\GitHub\ProjectBase\obj\Release\ProjectBase.dll
 F:\GitHub\ProjectBase\obj\Release\ProjectBase.pdb
+E:\GitHub\ProjectBase2\ProjectBase\bin\Release\ProjectBase.dll.config
+E:\GitHub\ProjectBase2\ProjectBase\bin\Release\ProjectBase.XML
+E:\GitHub\ProjectBase2\ProjectBase\bin\Release\ProjectBase.dll
+E:\GitHub\ProjectBase2\ProjectBase\bin\Release\ProjectBase.pdb
+E:\GitHub\ProjectBase2\ProjectBase\bin\Release\MySql.Data.xml
+E:\GitHub\ProjectBase2\ProjectBase\bin\Release\Npgsql.xml
+E:\GitHub\ProjectBase2\ProjectBase\bin\Release\System.Threading.Tasks.Extensions.xml
+E:\GitHub\ProjectBase2\ProjectBase\obj\Release\ProjectBase.csprojAssemblyReference.cache
+E:\GitHub\ProjectBase2\ProjectBase\obj\Release\ProjectBase.csproj.CoreCompileInputs.cache
+E:\GitHub\ProjectBase2\ProjectBase\obj\Release\ProjectBase.csproj.CopyComplete
+E:\GitHub\ProjectBase2\ProjectBase\obj\Release\ProjectBase.dll
+E:\GitHub\ProjectBase2\ProjectBase\obj\Release\ProjectBase.pdb
