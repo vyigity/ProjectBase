@@ -335,7 +335,7 @@ namespace ProjectBase.Database
             {
                 if (processEnded && (myCon == null || myCon.State == ConnectionState.Closed))
                 {
-                    if (exTransaction.Connection.State == ConnectionState.Open)
+                    if (exTransaction.Connection != null && exTransaction.Connection.State == ConnectionState.Open)
                     {
                         myCon = exTransaction.Connection;
                         tran = exTransaction;
@@ -358,7 +358,7 @@ namespace ProjectBase.Database
         }
 
         /// <summary>
-        /// Project Base returns true if there is an available transaction that is not committed or rolled back.
+        /// ProjectBase returns true if there is an available transaction that is not committed or rolled back.
         /// </summary>
         public bool IsProcessEnded(IDbTransaction exTransaction)
         {

@@ -127,5 +127,15 @@ namespace ProjectBase.Database
         /// Rollbacks current transaction.
         /// </summary>
         void RollBack();
+
+        /// <summary>
+        /// ProjectBase uses an external transaction.
+        /// </summary>
+        void UseExternalTransaction(IDbTransaction exTransaction);
+
+        /// <summary>
+        /// Project Base returns true if there is an available transaction that is not committed or rolled back.
+        /// </summary>
+        bool IsProcessEnded(IDbTransaction exTransaction);
     }
 }

@@ -211,7 +211,7 @@
         </member>
         <member name="M:ProjectBase.Database.DatabaseBase.IsProcessEnded(System.Data.IDbTransaction)">
             <summary>
-            Project Base returns true if there is an available transaction that is not committed or rolled back.
+            ProjectBase returns true if there is an available transaction that is not committed or rolled back.
             </summary>
         </member>
         <member name="M:ProjectBase.Database.DatabaseFactory.GetDbObject">
@@ -364,6 +364,16 @@
             Rollbacks current transaction.
             </summary>
         </member>
+        <member name="M:ProjectBase.Database.IDatabaseAsync2.UseExternalTransaction(System.Data.IDbTransaction)">
+            <summary>
+            ProjectBase uses an external transaction.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IDatabaseAsync2.IsProcessEnded(System.Data.IDbTransaction)">
+            <summary>
+            Project Base returns true if there is an available transaction that is not committed or rolled back.
+            </summary>
+        </member>
         <member name="P:ProjectBase.Database.IDatabase2.ConnectionString">
             <summary>
             Gets or sets connection string that is used by database interaction class.
@@ -487,6 +497,16 @@
         <member name="M:ProjectBase.Database.IDatabase2.RollBack">
             <summary>
             Rollbacks current transaction.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IDatabase2.UseExternalTransaction(System.Data.IDbTransaction)">
+            <summary>
+            ProjectBase uses an external transaction.
+            </summary>
+        </member>
+        <member name="M:ProjectBase.Database.IDatabase2.IsProcessEnded(System.Data.IDbTransaction)">
+            <summary>
+            ProjectBase returns true if there is an available transaction that is not committed or rolled back.
             </summary>
         </member>
         <member name="T:ProjectBase.Database.IQueryGenerator">
