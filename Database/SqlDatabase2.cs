@@ -37,7 +37,7 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                SqlDataAdapter oraadap = new SqlDataAdapter(new SqlCommand(query, myCon as SqlConnection));
+                SqlDataAdapter oraadap = new SqlDataAdapter(new SqlCommand(query, myCon as SqlConnection, tran as SqlTransaction));
                 oraadap.Fill(dt);
                 return dt;
             }
@@ -65,6 +65,7 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
+                query.Transaction = tran;
                 query.Connection = myCon;
                 SqlDataAdapter oraadap = new SqlDataAdapter(command);
                 oraadap.Fill(dt);
@@ -91,7 +92,7 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                SqlDataAdapter oraadap = new SqlDataAdapter(new SqlCommand(query, myCon as SqlConnection));
+                SqlDataAdapter oraadap = new SqlDataAdapter(new SqlCommand(query, myCon as SqlConnection, tran as SqlTransaction));
                 oraadap.Fill(set, table);
             }
             catch (SqlException ex)
@@ -118,6 +119,7 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
+                query.Transaction = tran;
                 SqlDataAdapter oraadap = new SqlDataAdapter(command);
                 oraadap.Fill(set, table);
             }
@@ -142,9 +144,8 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                SqlDataAdapter oraadap = new SqlDataAdapter(new SqlCommand(query, myCon as SqlConnection));
+                SqlDataAdapter oraadap = new SqlDataAdapter(new SqlCommand(query, myCon as SqlConnection, tran as SqlTransaction));
                 oraadap.Fill(table);
-
             }
             catch (SqlException ex)
             {
@@ -169,6 +170,7 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
+                query.Transaction = tran;
                 query.Connection = myCon;
                 SqlDataAdapter oraadap = new SqlDataAdapter(command);
                 oraadap.Fill(table);
@@ -197,7 +199,7 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                oracomm = new SqlCommand(query, myCon as SqlConnection);
+                oracomm = new SqlCommand(query, myCon as SqlConnection, tran as SqlTransaction);
                 return oracomm.ExecuteNonQuery();
             }
             catch (SqlException ex)
@@ -221,6 +223,7 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
+                query.Transaction = tran;
                 query.Connection = myCon;
                 return query.ExecuteNonQuery(); ;
             }
@@ -246,7 +249,7 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                oracomm = new SqlCommand(query, myCon as SqlConnection);
+                oracomm = new SqlCommand(query, myCon as SqlConnection, tran as SqlTransaction);
                 return oracomm.ExecuteScalar();
             }
             catch (SqlException ex)
@@ -271,6 +274,7 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
+                query.Transaction = tran;
                 query.Connection = myCon;
                 return query.ExecuteScalar();
             }
@@ -298,7 +302,7 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                comm = new SqlCommand(query, myCon as SqlConnection);
+                comm = new SqlCommand(query, myCon as SqlConnection, tran as SqlTransaction);
                 return comm.ExecuteReader();
             }
             catch (SqlException ex)
@@ -318,6 +322,7 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
+                query.Transaction = tran;
                 query.Connection = myCon;
                 return query.ExecuteReader();
             }
@@ -530,7 +535,7 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                oracomm = new SqlCommand(query, myCon as SqlConnection);
+                oracomm = new SqlCommand(query, myCon as SqlConnection, tran as SqlTransaction);
                 return Task.Run(() => { return oracomm.ExecuteNonQuery(); });
             }
             catch (SqlException ex)
@@ -554,6 +559,7 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
+                query.Transaction = tran;
                 query.Connection = myCon;
                 return Task.Run(() => { return query.ExecuteNonQuery(); });
             }
@@ -580,7 +586,7 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                SqlDataAdapter oraadap = new SqlDataAdapter(new SqlCommand(query, myCon as SqlConnection));
+                SqlDataAdapter oraadap = new SqlDataAdapter(new SqlCommand(query, myCon as SqlConnection, tran as SqlTransaction));
                 return Task.Run(() => { oraadap.Fill(dt); return dt; });
             }
             catch (SqlException ex)
@@ -607,12 +613,13 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
+                query.Transaction = tran;
                 query.Connection = myCon;
                 SqlDataAdapter oraadap = new SqlDataAdapter(command);
                 return Task.Run(() => { oraadap.Fill(dt); return dt; });
             }
             catch (SqlException ex)
-            {
+            {;
                 throw ex;
             }
             catch (Exception ex)
@@ -632,7 +639,7 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                SqlDataAdapter oraadap = new SqlDataAdapter(new SqlCommand(query, myCon as SqlConnection));
+                SqlDataAdapter oraadap = new SqlDataAdapter(new SqlCommand(query, myCon as SqlConnection, tran as SqlTransaction));
                 return Task.Run(() => { oraadap.Fill(table); return table; });
             }
             catch (SqlException ex)
@@ -658,6 +665,7 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
+                query.Transaction = tran;
                 query.Connection = myCon;
                 SqlDataAdapter oraadap = new SqlDataAdapter(command);
                 return Task.Run(() => { oraadap.Fill(table); return table; });
@@ -683,7 +691,7 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                SqlDataAdapter oraadap = new SqlDataAdapter(new SqlCommand(query, myCon as SqlConnection));
+                SqlDataAdapter oraadap = new SqlDataAdapter(new SqlCommand(query, myCon as SqlConnection, tran as SqlTransaction));
                 return Task.Run(() => { oraadap.Fill(set, table); });
             }
             catch (SqlException ex)
@@ -705,6 +713,7 @@ namespace ProjectBase.Database
         public Task FillObjectAsync(DataSet set, string table, IDbCommand query)
         {
             query.Connection = myCon;
+            query.Transaction = tran;
             SqlCommand command = query as SqlCommand;
 
             try
@@ -736,7 +745,7 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                comm = new SqlCommand(query, myCon as SqlConnection);
+                comm = new SqlCommand(query, myCon as SqlConnection, tran as SqlTransaction);
                 return Task.Run(() => { return (IDataReader)comm.ExecuteReader(); });
             }
             catch (SqlException ex)
@@ -756,6 +765,7 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
+                query.Transaction = tran;
                 query.Connection = myCon;
                 return Task.Run(() => { return (IDataReader)query.ExecuteReader(); });
             }
@@ -972,7 +982,7 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                oracomm = new SqlCommand(query, myCon as SqlConnection);
+                oracomm = new SqlCommand(query, myCon as SqlConnection, tran as SqlTransaction);
                 return Task.Run(() => { return oracomm.ExecuteScalar(); });
             }
             catch (SqlException ex)
@@ -996,6 +1006,7 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
+                query.Transaction = tran;
                 query.Connection = myCon;
                 return Task.Run(() => { return query.ExecuteScalar(); });
             }
@@ -1019,7 +1030,7 @@ namespace ProjectBase.Database
 
             try
             {
-                comm = new SqlCommand(query, myCon as SqlConnection);
+                comm = new SqlCommand(query, myCon as SqlConnection, tran as SqlTransaction);
                 return comm.ExecuteReader();
             }
             catch (SqlException ex)
@@ -1035,6 +1046,7 @@ namespace ProjectBase.Database
         {
             try
             {
+                query.Transaction = tran;
                 query.Connection = myCon;
                 return query.ExecuteReader();
             }

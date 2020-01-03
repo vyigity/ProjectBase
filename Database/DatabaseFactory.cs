@@ -21,11 +21,11 @@ namespace ProjectBase.Database
         {
             ConnectionStringSettings conStr = AppContext2.CONNECTION_STRINGS[AppContext2.DEFAULT_DB];
 
-            if (conStr.ProviderName == "Oracle.DataAccess.Client")
-            {
-                return new OracleDatabase2();
-            }
-            else if (conStr.ProviderName == "Oracle.ManagedDataAccess.Client")
+            //if (conStr.ProviderName == "Oracle.DataAccess.Client")
+            //{
+            //    return new OracleDatabase2();
+            //}
+            if (conStr.ProviderName == "Oracle.ManagedDataAccess.Client")
             {
                 return new OracleManagedDatabase2();
             }
@@ -55,11 +55,11 @@ namespace ProjectBase.Database
         {
             ConnectionStringSettings conStr = AppContext2.CONNECTION_STRINGS[AppContext2.DEFAULT_DB];
 
-            if (conStr.ProviderName == "Oracle.DataAccess.Client")
-            {
-                return new OracleDatabase2(setting);
-            }
-            else if (conStr.ProviderName == "Oracle.ManagedDataAccess.Client")
+            //if (conStr.ProviderName == "Oracle.DataAccess.Client")
+            //{
+            //    return new OracleDatabase2(setting);
+            //}
+            if (conStr.ProviderName == "Oracle.ManagedDataAccess.Client")
             {
                 return new OracleManagedDatabase2(setting);
             }
@@ -89,11 +89,11 @@ namespace ProjectBase.Database
         {
             ConnectionStringSettings conStr = AppContext2.CONNECTION_STRINGS[AppContext2.DEFAULT_DB];
 
-            if (conStr.ProviderName == "Oracle.DataAccess.Client")
-            {
-                return new OracleDatabase2(setting, isolation);
-            }
-            else if (conStr.ProviderName == "Oracle.ManagedDataAccess.Client")
+            //if (conStr.ProviderName == "Oracle.DataAccess.Client")
+            //{
+            //    return new OracleDatabase2(setting, isolation);
+            //}
+            if (conStr.ProviderName == "Oracle.ManagedDataAccess.Client")
             {
                 return new OracleManagedDatabase2(setting, isolation);
             }

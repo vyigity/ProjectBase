@@ -21,10 +21,6 @@ namespace ProjectBase.Database
             {
                 return new OracleManagedQueryGenerator();
             }
-            else if (conStr.ProviderName == "Oracle.DataAccess.Client")
-            {
-                return new OracleQueryGenerator();
-            }
             else if (conStr.ProviderName == "System.Data.SqlClient")
             {
                 return new SqlQueryGenerator();
@@ -52,10 +48,10 @@ namespace ProjectBase.Database
             {
                 return new OracleManagedQueryGenerator(ParameterProcessingMode);
             }
-            else if (conStr.ProviderName == "Oracle.DataAccess.Client")
-            {
-                return new OracleQueryGenerator(ParameterProcessingMode);
-            }
+            //else if (conStr.ProviderName == "Oracle.DataAccess.Client")
+            //{
+            //    return new OracleQueryGenerator(ParameterProcessingMode);
+            //}
             else if (conStr.ProviderName == "System.Data.SqlClient")
             {
                 return new SqlQueryGenerator(ParameterProcessingMode);

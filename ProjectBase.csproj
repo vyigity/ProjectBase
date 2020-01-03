@@ -34,6 +34,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\ProjectBase.XML</DocumentationFile>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -59,7 +60,6 @@
       <HintPath>..\..\DenemeProje\Deneme\packages\Npgsql.3.2.7\lib\net45\Npgsql.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Oracle.DataAccess, Version=4.121.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86" />
     <Reference Include="Oracle.ManagedDataAccess, Version=4.122.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
       <HintPath>..\..\DenemeProje\Deneme\packages\Oracle.ManagedDataAccess.12.2.1100\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
       <Private>True</Private>
@@ -98,9 +98,7 @@
     <Compile Include="Database\OleDbDatabase2.cs" />
     <Compile Include="Database\MySqlDatabase2.cs" />
     <Compile Include="Database\OracleManagedDatabase2.cs" />
-    <Compile Include="Database\OracleDatabase2.cs" />
     <Compile Include="Database\MySqlQueryGenerator.cs" />
-    <Compile Include="Database\OracleQueryGenerator.cs" />
     <Compile Include="Database\QueryGeneratorBase.cs" />
     <Compile Include="Database\SqlDatabase2.cs" />
     <Compile Include="Database\QueryGeneratorFactory.cs" />

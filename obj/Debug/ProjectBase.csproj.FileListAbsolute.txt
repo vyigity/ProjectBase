@@ -74,3 +74,14 @@ E:\GitHub\ProjectBase2\ProjectBase\obj\Debug\ProjectBase.csproj.CoreCompileInput
 E:\GitHub\ProjectBase2\ProjectBase\obj\Debug\ProjectBase.csproj.CopyComplete
 E:\GitHub\ProjectBase2\ProjectBase\obj\Debug\ProjectBase.dll
 E:\GitHub\ProjectBase2\ProjectBase\obj\Debug\ProjectBase.pdb
+H:\GitHub\ProjectBase2\ProjectBase\bin\Debug\ProjectBase.dll.config
+H:\GitHub\ProjectBase2\ProjectBase\bin\Debug\ProjectBase.dll
+H:\GitHub\ProjectBase2\ProjectBase\bin\Debug\ProjectBase.pdb
+H:\GitHub\ProjectBase2\ProjectBase\bin\Debug\MySql.Data.xml
+H:\GitHub\ProjectBase2\ProjectBase\bin\Debug\Npgsql.xml
+H:\GitHub\ProjectBase2\ProjectBase\bin\Debug\System.Threading.Tasks.Extensions.xml
+H:\GitHub\ProjectBase2\ProjectBase\obj\Debug\ProjectBase.csprojAssemblyReference.cache
+H:\GitHub\ProjectBase2\ProjectBase\obj\Debug\ProjectBase.csproj.CoreCompileInputs.cache
+H:\GitHub\ProjectBase2\ProjectBase\obj\Debug\ProjectBase.csproj.CopyComplete
+H:\GitHub\ProjectBase2\ProjectBase\obj\Debug\ProjectBase.dll
+H:\GitHub\ProjectBase2\ProjectBase\obj\Debug\ProjectBase.pdb
