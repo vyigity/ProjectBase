@@ -109,15 +109,15 @@ namespace ProjectBase.Database
         /// <summary>
         /// Returns generated insert command.
         /// </summary>
-        IDbCommand GetInsertCommand();
+        IDbCommand GetInsertcommand();
         /// <summary>
         /// Returns generated update command.
         /// </summary>
-        IDbCommand GetUpdateCommand();
+        IDbCommand GetUpdatecommand();
         /// <summary>
         /// Returns generated general command.
         /// </summary>
-        IDbCommand GetSelectCommandBasic();       
+        IDbCommand GetSelectcommandBasic();       
         /// <summary>
         /// Returns generated procedure command.
         /// </summary>

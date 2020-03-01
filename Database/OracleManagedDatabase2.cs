@@ -37,8 +37,8 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                OracleDataAdapter oraadap = new OracleDataAdapter(new OracleCommand(query, myCon as OracleConnection));
-                oraadap.Fill(dt);
+                OracleDataAdapter adapter = new OracleDataAdapter(new OracleCommand(query, myCon as OracleConnection));
+                adapter.Fill(dt);
                 return dt;
             }
             catch (OracleException ex)
@@ -66,8 +66,8 @@ namespace ProjectBase.Database
             {
                 GetConnection();
                 query.Connection = myCon;
-                OracleDataAdapter oraadap = new OracleDataAdapter(command);
-                oraadap.Fill(dt);
+                OracleDataAdapter adapter = new OracleDataAdapter(command);
+                adapter.Fill(dt);
                 return dt;
             }
             catch (OracleException ex)
@@ -91,8 +91,8 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                OracleDataAdapter oraadap = new OracleDataAdapter(new OracleCommand(query, myCon as OracleConnection));
-                oraadap.Fill(set, table);
+                OracleDataAdapter adapter = new OracleDataAdapter(new OracleCommand(query, myCon as OracleConnection));
+                adapter.Fill(set, table);
             }
             catch (OracleException ex)
             {
@@ -118,8 +118,8 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                OracleDataAdapter oraadap = new OracleDataAdapter(command);
-                oraadap.Fill(set, table);
+                OracleDataAdapter adapter = new OracleDataAdapter(command);
+                adapter.Fill(set, table);
             }
             catch (OracleException ex)
             {
@@ -142,8 +142,8 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                OracleDataAdapter oraadap = new OracleDataAdapter(new OracleCommand(query, myCon as OracleConnection));
-                oraadap.Fill(table);
+                OracleDataAdapter adapter = new OracleDataAdapter(new OracleCommand(query, myCon as OracleConnection));
+                adapter.Fill(table);
 
             }
             catch (OracleException ex)
@@ -170,8 +170,8 @@ namespace ProjectBase.Database
             {
                 GetConnection();
                 query.Connection = myCon;
-                OracleDataAdapter oraadap = new OracleDataAdapter(command);
-                oraadap.Fill(table);
+                OracleDataAdapter adapter = new OracleDataAdapter(command);
+                adapter.Fill(table);
 
             }
             catch (OracleException ex)
@@ -192,13 +192,13 @@ namespace ProjectBase.Database
         /// </summary>
         public override int ExecuteQuery(string query)
         {
-            OracleCommand oracomm = null;
+            OracleCommand command = null;
 
             try
             {
                 GetConnection();
-                oracomm = new OracleCommand(query, myCon as OracleConnection);
-                return oracomm.ExecuteNonQuery();
+                command = new OracleCommand(query, myCon as OracleConnection);
+                return command.ExecuteNonQuery();
             }
             catch (OracleException ex)
             {
@@ -242,12 +242,12 @@ namespace ProjectBase.Database
         /// </summary>
         public override object GetSingleValue(string query)
         {
-            OracleCommand oracomm = null;
+            OracleCommand command = null;
             try
             {
                 GetConnection();
-                oracomm = new OracleCommand(query, myCon as OracleConnection);
-                return oracomm.ExecuteScalar();
+                command = new OracleCommand(query, myCon as OracleConnection);
+                return command.ExecuteScalar();
             }
             catch (OracleException ex)
             {
@@ -293,13 +293,13 @@ namespace ProjectBase.Database
         /// </summary>
         public override IDataReader GetDataReader(string query)
         {
-            OracleCommand comm = null;
+            OracleCommand command = null;
 
             try
             {
                 GetConnection();
-                comm = new OracleCommand(query, myCon as OracleConnection);
-                return comm.ExecuteReader();
+                command = new OracleCommand(query, myCon as OracleConnection);
+                return command.ExecuteReader();
             }
             catch (OracleException ex)
             {
@@ -525,13 +525,13 @@ namespace ProjectBase.Database
         /// </summary>
         public Task<int> ExecuteQueryAsync(string query)
         {
-            OracleCommand oracomm = null;
+            OracleCommand command = null;
 
             try
             {
                 GetConnection();
-                oracomm = new OracleCommand(query, myCon as OracleConnection);
-                return Task.Run(() => { return oracomm.ExecuteNonQuery(); });
+                command = new OracleCommand(query, myCon as OracleConnection);
+                return Task.Run(() => { return command.ExecuteNonQuery(); });
             }
             catch (OracleException ex)
             {
@@ -580,8 +580,8 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                OracleDataAdapter oraadap = new OracleDataAdapter(new OracleCommand(query, myCon as OracleConnection));
-                return Task.Run(() => { oraadap.Fill(dt); return dt; });
+                OracleDataAdapter adapter = new OracleDataAdapter(new OracleCommand(query, myCon as OracleConnection));
+                return Task.Run(() => { adapter.Fill(dt); return dt; });
             }
             catch (OracleException ex)
             {
@@ -608,8 +608,8 @@ namespace ProjectBase.Database
             {
                 GetConnection();
                 query.Connection = myCon;
-                OracleDataAdapter oraadap = new OracleDataAdapter(command);
-                return Task.Run(() => { oraadap.Fill(dt); return dt; });
+                OracleDataAdapter adapter = new OracleDataAdapter(command);
+                return Task.Run(() => { adapter.Fill(dt); return dt; });
             }
             catch (OracleException ex)
             {
@@ -632,8 +632,8 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                OracleDataAdapter oraadap = new OracleDataAdapter(new OracleCommand(query, myCon as OracleConnection));
-                return Task.Run(() => { oraadap.Fill(table); return table; });
+                OracleDataAdapter adapter = new OracleDataAdapter(new OracleCommand(query, myCon as OracleConnection));
+                return Task.Run(() => { adapter.Fill(table); return table; });
             }
             catch (OracleException ex)
             {
@@ -659,8 +659,8 @@ namespace ProjectBase.Database
             {
                 GetConnection();
                 query.Connection = myCon;
-                OracleDataAdapter oraadap = new OracleDataAdapter(command);
-                return Task.Run(() => { oraadap.Fill(table); return table; });
+                OracleDataAdapter adapter = new OracleDataAdapter(command);
+                return Task.Run(() => { adapter.Fill(table); return table; });
             }
             catch (OracleException ex)
             {
@@ -683,8 +683,8 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                OracleDataAdapter oraadap = new OracleDataAdapter(new OracleCommand(query, myCon as OracleConnection));
-                return Task.Run(() => { oraadap.Fill(set, table); });
+                OracleDataAdapter adapter = new OracleDataAdapter(new OracleCommand(query, myCon as OracleConnection));
+                return Task.Run(() => { adapter.Fill(set, table); });
             }
             catch (OracleException ex)
             {
@@ -710,8 +710,8 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                OracleDataAdapter oraadap = new OracleDataAdapter(command);
-                return Task.Run(() => { oraadap.Fill(set, table); });
+                OracleDataAdapter adapter = new OracleDataAdapter(command);
+                return Task.Run(() => { adapter.Fill(set, table); });
             }
             catch (OracleException ex)
             {
@@ -731,13 +731,13 @@ namespace ProjectBase.Database
         /// </summary>
         public Task<IDataReader> GetDataReaderAsync(string query)
         {
-            OracleCommand comm = null;
+            OracleCommand command = null;
 
             try
             {
                 GetConnection();
-                comm = new OracleCommand(query, myCon as OracleConnection);
-                return Task.Run(() => { return (IDataReader)comm.ExecuteReader(); });
+                command = new OracleCommand(query, myCon as OracleConnection);
+                return Task.Run(() => { return (IDataReader)command.ExecuteReader(); });
             }
             catch (OracleException ex)
             {
@@ -968,12 +968,12 @@ namespace ProjectBase.Database
         /// </summary>
         public Task<object> GetSingleValueAsync(string query)
         {
-            OracleCommand oracomm = null;
+            OracleCommand command = null;
             try
             {
                 GetConnection();
-                oracomm = new OracleCommand(query, myCon as OracleConnection);
-                return Task.Run(() => { return oracomm.ExecuteScalar(); });
+                command = new OracleCommand(query, myCon as OracleConnection);
+                return Task.Run(() => { return command.ExecuteScalar(); });
             }
             catch (OracleException ex)
             {
@@ -1015,12 +1015,12 @@ namespace ProjectBase.Database
 
         private IDataReader GetDataReaderNoConnection(string query)
         {
-            OracleCommand comm = null;
+            OracleCommand command = null;
 
             try
             {
-                comm = new OracleCommand(query, myCon as OracleConnection);
-                return comm.ExecuteReader();
+                command = new OracleCommand(query, myCon as OracleConnection);
+                return command.ExecuteReader();
             }
             catch (OracleException ex)
             {

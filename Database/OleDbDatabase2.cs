@@ -37,8 +37,8 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                OleDbDataAdapter oraadap = new OleDbDataAdapter(new OleDbCommand(query, myCon as OleDbConnection));
-                oraadap.Fill(dt);
+                OleDbDataAdapter adapter = new OleDbDataAdapter(new OleDbCommand(query, myCon as OleDbConnection));
+                adapter.Fill(dt);
                 return dt;
             }
             catch (OleDbException ex)
@@ -66,8 +66,8 @@ namespace ProjectBase.Database
             {
                 GetConnection();
                 query.Connection = myCon;
-                OleDbDataAdapter oraadap = new OleDbDataAdapter(command);
-                oraadap.Fill(dt);
+                OleDbDataAdapter adapter = new OleDbDataAdapter(command);
+                adapter.Fill(dt);
                 return dt;
             }
             catch (OleDbException ex)
@@ -91,8 +91,8 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                OleDbDataAdapter oraadap = new OleDbDataAdapter(new OleDbCommand(query, myCon as OleDbConnection));
-                oraadap.Fill(set, table);
+                OleDbDataAdapter adapter = new OleDbDataAdapter(new OleDbCommand(query, myCon as OleDbConnection));
+                adapter.Fill(set, table);
             }
             catch (OleDbException ex)
             {
@@ -118,8 +118,8 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                OleDbDataAdapter oraadap = new OleDbDataAdapter(command);
-                oraadap.Fill(set, table);
+                OleDbDataAdapter adapter = new OleDbDataAdapter(command);
+                adapter.Fill(set, table);
             }
             catch (OleDbException ex)
             {
@@ -142,8 +142,8 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                OleDbDataAdapter oraadap = new OleDbDataAdapter(new OleDbCommand(query, myCon as OleDbConnection));
-                oraadap.Fill(table);
+                OleDbDataAdapter adapter = new OleDbDataAdapter(new OleDbCommand(query, myCon as OleDbConnection));
+                adapter.Fill(table);
 
             }
             catch (OleDbException ex)
@@ -170,8 +170,8 @@ namespace ProjectBase.Database
             {
                 GetConnection();
                 query.Connection = myCon;
-                OleDbDataAdapter oraadap = new OleDbDataAdapter(command);
-                oraadap.Fill(table);
+                OleDbDataAdapter adapter = new OleDbDataAdapter(command);
+                adapter.Fill(table);
 
             }
             catch (OleDbException ex)
@@ -192,13 +192,13 @@ namespace ProjectBase.Database
         /// </summary>
         public override int ExecuteQuery(string query)
         {
-            OleDbCommand oracomm = null;
+            OleDbCommand command = null;
 
             try
             {
                 GetConnection();
-                oracomm = new OleDbCommand(query, myCon as OleDbConnection);
-                return oracomm.ExecuteNonQuery();
+                command = new OleDbCommand(query, myCon as OleDbConnection);
+                return command.ExecuteNonQuery();
             }
             catch (OleDbException ex)
             {
@@ -242,12 +242,12 @@ namespace ProjectBase.Database
         /// </summary>
         public override object GetSingleValue(string query)
         {
-            OleDbCommand oracomm = null;
+            OleDbCommand command = null;
             try
             {
                 GetConnection();
-                oracomm = new OleDbCommand(query, myCon as OleDbConnection);
-                return oracomm.ExecuteScalar();
+                command = new OleDbCommand(query, myCon as OleDbConnection);
+                return command.ExecuteScalar();
             }
             catch (OleDbException ex)
             {
@@ -293,13 +293,13 @@ namespace ProjectBase.Database
         /// </summary>
         public override IDataReader GetDataReader(string query)
         {
-            OleDbCommand comm = null;
+            OleDbCommand command = null;
 
             try
             {
                 GetConnection();
-                comm = new OleDbCommand(query, myCon as OleDbConnection);
-                return comm.ExecuteReader();
+                command = new OleDbCommand(query, myCon as OleDbConnection);
+                return command.ExecuteReader();
             }
             catch (OleDbException ex)
             {
@@ -525,13 +525,13 @@ namespace ProjectBase.Database
         /// </summary>
         public Task<int> ExecuteQueryAsync(string query)
         {
-            OleDbCommand oracomm = null;
+            OleDbCommand command = null;
 
             try
             {
                 GetConnection();
-                oracomm = new OleDbCommand(query, myCon as OleDbConnection);
-                return Task.Run(() => { return oracomm.ExecuteNonQuery(); });
+                command = new OleDbCommand(query, myCon as OleDbConnection);
+                return Task.Run(() => { return command.ExecuteNonQuery(); });
             }
             catch (OleDbException ex)
             {
@@ -580,8 +580,8 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                OleDbDataAdapter oraadap = new OleDbDataAdapter(new OleDbCommand(query, myCon as OleDbConnection));
-                return Task.Run(() => { oraadap.Fill(dt); return dt; });
+                OleDbDataAdapter adapter = new OleDbDataAdapter(new OleDbCommand(query, myCon as OleDbConnection));
+                return Task.Run(() => { adapter.Fill(dt); return dt; });
             }
             catch (OleDbException ex)
             {
@@ -608,8 +608,8 @@ namespace ProjectBase.Database
             {
                 GetConnection();
                 query.Connection = myCon;
-                OleDbDataAdapter oraadap = new OleDbDataAdapter(command);
-                return Task.Run(() => { oraadap.Fill(dt); return dt; });
+                OleDbDataAdapter adapter = new OleDbDataAdapter(command);
+                return Task.Run(() => { adapter.Fill(dt); return dt; });
             }
             catch (OleDbException ex)
             {
@@ -632,8 +632,8 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                OleDbDataAdapter oraadap = new OleDbDataAdapter(new OleDbCommand(query, myCon as OleDbConnection));
-                return Task.Run(() => { oraadap.Fill(table); return table; });
+                OleDbDataAdapter adapter = new OleDbDataAdapter(new OleDbCommand(query, myCon as OleDbConnection));
+                return Task.Run(() => { adapter.Fill(table); return table; });
             }
             catch (OleDbException ex)
             {
@@ -659,8 +659,8 @@ namespace ProjectBase.Database
             {
                 GetConnection();
                 query.Connection = myCon;
-                OleDbDataAdapter oraadap = new OleDbDataAdapter(command);
-                return Task.Run(() => { oraadap.Fill(table); return table; });
+                OleDbDataAdapter adapter = new OleDbDataAdapter(command);
+                return Task.Run(() => { adapter.Fill(table); return table; });
             }
             catch (OleDbException ex)
             {
@@ -683,8 +683,8 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                OleDbDataAdapter oraadap = new OleDbDataAdapter(new OleDbCommand(query, myCon as OleDbConnection));
-                return Task.Run(() => { oraadap.Fill(set, table); });
+                OleDbDataAdapter adapter = new OleDbDataAdapter(new OleDbCommand(query, myCon as OleDbConnection));
+                return Task.Run(() => { adapter.Fill(set, table); });
             }
             catch (OleDbException ex)
             {
@@ -710,8 +710,8 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                OleDbDataAdapter oraadap = new OleDbDataAdapter(command);
-                return Task.Run(() => { oraadap.Fill(set, table); });
+                OleDbDataAdapter adapter = new OleDbDataAdapter(command);
+                return Task.Run(() => { adapter.Fill(set, table); });
             }
             catch (OleDbException ex)
             {
@@ -731,13 +731,13 @@ namespace ProjectBase.Database
         /// </summary>
         public Task<IDataReader> GetDataReaderAsync(string query)
         {
-            OleDbCommand comm = null;
+            OleDbCommand command = null;
 
             try
             {
                 GetConnection();
-                comm = new OleDbCommand(query, myCon as OleDbConnection);
-                return Task.Run(() => { return (IDataReader)comm.ExecuteReader(); });
+                command = new OleDbCommand(query, myCon as OleDbConnection);
+                return Task.Run(() => { return (IDataReader)command.ExecuteReader(); });
             }
             catch (OleDbException ex)
             {
@@ -968,12 +968,12 @@ namespace ProjectBase.Database
         /// </summary>
         public Task<object> GetSingleValueAsync(string query)
         {
-            OleDbCommand oracomm = null;
+            OleDbCommand command = null;
             try
             {
                 GetConnection();
-                oracomm = new OleDbCommand(query, myCon as OleDbConnection);
-                return Task.Run(() => { return oracomm.ExecuteScalar(); });
+                command = new OleDbCommand(query, myCon as OleDbConnection);
+                return Task.Run(() => { return command.ExecuteScalar(); });
             }
             catch (OleDbException ex)
             {
@@ -1015,12 +1015,12 @@ namespace ProjectBase.Database
 
         private IDataReader GetDataReaderNoConnection(string query)
         {
-            OleDbCommand comm = null;
+            OleDbCommand command = null;
 
             try
             {
-                comm = new OleDbCommand(query, myCon as OleDbConnection);
-                return comm.ExecuteReader();
+                command = new OleDbCommand(query, myCon as OleDbConnection);
+                return command.ExecuteReader();
             }
             catch (OleDbException ex)
             {

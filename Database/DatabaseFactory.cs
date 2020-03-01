@@ -21,10 +21,6 @@ namespace ProjectBase.Database
         {
             ConnectionStringSettings conStr = AppContext2.CONNECTION_STRINGS[AppContext2.DEFAULT_DB];
 
-            //if (conStr.ProviderName == "Oracle.DataAccess.Client")
-            //{
-            //    return new OracleDatabase2();
-            //}
             if (conStr.ProviderName == "Oracle.ManagedDataAccess.Client")
             {
                 return new OracleManagedDatabase2();
@@ -55,10 +51,6 @@ namespace ProjectBase.Database
         {
             ConnectionStringSettings conStr = AppContext2.CONNECTION_STRINGS[AppContext2.DEFAULT_DB];
 
-            //if (conStr.ProviderName == "Oracle.DataAccess.Client")
-            //{
-            //    return new OracleDatabase2(setting);
-            //}
             if (conStr.ProviderName == "Oracle.ManagedDataAccess.Client")
             {
                 return new OracleManagedDatabase2(setting);

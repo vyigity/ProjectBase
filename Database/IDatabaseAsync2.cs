@@ -34,7 +34,7 @@ namespace ProjectBase.Database
         void CloseConnection();
 
         /// <summary>
-        /// Commits current transaction.
+        /// commandits current transaction.
         /// </summary>
         void Commit();
 
@@ -134,7 +134,7 @@ namespace ProjectBase.Database
         void UseExternalTransaction(IDbTransaction exTransaction);
 
         /// <summary>
-        /// Project Base returns true if there is an available transaction that is not committed or rolled back.
+        /// Project Base returns true if there is an available transaction that is not commanditted or rolled back.
         /// </summary>
         bool IsProcessEnded(IDbTransaction exTransaction);
     }

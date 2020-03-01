@@ -37,8 +37,8 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                MySqlDataAdapter oraadap = new MySqlDataAdapter(new MySqlCommand(query, myCon as MySqlConnection));
-                oraadap.Fill(dt);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(new MySqlCommand(query, myCon as MySqlConnection));
+                adapter.Fill(dt);
                 return dt;
             }
             catch (MySqlException ex)
@@ -66,8 +66,8 @@ namespace ProjectBase.Database
             {
                 GetConnection();
                 query.Connection = myCon;
-                MySqlDataAdapter oraadap = new MySqlDataAdapter(command);
-                oraadap.Fill(dt);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                adapter.Fill(dt);
                 return dt;
             }
             catch (MySqlException ex)
@@ -91,8 +91,8 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                MySqlDataAdapter oraadap = new MySqlDataAdapter(new MySqlCommand(query, myCon as MySqlConnection));
-                oraadap.Fill(set, table);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(new MySqlCommand(query, myCon as MySqlConnection));
+                adapter.Fill(set, table);
             }
             catch (MySqlException ex)
             {
@@ -118,8 +118,8 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                MySqlDataAdapter oraadap = new MySqlDataAdapter(command);
-                oraadap.Fill(set, table);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                adapter.Fill(set, table);
             }
             catch (MySqlException ex)
             {
@@ -142,8 +142,8 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                MySqlDataAdapter oraadap = new MySqlDataAdapter(new MySqlCommand(query, myCon as MySqlConnection));
-                oraadap.Fill(table);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(new MySqlCommand(query, myCon as MySqlConnection));
+                adapter.Fill(table);
 
             }
             catch (MySqlException ex)
@@ -170,8 +170,8 @@ namespace ProjectBase.Database
             {
                 GetConnection();
                 query.Connection = myCon;
-                MySqlDataAdapter oraadap = new MySqlDataAdapter(command);
-                oraadap.Fill(table);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                adapter.Fill(table);
 
             }
             catch (MySqlException ex)
@@ -192,13 +192,13 @@ namespace ProjectBase.Database
         /// </summary>
         public override int ExecuteQuery(string query)
         {
-            MySqlCommand oracomm = null;
+            MySqlCommand command = null;
 
             try
             {
                 GetConnection();
-                oracomm = new MySqlCommand(query, myCon as MySqlConnection);
-                return oracomm.ExecuteNonQuery();
+                command = new MySqlCommand(query, myCon as MySqlConnection);
+                return command.ExecuteNonQuery();
             }
             catch (MySqlException ex)
             {
@@ -242,12 +242,12 @@ namespace ProjectBase.Database
         /// </summary>
         public override object GetSingleValue(string query)
         {
-            MySqlCommand oracomm = null;
+            MySqlCommand command = null;
             try
             {
                 GetConnection();
-                oracomm = new MySqlCommand(query, myCon as MySqlConnection);
-                return oracomm.ExecuteScalar();
+                command = new MySqlCommand(query, myCon as MySqlConnection);
+                return command.ExecuteScalar();
             }
             catch (MySqlException ex)
             {
@@ -293,13 +293,13 @@ namespace ProjectBase.Database
         /// </summary>
         public override IDataReader GetDataReader(string query)
         {
-            MySqlCommand comm = null;
+            MySqlCommand command = null;
 
             try
             {
                 GetConnection();
-                comm = new MySqlCommand(query, myCon as MySqlConnection);
-                return comm.ExecuteReader();
+                command = new MySqlCommand(query, myCon as MySqlConnection);
+                return command.ExecuteReader();
             }
             catch (MySqlException ex)
             {
@@ -525,13 +525,13 @@ namespace ProjectBase.Database
         /// </summary>
         public Task<int> ExecuteQueryAsync(string query)
         {
-            MySqlCommand oracomm = null;
+            MySqlCommand command = null;
 
             try
             {
                 GetConnection();
-                oracomm = new MySqlCommand(query, myCon as MySqlConnection);
-                return Task.Run(() => { return oracomm.ExecuteNonQuery(); });
+                command = new MySqlCommand(query, myCon as MySqlConnection);
+                return Task.Run(() => { return command.ExecuteNonQuery(); });
             }
             catch (MySqlException ex)
             {
@@ -580,8 +580,8 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                MySqlDataAdapter oraadap = new MySqlDataAdapter(new MySqlCommand(query, myCon as MySqlConnection));
-                return Task.Run(() => { oraadap.Fill(dt); return dt; });
+                MySqlDataAdapter adapter = new MySqlDataAdapter(new MySqlCommand(query, myCon as MySqlConnection));
+                return Task.Run(() => { adapter.Fill(dt); return dt; });
             }
             catch (MySqlException ex)
             {
@@ -608,8 +608,8 @@ namespace ProjectBase.Database
             {
                 GetConnection();
                 query.Connection = myCon;
-                MySqlDataAdapter oraadap = new MySqlDataAdapter(command);
-                return Task.Run(() => { oraadap.Fill(dt); return dt; });
+                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                return Task.Run(() => { adapter.Fill(dt); return dt; });
             }
             catch (MySqlException ex)
             {
@@ -632,8 +632,8 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                MySqlDataAdapter oraadap = new MySqlDataAdapter(new MySqlCommand(query, myCon as MySqlConnection));
-                return Task.Run(() => { oraadap.Fill(table); return table; });
+                MySqlDataAdapter adapter = new MySqlDataAdapter(new MySqlCommand(query, myCon as MySqlConnection));
+                return Task.Run(() => { adapter.Fill(table); return table; });
             }
             catch (MySqlException ex)
             {
@@ -659,8 +659,8 @@ namespace ProjectBase.Database
             {
                 GetConnection();
                 query.Connection = myCon;
-                MySqlDataAdapter oraadap = new MySqlDataAdapter(command);
-                return Task.Run(() => { oraadap.Fill(table); return table; });
+                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                return Task.Run(() => { adapter.Fill(table); return table; });
             }
             catch (MySqlException ex)
             {
@@ -683,8 +683,8 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                MySqlDataAdapter oraadap = new MySqlDataAdapter(new MySqlCommand(query, myCon as MySqlConnection));
-                return Task.Run(() => { oraadap.Fill(set, table); });
+                MySqlDataAdapter adapter = new MySqlDataAdapter(new MySqlCommand(query, myCon as MySqlConnection));
+                return Task.Run(() => { adapter.Fill(set, table); });
             }
             catch (MySqlException ex)
             {
@@ -710,8 +710,8 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                MySqlDataAdapter oraadap = new MySqlDataAdapter(command);
-                return Task.Run(() => { oraadap.Fill(set, table); });
+                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                return Task.Run(() => { adapter.Fill(set, table); });
             }
             catch (MySqlException ex)
             {
@@ -731,13 +731,13 @@ namespace ProjectBase.Database
         /// </summary>
         public Task<IDataReader> GetDataReaderAsync(string query)
         {
-            MySqlCommand comm = null;
+            MySqlCommand command = null;
 
             try
             {
                 GetConnection();
-                comm = new MySqlCommand(query, myCon as MySqlConnection);
-                return Task.Run(() => { return (IDataReader)comm.ExecuteReader(); });
+                command = new MySqlCommand(query, myCon as MySqlConnection);
+                return Task.Run(() => { return (IDataReader)command.ExecuteReader(); });
             }
             catch (MySqlException ex)
             {
@@ -968,12 +968,12 @@ namespace ProjectBase.Database
         /// </summary>
         public Task<object> GetSingleValueAsync(string query)
         {
-            MySqlCommand oracomm = null;
+            MySqlCommand command = null;
             try
             {
                 GetConnection();
-                oracomm = new MySqlCommand(query, myCon as MySqlConnection);
-                return Task.Run(() => { return oracomm.ExecuteScalar(); });
+                command = new MySqlCommand(query, myCon as MySqlConnection);
+                return Task.Run(() => { return command.ExecuteScalar(); });
             }
             catch (MySqlException ex)
             {
@@ -1015,12 +1015,12 @@ namespace ProjectBase.Database
 
         private IDataReader GetDataReaderNoConnection(string query)
         {
-            MySqlCommand comm = null;
+            MySqlCommand command = null;
 
             try
             {
-                comm = new MySqlCommand(query, myCon as MySqlConnection);
-                return comm.ExecuteReader();
+                command = new MySqlCommand(query, myCon as MySqlConnection);
+                return command.ExecuteReader();
             }
             catch (MySqlException ex)
             {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProjectBase.Database
 {
-    public class CommandStringProcessor
+    public class commandStringProcessor
     {
         /// <summary>
         /// Parameter character that is used by specific database.
@@ -24,13 +24,13 @@ namespace ProjectBase.Database
         /// </summary>
         public string GlobalParameterRegExp { get; set; }
 
-        public CommandStringProcessor()
+        public commandStringProcessor()
         {
             ParameterCharacters = new List<char>() { ':', '@', '$' };
             GlobalParameterRegExp = "\\.p\\.\\w";
         }
 
-        public CommandStringProcessor(char dbBasedParameterCharacter)
+        public commandStringProcessor(char dbBasedParameterCharacter)
         {
             ParameterCharacters = new List<char>() { ':', '@', '$' };
             GlobalParameterRegExp = "\\.p\\.\\w";
@@ -40,7 +40,7 @@ namespace ProjectBase.Database
         /// <summary>
         /// Produces processable command text from raw command text that includes global parameter definitions.
         /// </summary>
-        public string GetPreparedGlobalCommandString(string commandString)
+        public string GetPreparedGlobalcommandString(string commandString)
         {
             StringBuilder sbuilder = new StringBuilder(commandString);
 
@@ -60,7 +60,7 @@ namespace ProjectBase.Database
         /// <summary>
         /// Produces database specific processable command text from raw command text that includes database based parameter definitions.
         /// </summary>
-        public string GetPreparedLocalCommandString(string commandString)
+        public string GetPreparedLocalcommandString(string commandString)
         {
             StringBuilder result = new StringBuilder(commandString);
 

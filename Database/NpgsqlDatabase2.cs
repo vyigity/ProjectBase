@@ -37,8 +37,8 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                NpgsqlDataAdapter oraadap = new NpgsqlDataAdapter(new NpgsqlCommand(query, myCon as NpgsqlConnection));
-                oraadap.Fill(dt);
+                NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(new NpgsqlCommand(query, myCon as NpgsqlConnection));
+                adapter.Fill(dt);
                 return dt;
             }
             catch (NpgsqlException ex)
@@ -66,8 +66,8 @@ namespace ProjectBase.Database
             {
                 GetConnection();
                 query.Connection = myCon;
-                NpgsqlDataAdapter oraadap = new NpgsqlDataAdapter(command);
-                oraadap.Fill(dt);
+                NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(command);
+                adapter.Fill(dt);
                 return dt;
             }
             catch (NpgsqlException ex)
@@ -91,8 +91,8 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                NpgsqlDataAdapter oraadap = new NpgsqlDataAdapter(new NpgsqlCommand(query, myCon as NpgsqlConnection));
-                oraadap.Fill(set, table);
+                NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(new NpgsqlCommand(query, myCon as NpgsqlConnection));
+                adapter.Fill(set, table);
             }
             catch (NpgsqlException ex)
             {
@@ -118,8 +118,8 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                NpgsqlDataAdapter oraadap = new NpgsqlDataAdapter(command);
-                oraadap.Fill(set, table);
+                NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(command);
+                adapter.Fill(set, table);
             }
             catch (NpgsqlException ex)
             {
@@ -142,8 +142,8 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                NpgsqlDataAdapter oraadap = new NpgsqlDataAdapter(new NpgsqlCommand(query, myCon as NpgsqlConnection));
-                oraadap.Fill(table);
+                NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(new NpgsqlCommand(query, myCon as NpgsqlConnection));
+                adapter.Fill(table);
 
             }
             catch (NpgsqlException ex)
@@ -170,8 +170,8 @@ namespace ProjectBase.Database
             {
                 GetConnection();
                 query.Connection = myCon;
-                NpgsqlDataAdapter oraadap = new NpgsqlDataAdapter(command);
-                oraadap.Fill(table);
+                NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(command);
+                adapter.Fill(table);
 
             }
             catch (NpgsqlException ex)
@@ -192,13 +192,13 @@ namespace ProjectBase.Database
         /// </summary>
         public override int ExecuteQuery(string query)
         {
-            NpgsqlCommand oracomm = null;
+            NpgsqlCommand command = null;
 
             try
             {
                 GetConnection();
-                oracomm = new NpgsqlCommand(query, myCon as NpgsqlConnection);
-                return oracomm.ExecuteNonQuery();
+                command = new NpgsqlCommand(query, myCon as NpgsqlConnection);
+                return command.ExecuteNonQuery();
             }
             catch (NpgsqlException ex)
             {
@@ -242,12 +242,12 @@ namespace ProjectBase.Database
         /// </summary>
         public override object GetSingleValue(string query)
         {
-            NpgsqlCommand oracomm = null;
+            NpgsqlCommand command = null;
             try
             {
                 GetConnection();
-                oracomm = new NpgsqlCommand(query, myCon as NpgsqlConnection);
-                return oracomm.ExecuteScalar();
+                command = new NpgsqlCommand(query, myCon as NpgsqlConnection);
+                return command.ExecuteScalar();
             }
             catch (NpgsqlException ex)
             {
@@ -293,13 +293,13 @@ namespace ProjectBase.Database
         /// </summary>
         public override IDataReader GetDataReader(string query)
         {
-            NpgsqlCommand comm = null;
+            NpgsqlCommand command = null;
 
             try
             {
                 GetConnection();
-                comm = new NpgsqlCommand(query, myCon as NpgsqlConnection);
-                return comm.ExecuteReader();
+                command = new NpgsqlCommand(query, myCon as NpgsqlConnection);
+                return command.ExecuteReader();
             }
             catch (NpgsqlException ex)
             {
@@ -525,13 +525,13 @@ namespace ProjectBase.Database
         /// </summary>
         public Task<int> ExecuteQueryAsync(string query)
         {
-            NpgsqlCommand oracomm = null;
+            NpgsqlCommand command = null;
 
             try
             {
                 GetConnection();
-                oracomm = new NpgsqlCommand(query, myCon as NpgsqlConnection);
-                return Task.Run(() => { return oracomm.ExecuteNonQuery(); });
+                command = new NpgsqlCommand(query, myCon as NpgsqlConnection);
+                return Task.Run(() => { return command.ExecuteNonQuery(); });
             }
             catch (NpgsqlException ex)
             {
@@ -580,8 +580,8 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                NpgsqlDataAdapter oraadap = new NpgsqlDataAdapter(new NpgsqlCommand(query, myCon as NpgsqlConnection));
-                return Task.Run(() => { oraadap.Fill(dt); return dt; });
+                NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(new NpgsqlCommand(query, myCon as NpgsqlConnection));
+                return Task.Run(() => { adapter.Fill(dt); return dt; });
             }
             catch (NpgsqlException ex)
             {
@@ -608,8 +608,8 @@ namespace ProjectBase.Database
             {
                 GetConnection();
                 query.Connection = myCon;
-                NpgsqlDataAdapter oraadap = new NpgsqlDataAdapter(command);
-                return Task.Run(() => { oraadap.Fill(dt); return dt; });
+                NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(command);
+                return Task.Run(() => { adapter.Fill(dt); return dt; });
             }
             catch (NpgsqlException ex)
             {
@@ -632,8 +632,8 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                NpgsqlDataAdapter oraadap = new NpgsqlDataAdapter(new NpgsqlCommand(query, myCon as NpgsqlConnection));
-                return Task.Run(() => { oraadap.Fill(table); return table; });
+                NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(new NpgsqlCommand(query, myCon as NpgsqlConnection));
+                return Task.Run(() => { adapter.Fill(table); return table; });
             }
             catch (NpgsqlException ex)
             {
@@ -659,8 +659,8 @@ namespace ProjectBase.Database
             {
                 GetConnection();
                 query.Connection = myCon;
-                NpgsqlDataAdapter oraadap = new NpgsqlDataAdapter(command);
-                return Task.Run(() => { oraadap.Fill(table); return table; });
+                NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(command);
+                return Task.Run(() => { adapter.Fill(table); return table; });
             }
             catch (NpgsqlException ex)
             {
@@ -683,8 +683,8 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                NpgsqlDataAdapter oraadap = new NpgsqlDataAdapter(new NpgsqlCommand(query, myCon as NpgsqlConnection));
-                return Task.Run(() => { oraadap.Fill(set, table); });
+                NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(new NpgsqlCommand(query, myCon as NpgsqlConnection));
+                return Task.Run(() => { adapter.Fill(set, table); });
             }
             catch (NpgsqlException ex)
             {
@@ -710,8 +710,8 @@ namespace ProjectBase.Database
             try
             {
                 GetConnection();
-                NpgsqlDataAdapter oraadap = new NpgsqlDataAdapter(command);
-                return Task.Run(() => { oraadap.Fill(set, table); });
+                NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(command);
+                return Task.Run(() => { adapter.Fill(set, table); });
             }
             catch (NpgsqlException ex)
             {
@@ -731,13 +731,13 @@ namespace ProjectBase.Database
         /// </summary>
         public Task<IDataReader> GetDataReaderAsync(string query)
         {
-            NpgsqlCommand comm = null;
+            NpgsqlCommand command = null;
 
             try
             {
                 GetConnection();
-                comm = new NpgsqlCommand(query, myCon as NpgsqlConnection);
-                return Task.Run(() => { return (IDataReader)comm.ExecuteReader(); });
+                command = new NpgsqlCommand(query, myCon as NpgsqlConnection);
+                return Task.Run(() => { return (IDataReader)command.ExecuteReader(); });
             }
             catch (NpgsqlException ex)
             {
@@ -968,12 +968,12 @@ namespace ProjectBase.Database
         /// </summary>
         public Task<object> GetSingleValueAsync(string query)
         {
-            NpgsqlCommand oracomm = null;
+            NpgsqlCommand command = null;
             try
             {
                 GetConnection();
-                oracomm = new NpgsqlCommand(query, myCon as NpgsqlConnection);
-                return Task.Run(() => { return oracomm.ExecuteScalar(); });
+                command = new NpgsqlCommand(query, myCon as NpgsqlConnection);
+                return Task.Run(() => { return command.ExecuteScalar(); });
             }
             catch (NpgsqlException ex)
             {
@@ -1015,12 +1015,12 @@ namespace ProjectBase.Database
 
         private IDataReader GetDataReaderNoConnection(string query)
         {
-            NpgsqlCommand comm = null;
+            NpgsqlCommand command = null;
 
             try
             {
-                comm = new NpgsqlCommand(query, myCon as NpgsqlConnection);
-                return comm.ExecuteReader();
+                command = new NpgsqlCommand(query, myCon as NpgsqlConnection);
+                return command.ExecuteReader();
             }
             catch (NpgsqlException ex)
             {

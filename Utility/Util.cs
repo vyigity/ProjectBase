@@ -161,7 +161,7 @@ namespace ProjectBase.Utility
             return obj == System.DBNull.Value || obj == null;
         }
         /// <summary>
-        /// Converts a object data type to another acorrding to T.
+        /// Converts a object data type to another according to T.
         /// </summary>
         public static T GetProperty<T>(object obj)
         {
@@ -171,7 +171,7 @@ namespace ProjectBase.Utility
                 return (T)Convert.ChangeType(obj, typeof(T));
         }
         /// <summary>
-        /// Converts a object data type to another acorrding to T. If value is null, returns given default value.
+        /// Converts a object data type to another according to T. If value is null, returns given default value.
         /// </summary>
         public static T GetProperty<T>(object obj, T defaultValue)
         {
@@ -181,7 +181,7 @@ namespace ProjectBase.Utility
                 return (T)Convert.ChangeType(obj, typeof(T));
         }
         /// <summary>
-        /// Converts a object data type to another acorrding to given object type.
+        /// Converts a object data type to another according to given object type.
         /// </summary>
         public static object GetProperty(object obj, Type objectType)
         {
@@ -202,7 +202,7 @@ namespace ProjectBase.Utility
             }
         }
         /// <summary>
-        /// Converts a object data type to another acorrding to given object type. If value is null, returns given default value.
+        /// Converts a object data type to another according to given object type. If value is null, returns given default value.
         /// </summary>
         public static object GetProperty(object Obj, Type objectType, object defaultValue)
         {
@@ -223,7 +223,7 @@ namespace ProjectBase.Utility
             }
         }
         /// <summary>
-        /// Converts a nullable object data type to another acorrding to T.
+        /// Converts a nullable object data type to another according to T.
         /// </summary>
         public static Nullable<T> GetPropertyNullable<T>(object obj) where T : struct
         {

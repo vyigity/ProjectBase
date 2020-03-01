@@ -226,7 +226,7 @@ namespace ProjectBase.Database
         /// <summary>
         /// Returns generated insert command.
         /// </summary>
-        public override IDbCommand GetInsertCommand()
+        public override IDbCommand GetInsertcommand()
         {
             if (!isFilled)
             {
@@ -268,7 +268,7 @@ namespace ProjectBase.Database
         /// <summary>
         /// Returns generated update command.
         /// </summary>
-        public override IDbCommand GetUpdateCommand()
+        public override IDbCommand GetUpdatecommand()
         {
             if (!isFilled)
             {
@@ -292,7 +292,7 @@ namespace ProjectBase.Database
                 if (FilterText != null)
                 {
                     bString.Append(" ");
-                    bString.Append(GetPreparedCommandString(FilterText, CommandStringType.Filter));
+                    bString.Append(GetPreparedcommandString(FilterText, commandStringType.Filter));
                 }
 
                 foreach (OracleParameter param in FilterParameters)
@@ -310,16 +310,16 @@ namespace ProjectBase.Database
         /// <summary>
         /// Returns generated general command.
         /// </summary>
-        public override IDbCommand GetSelectCommandBasic()
+        public override IDbCommand GetSelectcommandBasic()
         {
             if (!isFilled)
             {
-                StringBuilder bString = new StringBuilder(GetPreparedCommandString(SelectText, CommandStringType.Main));
+                StringBuilder bString = new StringBuilder(GetPreparedcommandString(SelectText, commandStringType.Main));
 
                 if (FilterText != null)
                 {
                     bString.Append(" ");
-                    bString.Append(GetPreparedCommandString(FilterText, CommandStringType.Filter));
+                    bString.Append(GetPreparedcommandString(FilterText, commandStringType.Filter));
                 }
 
                 foreach (OracleParameter param in FilterParameters)
@@ -330,7 +330,7 @@ namespace ProjectBase.Database
                 bString.Append(" ");
 
                 if (SelectTail != null)
-                    bString.Append(GetPreparedCommandString(SelectTail, CommandStringType.Tail));
+                    bString.Append(GetPreparedcommandString(SelectTail, commandStringType.Tail));
 
                 command.CommandText = bString.ToString();
             }

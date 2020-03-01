@@ -242,7 +242,7 @@ namespace ProjectBase.Database
         }
 
         /// <summary>
-        /// Commits current transaction.
+        /// commandits current transaction.
         /// </summary>
         public virtual void Commit()
         {
@@ -358,7 +358,7 @@ namespace ProjectBase.Database
         }
 
         /// <summary>
-        /// ProjectBase returns true if there is an available transaction that is not committed or rolled back.
+        /// ProjectBase returns true if there is an available transaction that is not commanditted or rolled back.
         /// </summary>
         public bool IsProcessEnded(IDbTransaction exTransaction)
         {

@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 namespace ProjectBase.Database
 {
     public enum ParameterMode { Local, Global }
-    public enum CommandStringType { Main, Filter, Tail }
+    public enum commandStringType { Main, Filter, Tail }
     /// <summary>
     /// Can be used for database command generation with helper functions.
     /// </summary>
     public abstract class QueryGeneratorBase
     {
-        CommandStringProcessor stringProcessor = null;
-        public CommandStringProcessor StringProcessor { get { return stringProcessor; }}
+        commandStringProcessor stringProcessor = null;
+        public commandStringProcessor StringProcessor { get { return stringProcessor; }}
 
         ParameterMode parameterProcessingMode = ParameterMode.Local;
         public ParameterMode ParameterProcessingMode
@@ -54,7 +54,7 @@ namespace ProjectBase.Database
 
         public QueryGeneratorBase(char parameterCharacter)
         {
-            stringProcessor = new CommandStringProcessor(parameterCharacter);
+            stringProcessor = new commandStringProcessor(parameterCharacter);
         }
 
         /// <summary>
@@ -138,15 +138,15 @@ namespace ProjectBase.Database
         /// <summary>
         /// Returns generated insert command.
         /// </summary>
-        abstract public IDbCommand GetInsertCommand();
+        abstract public IDbCommand GetInsertcommand();
         /// <summary>
         /// Returns generated update command.
         /// </summary>
-        abstract public IDbCommand GetUpdateCommand();
+        abstract public IDbCommand GetUpdatecommand();
         /// <summary>
         /// Returns generated general command.
         /// </summary>
-        abstract public IDbCommand GetSelectCommandBasic();
+        abstract public IDbCommand GetSelectcommandBasic();
         /// <summary>
         /// Returns generated procedure command.
         /// </summary>
@@ -156,19 +156,19 @@ namespace ProjectBase.Database
         /// </summary>
         abstract public void Clear();
 
-        public string GetPreparedCommandString(string commandString, CommandStringType csType)
+        public string GetPreparedcommandString(string commandString, commandStringType csType)
         {
             switch (ParameterProcessingMode)
             {
                 case ParameterMode.Local:
 
-                    if (csType == CommandStringType.Filter)
-                        return StringProcessor.GetPreparedLocalCommandString(commandString);
+                    if (csType == commandStringType.Filter)
+                        return StringProcessor.GetPreparedLocalcommandString(commandString);
                     else
                         return commandString;
 
                 case ParameterMode.Global:
-                    return StringProcessor.GetPreparedGlobalCommandString(commandString);
+                    return StringProcessor.GetPreparedGlobalcommandString(commandString);
                 default:
                     return null;
             }
