@@ -168,7 +168,37 @@ namespace ProjectBase.Utility
             if (IsNull(obj))
                 return default(T);
             else
+            {
+                if (obj.GetType() == typeof(T))
+                {
+                    return (T)obj;
+                }
+
+                if (typeof(T) == typeof(Guid))
+                {
+                    if (obj is Byte[])
+                    {
+                        return (T)(object)new Guid(obj as Byte[]);
+                    }
+                    else
+                    {
+                        return (T)(object)Guid.Parse(obj.ToString());
+                    }
+                }
+                else if (obj is Guid)
+                {
+                    if (typeof(T) == typeof(Byte[]))
+                    {
+                        return (T)(object)((Guid)obj).ToByteArray();
+                    }
+                    else
+                    {
+                        return (T)(object)((Guid)obj).ToString();
+                    }
+                }
+
                 return (T)Convert.ChangeType(obj, typeof(T));
+            }
         }
         /// <summary>
         /// Converts a object data type to another according to T. If value is null, returns given default value.
@@ -178,25 +208,83 @@ namespace ProjectBase.Utility
             if (IsNull(obj))
                 return defaultValue;
             else
+            {
+                if (obj.GetType() == typeof(T))
+                {
+                    return (T)obj;
+                }
+
+                if (typeof(T) == typeof(Guid))
+                {
+                    if (obj is Byte[])
+                    {
+                        return (T)(object)new Guid(obj as Byte[]);
+                    }
+                    else
+                    {
+                        return (T)(object)Guid.Parse(obj.ToString());
+                    }
+                }
+                else if (obj is Guid)
+                {
+                    if (typeof(T) == typeof(Byte[]))
+                    {
+                        return (T)(object)((Guid)obj).ToByteArray();
+                    }
+                    else
+                    {
+                        return (T)(object)((Guid)obj).ToString();
+                    }
+                }
+
                 return (T)Convert.ChangeType(obj, typeof(T));
+            }
         }
         /// <summary>
         /// Converts a object data type to another according to given object type.
         /// </summary>
         public static object GetProperty(object obj, Type objectType)
         {
-            Type  objectTypeTmp = null;
+            Type objectTypeTmp = null;
 
             if (IsNull(obj))
                 return null;
             else
             {
+                if (obj.GetType() == objectType)
+                {
+                    return obj;
+                }
+
                 if (Nullable.GetUnderlyingType(objectType) != null)
                 {
                     objectTypeTmp = Nullable.GetUnderlyingType(objectType);
                 }
                 else
                     objectTypeTmp = objectType;
+
+                if (objectTypeTmp == typeof(Guid))
+                {
+                    if (obj is Byte[])
+                    {
+                        return new Guid(obj as Byte[]);
+                    }
+                    else
+                    {
+                        return Guid.Parse(obj.ToString());
+                    }
+                }
+                else if (obj is Guid)
+                {
+                    if (objectTypeTmp == typeof(Byte[]))
+                    {
+                        return ((Guid)obj).ToByteArray();
+                    }
+                    else
+                    {
+                        return ((Guid)obj).ToString();
+                    }
+                }
 
                 return Convert.ChangeType(obj, objectTypeTmp);
             }
@@ -204,14 +292,19 @@ namespace ProjectBase.Utility
         /// <summary>
         /// Converts a object data type to another according to given object type. If value is null, returns given default value.
         /// </summary>
-        public static object GetProperty(object Obj, Type objectType, object defaultValue)
+        public static object GetProperty(object obj, Type objectType, object defaultValue)
         {
             Type objectTypeTmp = null;
 
-            if (IsNull(Obj))
+            if (IsNull(obj))
                 return defaultValue;
             else
             {
+                if (obj.GetType() == objectType)
+                {
+                    return obj;
+                }
+
                 if (Nullable.GetUnderlyingType(objectType) != null)
                 {
                     objectTypeTmp = Nullable.GetUnderlyingType(objectType);
@@ -219,7 +312,19 @@ namespace ProjectBase.Utility
                 else
                     objectTypeTmp = objectType;
 
-                return Convert.ChangeType(Obj, objectTypeTmp);
+                if (objectTypeTmp == typeof(Guid))
+                {
+                    if (obj is Byte[])
+                    {
+                        return new Guid(obj as Byte[]);
+                    }
+                    else
+                    {
+                        return Guid.Parse(obj.ToString());
+                    }
+                }
+
+                return Convert.ChangeType(obj, objectTypeTmp);
             }
         }
         /// <summary>
@@ -232,7 +337,37 @@ namespace ProjectBase.Utility
                 if (IsNull(obj))
                     return null;
                 else
+                {
+                    if (typeof(T) == obj.GetType())
+                    {
+                        return (T)obj;
+                    }
+
+                    if (typeof(T) == typeof(Guid))
+                    {
+                        if (obj is Byte[])
+                        {
+                            return (Nullable<T>)(object)new Guid(obj as Byte[]);
+                        }
+                        else
+                        {
+                            return (Nullable<T>)(object)Guid.Parse(obj.ToString());
+                        }
+                    }
+                    else if (obj is Guid)
+                    {
+                        if (typeof(T) == typeof(Byte[]))
+                        {
+                            return (T)(object)((Guid)obj).ToByteArray();
+                        }
+                        else
+                        {
+                            return (T)(object)((Guid)obj).ToString();
+                        }
+                    }
+
                     return (Nullable<T>)Convert.ChangeType(obj, typeof(T));
+                }
             }
             catch
             {
