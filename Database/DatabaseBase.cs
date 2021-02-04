@@ -242,7 +242,7 @@ namespace ProjectBase.Database
         }
 
         /// <summary>
-        /// commandits current transaction.
+        /// Commits current transaction.
         /// </summary>
         public virtual void Commit()
         {
@@ -272,7 +272,7 @@ namespace ProjectBase.Database
         }
 
         /// <summary>
-        /// Rollbacks current transaction if in transaction mod and closes current connection.
+        /// Rollbacks current transaction if in transaction mode and closes current connection.
         /// </summary>
         public virtual void CloseConnection()
         {
@@ -286,7 +286,7 @@ namespace ProjectBase.Database
         }
 
         /// <summary>
-        /// Rollbacks current transaction if in transaction mod and closes current connection.
+        /// Rollbacks current transaction if in transaction mode and closes current connection.
         /// </summary>
         public virtual void ClearConnection()
         {
@@ -358,7 +358,7 @@ namespace ProjectBase.Database
         }
 
         /// <summary>
-        /// ProjectBase returns true if there is an available transaction that is not commanditted or rolled back.
+        /// ProjectBase returns true if there is an available transaction that is not committed or rollbacked.
         /// </summary>
         public bool IsProcessEnded(IDbTransaction exTransaction)
         {
