@@ -138,7 +138,7 @@ namespace ProjectBase.Database
         void UseExternalTransaction(IDbTransaction exTransaction);
 
         /// <summary>
-        /// ProjectBase returns true if there is an available transaction that is not commanditted or rolled back.
+        /// ProjectBase returns true if there is an available transaction that is not committed or rollbacked.
         /// </summary>
         bool IsProcessEnded(IDbTransaction exTransaction);
     }
